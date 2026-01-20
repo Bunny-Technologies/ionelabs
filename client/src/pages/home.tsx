@@ -25,7 +25,6 @@ import {
   ShoppingCart,
   Heart,
   Factory,
-  Truck,
   Menu,
   X,
   Mail,
@@ -77,6 +76,11 @@ import analyticsImage from "@assets/stock_images/data_analytics_dashb_f154ce7f.j
 import testimonial1 from "@assets/stock_images/professional_busines_e7abe378.jpg";
 import testimonial2 from "@assets/stock_images/professional_busines_2b65e838.jpg";
 import testimonial3 from "@assets/stock_images/professional_busines_03341d21.jpg";
+import smartGridImage from "@assets/stock_images/modern_smart_grid_po_98ffde9c.jpg";
+import powerInfraImage from "@assets/stock_images/modern_smart_grid_po_1acb6f9a.jpg";
+import teamWorkImage from "@assets/stock_images/business_team_profes_34bf9c20.jpg";
+import cloudDataImage from "@assets/stock_images/cloud_computing_serv_87c9c082.jpg";
+import iotDevicesImage from "@assets/stock_images/iot_internet_of_thin_b80df81d.jpg";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -188,59 +192,32 @@ export default function Home() {
   };
 
   const services = [
-    {
-      icon: Code2,
-      title: "Custom Software Development",
-      description: "Tailored solutions built from the ground up to meet your unique business requirements and scale with your growth."
-    },
-    {
-      icon: Cloud,
-      title: "Cloud Solutions",
-      description: "Seamless cloud migration, infrastructure optimization, and managed services for maximum performance."
-    },
-    {
-      icon: Smartphone,
-      title: "Mobile App Development",
-      description: "Native and cross-platform mobile applications that deliver exceptional user experiences across all devices."
-    },
-    {
-      icon: BarChart3,
-      title: "Data Analytics",
-      description: "Transform raw data into actionable insights with our advanced analytics and business intelligence solutions."
-    },
-    {
-      icon: Settings,
-      title: "DevOps & Automation",
-      description: "Streamline your development pipeline with CI/CD, infrastructure as code, and automated testing."
-    },
-    {
-      icon: Palette,
-      title: "UI/UX Design",
-      description: "User-centered design that combines aesthetics with functionality for intuitive digital experiences."
-    }
+    { icon: Code2, title: "Software Development", image: devImage },
+    { icon: Cloud, title: "Cloud Solutions", image: cloudDataImage },
+    { icon: Smartphone, title: "Mobile Apps", image: mobileImage },
+    { icon: BarChart3, title: "Data Analytics", image: analyticsImage },
+    { icon: Settings, title: "DevOps", image: cloudImage },
+    { icon: Palette, title: "UI/UX Design", image: teamWorkImage }
   ];
 
 
   const solutions = [
     {
       image: devImage,
-      title: "Enterprise Software Solutions",
-      description: "Build robust, scalable enterprise applications that streamline operations and drive efficiency across your organization.",
-      benefits: ["Custom ERP Systems", "CRM Integration", "Workflow Automation", "Legacy Modernization"],
+      title: "Enterprise Software",
+      benefits: ["Custom ERP", "CRM Integration", "Workflow Automation"],
       reverse: false
     },
     {
       image: cloudImage,
       title: "Digital Transformation",
-      description: "Embrace the future with comprehensive digital transformation strategies that revolutionize how you do business.",
-      benefits: ["Cloud Migration", "Process Digitization", "API Development", "System Integration"],
+      benefits: ["Cloud Migration", "API Development", "System Integration"],
       reverse: true
     },
     {
       image: mobileImage,
       title: "Startup Acceleration",
-      description: "From MVP to market leader, we help startups build, launch, and scale their products with speed and precision.",
-      benefits: ["Rapid Prototyping", "MVP Development", "Technical Advisory", "Scaling Strategy"],
+      benefits: ["Rapid Prototyping", "MVP Development", "Scaling Strategy"],
       reverse: false
     }
   ];
@@ -249,60 +226,51 @@ export default function Home() {
     {
       image: testimonial1,
       name: "J.T. Rao",
-      role: "Founder & CEO, Winamr Systems",
-      company: "Winamr Systems",
+      role: "CEO, Winamr Systems",
       rating: 5,
-      text: "iOne Techlabs has been our trusted technology partner for over 5 years. Their expertise in IoT and smart metering software has been instrumental in delivering world-class AMI solutions to utilities across India."
+      text: "Trusted technology partner for 5+ years. World-class AMI solutions."
     },
     {
       image: testimonial2,
       name: "Rajesh Kumar",
-      role: "CTO, Telangana State Power Distribution",
-      company: "TSSPDCL",
+      role: "CTO, TSSPDCL",
       rating: 5,
-      text: "The smart grid pilot project delivered by iOne Techlabs won the SKOCH Award for excellence. Their understanding of utility operations and technical prowess is unmatched."
+      text: "SKOCH Award winning smart grid project. Unmatched technical expertise."
     },
     {
       image: testimonial3,
       name: "Priya Sharma",
-      role: "VP Technology, Tata Power",
-      company: "Tata Power",
+      role: "VP, Tata Power",
       rating: 5,
-      text: "iOne Techlabs delivered our meter data management system on time and within budget. The solution handles millions of data points daily with 99.99% accuracy."
+      text: "On-time delivery with 99.99% data accuracy. Exceptional results."
     }
   ];
 
   const industries = [
-    { icon: Heart, name: "Healthcare", description: "HIPAA-compliant solutions" },
-    { icon: Building2, name: "Finance", description: "Secure banking platforms" },
-    { icon: ShoppingCart, name: "E-commerce", description: "Scalable retail solutions" },
-    { icon: GraduationCap, name: "Education", description: "Learning management systems" },
-    { icon: Factory, name: "Manufacturing", description: "Industry 4.0 solutions" },
-    { icon: Truck, name: "Logistics", description: "Supply chain optimization" }
+    { icon: Heart, name: "Healthcare" },
+    { icon: Building2, name: "Finance" },
+    { icon: ShoppingCart, name: "E-commerce" },
+    { icon: GraduationCap, name: "Education" },
+    { icon: Factory, name: "Manufacturing" },
+    { icon: Zap, name: "Energy" }
   ];
 
-  const clients = [
-    { name: "Winamr Systems", description: "Smart Metering & IoT Solutions", featured: true },
-    { name: "Telangana State Power", description: "State Power Distribution" },
-    { name: "BSES Rajdhani", description: "Delhi Power Distribution" },
-    { name: "Tata Power", description: "Energy Infrastructure" },
-    { name: "Adani Power", description: "Power Generation & Distribution" },
-    { name: "Torrent Power", description: "Integrated Power Utility" },
-    { name: "CESC Limited", description: "Power & Energy Services" },
-    { name: "NTPC", description: "National Thermal Power" }
+  const utilityClients = [
+    { name: "Tata Power" },
+    { name: "NTPC" },
+    { name: "Adani Power" },
+    { name: "Telangana State Power" },
+    { name: "BSES Rajdhani" },
+    { name: "Torrent Power" },
+    { name: "CESC Limited" },
+    { name: "UPPCL" }
   ];
 
   const certifications = [
-    { name: "ISO 27001:2013", description: "Information Security", icon: Shield },
-    { name: "ISO 9001:2015", description: "Quality Management", icon: Award },
-    { name: "CMMI Level 3", description: "Process Maturity", icon: Trophy },
-    { name: "SOC 2 Type II", description: "Security Compliance", icon: Shield }
-  ];
-
-  const achievements = [
-    { title: "Best Smart Grid Solution", year: "2024", org: "India Energy Awards" },
-    { title: "Top 50 Tech Innovators", year: "2023", org: "Tech Excellence Forum" },
-    { title: "Digital Transformation Leader", year: "2023", org: "CIO India" }
+    { name: "ISO 27001", icon: Shield },
+    { name: "ISO 9001", icon: Award },
+    { name: "CMMI L3", icon: Trophy },
+    { name: "SOC 2", icon: Shield }
   ];
 
   return (
@@ -439,27 +407,24 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services Section */}
-      <section id="services" className="py-16 md:py-24 lg:py-32 bg-card/50">
+      {/* Services Section - Visual Grid */}
+      <section id="services" className="py-16 md:py-24 bg-card/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
-            className="text-center max-w-3xl mx-auto mb-16"
+            className="text-center max-w-3xl mx-auto mb-12"
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
             variants={fadeInUp}
           >
             <Badge variant="secondary" className="mb-4" data-testid="badge-services">Our Services</Badge>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6" data-testid="text-services-title">
-              Comprehensive Technology Solutions
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground" data-testid="text-services-title">
+              What We Build
             </h2>
-            <p className="text-lg text-muted-foreground" data-testid="text-services-description">
-              From concept to deployment, we provide end-to-end technology services that empower your business to thrive in the digital age.
-            </p>
           </motion.div>
 
           <motion.div 
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+            className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6"
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
@@ -467,13 +432,22 @@ export default function Home() {
           >
             {services.map((service, index) => (
               <motion.div key={index} variants={fadeInUp}>
-                <Card className="p-6 md:p-8 h-full hover-elevate transition-all duration-300 group" data-testid={`card-service-${index}`}>
-                  <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
-                    <service.icon className="h-7 w-7 text-primary" />
+                <div className="relative group rounded-xl overflow-hidden h-48 md:h-64 hover-elevate" data-testid={`card-service-${index}`}>
+                  <img 
+                    src={service.image} 
+                    alt={service.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                        <service.icon className="h-5 w-5 text-white" />
+                      </div>
+                      <h3 className="text-lg md:text-xl font-bold text-white">{service.title}</h3>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-3">{service.title}</h3>
-                  <p className="text-muted-foreground">{service.description}</p>
-                </Card>
+                </div>
               </motion.div>
             ))}
           </motion.div>
@@ -529,142 +503,122 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Trusted Clients Section */}
-      <section className="py-16 md:py-24 bg-muted/30">
+      {/* Winamr Systems - Subsidiary Section */}
+      <section className="py-16 md:py-24 bg-gradient-to-br from-muted/30 via-background to-accent/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
-            className="text-center max-w-3xl mx-auto mb-16"
+            className="text-center max-w-3xl mx-auto mb-12"
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
             variants={fadeInUp}
           >
-            <Badge variant="secondary" className="mb-4" data-testid="badge-clients">Trusted Partners</Badge>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6" data-testid="text-clients-title">
-              Powering Industry Leaders
+            <Badge variant="default" className="mb-4 bg-accent text-accent-foreground" data-testid="badge-subsidiary">
+              <Building2 className="h-3 w-3 mr-1" />
+              Our Subsidiary Company
+            </Badge>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4" data-testid="text-subsidiary-title">
+              Winamr Systems
             </h2>
             <p className="text-lg text-muted-foreground">
-              From smart grid pioneers to enterprise utilities, we partner with organizations that are shaping the future of energy and technology.
+              Owned and operated by iOne Techlabs
             </p>
           </motion.div>
 
+          <motion.div
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            <Card className="overflow-hidden border-accent/30 bg-gradient-to-br from-card to-accent/5">
+              <div className="grid lg:grid-cols-2">
+                <div className="relative h-64 lg:h-auto">
+                  <img 
+                    src={smartGridImage} 
+                    alt="Winamr Smart Grid Solutions" 
+                    className="w-full h-full object-cover"
+                    data-testid="img-winamr-showcase"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent to-card/80 lg:bg-gradient-to-l" />
+                </div>
+                <div className="p-8 lg:p-12 flex flex-col justify-center">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center">
+                      <Zap className="h-8 w-8 text-accent" />
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold text-foreground">Winamr Systems</div>
+                      <div className="text-accent font-medium">iOne Techlabs Subsidiary</div>
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-3 gap-4 mb-8">
+                    <div className="text-center p-4 bg-primary/5 rounded-xl">
+                      <div className="text-3xl font-bold text-primary">
+                        <AnimatedCounter end={8} suffix="+" />
+                      </div>
+                      <div className="text-sm text-muted-foreground">Utility Clients</div>
+                    </div>
+                    <div className="text-center p-4 bg-accent/5 rounded-xl">
+                      <div className="text-3xl font-bold text-accent">5G</div>
+                      <div className="text-sm text-muted-foreground">Smart Meters</div>
+                    </div>
+                    <div className="text-center p-4 bg-primary/5 rounded-xl">
+                      <div className="text-3xl font-bold text-primary">AI</div>
+                      <div className="text-sm text-muted-foreground">IRIS Platform</div>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {utilityClients.slice(0, 6).map((client, index) => (
+                      <Badge key={index} variant="outline" className="px-3 py-1">
+                        {client.name}
+                      </Badge>
+                    ))}
+                    <Badge variant="secondary" className="px-3 py-1">+2 more</Badge>
+                  </div>
+
+                  <Button size="lg" className="w-fit group" data-testid="button-explore-winamr">
+                    Explore Winamr
+                    <ChevronRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </div>
+              </div>
+            </Card>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Trust Badges - Visual Compact Section */}
+      <section className="py-12 md:py-16 bg-muted/20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
-            className="grid grid-cols-2 md:grid-cols-4 gap-6"
+            className="flex flex-wrap items-center justify-center gap-6 md:gap-10"
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
             variants={staggerContainer}
           >
-            {clients.map((client, index) => (
+            {certifications.map((cert, index) => (
               <motion.div 
                 key={index}
                 variants={fadeInUp}
-                className={`group relative ${client.featured ? 'md:col-span-2 md:row-span-2' : ''}`}
+                className="flex items-center gap-3 px-4 py-2 rounded-full bg-card border border-border"
               >
-                <Card className={`p-6 h-full hover-elevate transition-all duration-300 ${client.featured ? 'border-accent bg-gradient-to-br from-accent/5 to-primary/5' : ''}`}>
-                  <div className="flex flex-col h-full justify-center items-center text-center">
-                    {client.featured && (
-                      <Badge variant="default" className="mb-4 bg-accent text-accent-foreground">
-                        <Sparkles className="h-3 w-3 mr-1" />
-                        Featured Partner
-                      </Badge>
-                    )}
-                    <div className={`w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4 ${client.featured ? 'w-20 h-20' : ''}`}>
-                      <Globe className={`text-primary ${client.featured ? 'h-10 w-10' : 'h-8 w-8'}`} />
-                    </div>
-                    <h3 className={`font-bold text-foreground mb-2 ${client.featured ? 'text-xl' : 'text-lg'}`}>{client.name}</h3>
-                    <p className="text-sm text-muted-foreground">{client.description}</p>
-                    {client.featured && (
-                      <p className="text-sm text-muted-foreground mt-4">
-                        Sister company delivering world's first 5G-enabled smart meters and AI-powered IRIS platform.
-                      </p>
-                    )}
-                  </div>
-                </Card>
+                <cert.icon className="h-5 w-5 text-primary" />
+                <span className="font-semibold text-foreground">{cert.name}</span>
               </motion.div>
             ))}
+            <motion.div variants={fadeInUp} className="flex items-center gap-3 px-4 py-2 rounded-full bg-accent/10 border border-accent/30">
+              <Zap className="h-5 w-5 text-accent" />
+              <span className="font-semibold text-accent">Make in India</span>
+            </motion.div>
+            <motion.div variants={fadeInUp} className="flex items-center gap-3 px-4 py-2 rounded-full bg-primary/10 border border-primary/30">
+              <Award className="h-5 w-5 text-primary" />
+              <span className="font-semibold text-primary">Best Smart Grid 2024</span>
+            </motion.div>
           </motion.div>
-        </div>
-      </section>
-
-      {/* Certifications & Achievements */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16">
-            <motion.div
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              variants={fadeInUp}
-            >
-              <Badge variant="secondary" className="mb-4">Certifications</Badge>
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-                Enterprise-Grade Quality Standards
-              </h2>
-              <p className="text-lg text-muted-foreground mb-8">
-                Our certifications demonstrate our commitment to quality, security, and process excellence at every level.
-              </p>
-              <div className="grid grid-cols-2 gap-4">
-                {certifications.map((cert, index) => (
-                  <Card key={index} className="p-4 hover-elevate transition-all duration-300">
-                    <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                        <cert.icon className="h-6 w-6 text-primary" />
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-foreground">{cert.name}</h4>
-                        <p className="text-sm text-muted-foreground">{cert.description}</p>
-                      </div>
-                    </div>
-                  </Card>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              variants={fadeInUp}
-            >
-              <Badge variant="secondary" className="mb-4">Recognition</Badge>
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-                Award-Winning Excellence
-              </h2>
-              <p className="text-lg text-muted-foreground mb-8">
-                Industry recognition that reflects our dedication to innovation and client success.
-              </p>
-              <div className="space-y-4">
-                {achievements.map((achievement, index) => (
-                  <Card key={index} className="p-6 hover-elevate transition-all duration-300">
-                    <div className="flex items-center justify-between gap-4">
-                      <div className="flex items-center gap-4">
-                        <div className="w-1 h-12 bg-accent rounded-full flex-shrink-0" />
-                        <div>
-                          <h4 className="font-semibold text-foreground text-lg">{achievement.title}</h4>
-                          <p className="text-muted-foreground">{achievement.org}</p>
-                        </div>
-                      </div>
-                      <Badge variant="outline" className="flex-shrink-0">
-                        {achievement.year}
-                      </Badge>
-                    </div>
-                  </Card>
-                ))}
-              </div>
-              <Card className="mt-6 p-6 bg-gradient-to-r from-primary/5 to-accent/5 border-accent/20">
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
-                    <Zap className="h-8 w-8 text-accent" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-foreground text-lg">Make in India Initiative</h4>
-                    <p className="text-muted-foreground">100% Indigenous Solutions - Proudly developed in India for global markets</p>
-                  </div>
-                </div>
-              </Card>
-            </motion.div>
-          </div>
         </div>
       </section>
 
@@ -673,7 +627,7 @@ export default function Home() {
         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/5 to-transparent" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <motion.div 
-            className="text-center max-w-3xl mx-auto mb-16"
+            className="text-center max-w-3xl mx-auto mb-12"
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
@@ -681,211 +635,154 @@ export default function Home() {
           >
             <Badge variant="secondary" className="mb-4">
               <Zap className="h-3 w-3 mr-1" />
-              Advanced Technology
+              Smart Grid Technology
             </Badge>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-              IoT & Smart Grid Solutions
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+              IoT & Energy Solutions
             </h2>
-            <p className="text-lg text-muted-foreground">
-              Powering the future of energy with AI-driven analytics, 5G-enabled smart metering, and comprehensive grid management platforms.
-            </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <motion.div
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              variants={fadeInUp}
-              className="lg:col-span-2"
-            >
-              <Card className="p-8 h-full bg-gradient-to-br from-primary/5 to-accent/5 border-primary/20 hover-elevate">
-                <div className="flex items-start gap-6">
-                  <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <Sparkles className="h-8 w-8 text-primary" />
+          {/* Hero Image Grid */}
+          <motion.div 
+            className="grid md:grid-cols-2 gap-6 mb-12"
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
+            <motion.div variants={fadeInUp} className="relative rounded-2xl overflow-hidden h-64 md:h-80">
+              <img src={powerInfraImage} alt="Power Infrastructure" className="w-full h-full object-cover" data-testid="img-power-infra" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+              <div className="absolute bottom-0 left-0 p-6">
+                <Badge className="mb-2 bg-accent text-accent-foreground">AI-Powered</Badge>
+                <h3 className="text-2xl font-bold text-white">IRIS Platform</h3>
+                <p className="text-white/80 text-sm">Intelligent grid management</p>
+              </div>
+            </motion.div>
+            <motion.div variants={fadeInUp} className="relative rounded-2xl overflow-hidden h-64 md:h-80">
+              <img src={iotDevicesImage} alt="IoT Smart Devices" className="w-full h-full object-cover" data-testid="img-iot-devices" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+              <div className="absolute bottom-0 left-0 p-6">
+                <Badge className="mb-2 bg-primary text-primary-foreground">5G Enabled</Badge>
+                <h3 className="text-2xl font-bold text-white">Smart Meters</h3>
+                <p className="text-white/80 text-sm">Real-time data visibility</p>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Feature Icons Grid */}
+          <motion.div 
+            className="grid grid-cols-2 md:grid-cols-4 gap-4"
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
+            {[
+              { icon: BarChart3, label: "MDMS Analytics", color: "primary" },
+              { icon: Shield, label: "Grid Security", color: "accent" },
+              { icon: Globe, label: "Multi-Protocol", color: "primary" },
+              { icon: Sparkles, label: "AI Analytics", color: "accent" }
+            ].map((item, index) => (
+              <motion.div key={index} variants={fadeInUp}>
+                <Card className="p-4 text-center hover-elevate">
+                  <div className={`w-12 h-12 mx-auto rounded-xl bg-${item.color}/10 flex items-center justify-center mb-3`}>
+                    <item.icon className={`h-6 w-6 text-${item.color}`} />
                   </div>
-                  <div>
-                    <Badge variant="outline" className="mb-3">AI-Powered</Badge>
-                    <h3 className="text-2xl font-bold text-foreground mb-3">IRIS Platform</h3>
-                    <p className="text-muted-foreground mb-4">
-                      Our Intelligent Remote Interface Server provides real-time data acquisition, advanced analytics, and seamless integration with blockchain technology for secure, transparent utility operations.
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      <Badge variant="secondary">MDAS Integration</Badge>
-                      <Badge variant="secondary">HES Compatible</Badge>
-                      <Badge variant="secondary">GET-SET Services</Badge>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-            </motion.div>
-
-            <motion.div
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              variants={fadeInUp}
-            >
-              <Card className="p-6 h-full hover-elevate">
-                <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4">
-                  <Globe className="h-6 w-6 text-accent" />
-                </div>
-                <h3 className="text-xl font-bold text-foreground mb-2">5G Smart Meters</h3>
-                <p className="text-muted-foreground text-sm">
-                  World's first 5G-enabled smart metering solutions with ultra-low latency and real-time grid visibility.
-                </p>
-              </Card>
-            </motion.div>
-
-            <motion.div
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              variants={fadeInUp}
-            >
-              <Card className="p-6 h-full hover-elevate">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                  <BarChart3 className="h-6 w-6 text-primary" />
-                </div>
-                <h3 className="text-xl font-bold text-foreground mb-2">MDMS Analytics</h3>
-                <p className="text-muted-foreground text-sm">
-                  Comprehensive meter data management with AI-powered loss detection and demand forecasting.
-                </p>
-              </Card>
-            </motion.div>
-
-            <motion.div
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              variants={fadeInUp}
-            >
-              <Card className="p-6 h-full hover-elevate">
-                <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4">
-                  <Shield className="h-6 w-6 text-accent" />
-                </div>
-                <h3 className="text-xl font-bold text-foreground mb-2">Grid Security</h3>
-                <p className="text-muted-foreground text-sm">
-                  End-to-end encryption with blockchain-backed audit trails for tamper-proof utility operations.
-                </p>
-              </Card>
-            </motion.div>
-
-            <motion.div
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              variants={fadeInUp}
-            >
-              <Card className="p-6 h-full hover-elevate">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                  <Zap className="h-6 w-6 text-primary" />
-                </div>
-                <h3 className="text-xl font-bold text-foreground mb-2">AMI Communication</h3>
-                <p className="text-muted-foreground text-sm">
-                  Multi-protocol support: RF-Mesh, PLCC, 6LoWPAN, LoRa, NB-IoT, and cellular connectivity.
-                </p>
-              </Card>
-            </motion.div>
-          </div>
+                  <div className="font-semibold text-foreground">{item.label}</div>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
 
           <motion.div 
-            className="mt-12 text-center"
+            className="mt-10 text-center"
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
             variants={fadeInUp}
           >
             <Button size="lg" className="group" data-testid="button-explore-technology">
-              Explore Our Technology
+              Explore Technology
               <ChevronRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Button>
           </motion.div>
         </div>
       </section>
 
-      {/* Solutions Section */}
-      <section id="solutions" className="py-16 md:py-24 lg:py-32">
+      {/* Solutions Section - Visual Grid */}
+      <section id="solutions" className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
-            className="text-center max-w-3xl mx-auto mb-16"
+            className="text-center max-w-3xl mx-auto mb-12"
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
             variants={fadeInUp}
           >
             <Badge variant="secondary" className="mb-4" data-testid="badge-solutions">Solutions</Badge>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6" data-testid="text-solutions-title">
-              Tailored Solutions for Every Challenge
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground" data-testid="text-solutions-title">
+              What We Deliver
             </h2>
-            <p className="text-lg text-muted-foreground" data-testid="text-solutions-description">
-              Whether you're an enterprise looking to modernize or a startup ready to scale, we have the expertise to make it happen.
-            </p>
           </motion.div>
 
-          <div className="space-y-24">
+          <motion.div 
+            className="grid md:grid-cols-3 gap-6"
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
             {solutions.map((solution, index) => (
-              <motion.div 
-                key={index}
-                className={`grid lg:grid-cols-2 gap-12 lg:gap-16 items-center ${solution.reverse ? 'lg:flex-row-reverse' : ''}`}
-                initial="initial"
-                whileInView="animate"
-                viewport={{ once: true }}
-                variants={fadeInUp}
-              >
-                <div className={`${solution.reverse ? 'lg:order-2' : ''}`}>
-                  <div className="rounded-lg overflow-hidden shadow-xl">
+              <motion.div key={index} variants={fadeInUp}>
+                <Card className="overflow-hidden h-full group hover-elevate" data-testid={`card-solution-${index}`}>
+                  <div className="relative h-48 overflow-hidden">
                     <img 
                       src={solution.image} 
                       alt={solution.title} 
-                      className="w-full h-auto object-cover"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       data-testid={`img-solution-${index}`}
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute bottom-4 left-4">
+                      <h3 className="text-xl font-bold text-white">{solution.title}</h3>
+                    </div>
                   </div>
-                </div>
-                <div className={`space-y-6 ${solution.reverse ? 'lg:order-1' : ''}`}>
-                  <h3 className="text-2xl md:text-3xl font-bold text-foreground">{solution.title}</h3>
-                  <p className="text-lg text-muted-foreground">{solution.description}</p>
-                  <ul className="space-y-3">
-                    {solution.benefits.map((benefit, benefitIndex) => (
-                      <li key={benefitIndex} className="flex items-center gap-3">
-                        <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0" />
-                        <span className="text-foreground">{benefit}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Button className="mt-4" data-testid={`button-learn-more-${index}`}>
-                    Learn More
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </div>
+                  <div className="p-5">
+                    <div className="flex flex-wrap gap-2">
+                      {solution.benefits.map((benefit, benefitIndex) => (
+                        <Badge key={benefitIndex} variant="outline" className="text-xs">
+                          <CheckCircle2 className="h-3 w-3 mr-1" />
+                          {benefit}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                </Card>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="py-16 md:py-24 lg:py-32 bg-card/50">
+      {/* Testimonials Section - Compact */}
+      <section className="py-12 md:py-16 bg-card/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
-            className="text-center max-w-3xl mx-auto mb-16"
+            className="text-center max-w-3xl mx-auto mb-10"
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
             variants={fadeInUp}
           >
-            <Badge variant="secondary" className="mb-4" data-testid="badge-testimonials">Testimonials</Badge>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6" data-testid="text-testimonials-title">
-              What Our Clients Say
+            <Badge variant="secondary" className="mb-4" data-testid="badge-testimonials">Client Reviews</Badge>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground" data-testid="text-testimonials-title">
+              Trusted by Industry Leaders
             </h2>
-            <p className="text-lg text-muted-foreground" data-testid="text-testimonials-description">
-              Don't just take our word for it. Here's what industry leaders have to say about working with iOne Techlabs.
-            </p>
           </motion.div>
 
           <motion.div 
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+            className="grid md:grid-cols-3 gap-4 md:gap-6"
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
@@ -893,22 +790,22 @@ export default function Home() {
           >
             {testimonials.map((testimonial, index) => (
               <motion.div key={index} variants={fadeInUp}>
-                <Card className="p-6 md:p-8 h-full" data-testid={`card-testimonial-${index}`}>
-                  <div className="flex items-center gap-1 mb-4">
+                <Card className="p-5 h-full" data-testid={`card-testimonial-${index}`}>
+                  <div className="flex items-center gap-1 mb-3">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 fill-accent text-accent" />
+                      <Star key={i} className="h-4 w-4 fill-accent text-accent" />
                     ))}
                   </div>
-                  <p className="text-muted-foreground mb-6 italic">"{testimonial.text}"</p>
-                  <div className="flex items-center gap-4 mt-auto">
+                  <p className="text-muted-foreground text-sm mb-4">"{testimonial.text}"</p>
+                  <div className="flex items-center gap-3">
                     <img 
                       src={testimonial.image} 
                       alt={testimonial.name}
-                      className="w-12 h-12 rounded-full object-cover"
+                      className="w-10 h-10 rounded-full object-cover"
                     />
                     <div>
-                      <div className="font-semibold text-foreground">{testimonial.name}</div>
-                      <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                      <div className="font-semibold text-foreground text-sm">{testimonial.name}</div>
+                      <div className="text-xs text-muted-foreground">{testimonial.role}</div>
                     </div>
                   </div>
                 </Card>
@@ -918,27 +815,75 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Industries Section */}
-      <section id="industries" className="py-16 md:py-24 lg:py-32">
+      {/* About Section with Team Image */}
+      <section id="team" className="py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center"
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
+            <motion.div variants={fadeInUp} className="relative">
+              <div className="rounded-2xl overflow-hidden shadow-2xl">
+                <img src={teamWorkImage} alt="Our Expert Team" className="w-full h-auto object-cover" data-testid="img-team" />
+              </div>
+              <div className="absolute -bottom-4 -right-4 bg-card p-4 rounded-xl shadow-lg border border-border hidden md:flex items-center gap-3">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Users className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-foreground">150+</div>
+                  <div className="text-sm text-muted-foreground">Engineers</div>
+                </div>
+              </div>
+            </motion.div>
+            <motion.div variants={fadeInUp} className="space-y-6">
+              <Badge variant="secondary">About iOne Techlabs</Badge>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+                Building Tomorrow's Technology Today
+              </h2>
+              <div className="grid grid-cols-3 gap-4">
+                <div className="text-center p-4 bg-muted/50 rounded-xl">
+                  <div className="text-3xl font-bold text-primary">10+</div>
+                  <div className="text-sm text-muted-foreground">Years</div>
+                </div>
+                <div className="text-center p-4 bg-muted/50 rounded-xl">
+                  <div className="text-3xl font-bold text-primary">500+</div>
+                  <div className="text-sm text-muted-foreground">Projects</div>
+                </div>
+                <div className="text-center p-4 bg-muted/50 rounded-xl">
+                  <div className="text-3xl font-bold text-primary">50+</div>
+                  <div className="text-sm text-muted-foreground">Clients</div>
+                </div>
+              </div>
+              <Button size="lg" className="group" data-testid="button-about-learn-more">
+                Learn More
+                <ChevronRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Industries Section - Visual Icons */}
+      <section id="industries" className="py-12 md:py-16 bg-muted/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
-            className="text-center max-w-3xl mx-auto mb-16"
+            className="text-center mb-10"
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
             variants={fadeInUp}
           >
-            <Badge variant="secondary" className="mb-4" data-testid="badge-industries">Industries</Badge>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6" data-testid="text-industries-title">
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground" data-testid="text-industries-title">
               Industries We Serve
             </h2>
-            <p className="text-lg text-muted-foreground" data-testid="text-industries-description">
-              Deep domain expertise across diverse industries enables us to deliver solutions that truly understand your business challenges.
-            </p>
           </motion.div>
 
           <motion.div 
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6"
+            className="grid grid-cols-3 md:grid-cols-6 gap-4"
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
@@ -946,13 +891,12 @@ export default function Home() {
           >
             {industries.map((industry, index) => (
               <motion.div key={index} variants={fadeInUp}>
-                <Card className="p-6 text-center hover-elevate transition-all duration-300 group" data-testid={`card-industry-${index}`}>
-                  <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
+                <div className="p-4 text-center hover-elevate rounded-xl group" data-testid={`card-industry-${index}`}>
+                  <div className="w-14 h-14 rounded-xl bg-card border border-border flex items-center justify-center mx-auto mb-3 group-hover:bg-primary/10 transition-colors">
                     <industry.icon className="h-7 w-7 text-primary" />
                   </div>
-                  <h3 className="font-semibold text-foreground mb-1">{industry.name}</h3>
-                  <p className="text-xs text-muted-foreground">{industry.description}</p>
-                </Card>
+                  <span className="font-medium text-foreground text-sm">{industry.name}</span>
+                </div>
               </motion.div>
             ))}
           </motion.div>

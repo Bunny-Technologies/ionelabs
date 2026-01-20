@@ -1,17 +1,18 @@
 # iOne Techlabs - Professional Company Website
 
 ## Overview
-A professional technology company landing page for iOne Techlabs (sister company of Winamr Systems), showcasing their software development, cloud solutions, IoT, and smart grid services.
+A professional technology company landing page for iOne Techlabs (parent company of Winamr Systems), showcasing their software development, cloud solutions, IoT, and smart grid services.
 
 ## Recent Changes
-- **January 2026**: Enhanced website with advanced features and Winamr integration
-  - Added Winamr Systems as featured partner with 8 utility company clients
-  - Added Certifications section (ISO 27001, ISO 9001, CMMI Level 3, SOC 2)
-  - Added Awards/Achievements section with "Best Smart Grid Solution 2024"
-  - Added IoT & Smart Grid Technology section with IRIS Platform showcase
-  - Added animated counter components for stats
-  - Updated testimonials with J.T. Rao (Winamr CEO) and utility sector clients
-  - Added "Make in India" initiative highlight
+- **January 2026**: Major visual overhaul - less text, more visuals
+  - Winamr Systems now shown as SUBSIDIARY owned by iOne Techlabs (not partner)
+  - Replaced text-heavy services section with image-grid layout
+  - Added visual IoT section with hero images (power infrastructure, IoT devices)
+  - Added About section with team image and stats
+  - Simplified testimonials to be shorter and more compact
+  - Added trust badges bar (certifications + awards in pill format)
+  - Simplified industries section to icon-only format
+  - Reduced overall text density across all sections
 - Created comprehensive landing page with Hero, Services, Stats, Solutions, Testimonials, Industries, CTA, and Contact sections
 - Implemented contact form with backend API
 - Implemented newsletter subscription with backend API
