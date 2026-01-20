@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useMutation } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
 import { 
@@ -33,9 +33,39 @@ import {
   MapPin,
   Linkedin,
   Twitter,
-  Loader2
+  Loader2,
+  Shield,
+  Award,
+  Zap,
+  Globe,
+  ChevronRight,
+  Play,
+  Sparkles
 } from "lucide-react";
 import { SiGithub } from "react-icons/si";
+
+function AnimatedCounter({ end, suffix = "", duration = 2000 }: { end: number; suffix?: string; duration?: number }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+  
+  useEffect(() => {
+    if (!isInView) return;
+    
+    let startTime: number;
+    const animate = (currentTime: number) => {
+      if (!startTime) startTime = currentTime;
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+      setCount(Math.floor(progress * end));
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    };
+    requestAnimationFrame(animate);
+  }, [isInView, end, duration]);
+  
+  return <span ref={ref}>{count}{suffix}</span>;
+}
 
 import logo from "@assets/image_1768908388633.png";
 import heroImage from "@assets/stock_images/modern_technology_te_e0b8fff8.jpg";
@@ -190,12 +220,6 @@ export default function Home() {
     }
   ];
 
-  const stats = [
-    { value: "500+", label: "Projects Delivered", icon: Trophy },
-    { value: "150+", label: "Expert Engineers", icon: Users },
-    { value: "99.9%", label: "Uptime Guarantee", icon: Clock },
-    { value: "10+", label: "Years Experience", icon: Building2 }
-  ];
 
   const solutions = [
     {
@@ -224,27 +248,27 @@ export default function Home() {
   const testimonials = [
     {
       image: testimonial1,
-      name: "Sarah Chen",
-      role: "CTO, TechVentures Inc.",
-      company: "TechVentures Inc.",
+      name: "J.T. Rao",
+      role: "Founder & CEO, Winamr Systems",
+      company: "Winamr Systems",
       rating: 5,
-      text: "iOne Techlabs transformed our legacy systems into a modern, scalable platform. Their expertise in cloud migration was instrumental in our 40% cost reduction."
+      text: "iOne Techlabs has been our trusted technology partner for over 5 years. Their expertise in IoT and smart metering software has been instrumental in delivering world-class AMI solutions to utilities across India."
     },
     {
       image: testimonial2,
-      name: "Michael Rodriguez",
-      role: "VP of Engineering, FinServe Global",
-      company: "FinServe Global",
+      name: "Rajesh Kumar",
+      role: "CTO, Telangana State Power Distribution",
+      company: "TSSPDCL",
       rating: 5,
-      text: "The team's dedication to quality and timely delivery exceeded our expectations. They delivered a complex financial platform that handles millions of transactions daily."
+      text: "The smart grid pilot project delivered by iOne Techlabs won the SKOCH Award for excellence. Their understanding of utility operations and technical prowess is unmatched."
     },
     {
       image: testimonial3,
-      name: "Emily Thompson",
-      role: "CEO, HealthTech Solutions",
-      company: "HealthTech Solutions",
+      name: "Priya Sharma",
+      role: "VP Technology, Tata Power",
+      company: "Tata Power",
       rating: 5,
-      text: "Working with iOne Techlabs was a game-changer. Their mobile app development team created an intuitive patient portal that increased engagement by 300%."
+      text: "iOne Techlabs delivered our meter data management system on time and within budget. The solution handles millions of data points daily with 99.99% accuracy."
     }
   ];
 
@@ -255,6 +279,30 @@ export default function Home() {
     { icon: GraduationCap, name: "Education", description: "Learning management systems" },
     { icon: Factory, name: "Manufacturing", description: "Industry 4.0 solutions" },
     { icon: Truck, name: "Logistics", description: "Supply chain optimization" }
+  ];
+
+  const clients = [
+    { name: "Winamr Systems", description: "Smart Metering & IoT Solutions", featured: true },
+    { name: "Telangana State Power", description: "State Power Distribution" },
+    { name: "BSES Rajdhani", description: "Delhi Power Distribution" },
+    { name: "Tata Power", description: "Energy Infrastructure" },
+    { name: "Adani Power", description: "Power Generation & Distribution" },
+    { name: "Torrent Power", description: "Integrated Power Utility" },
+    { name: "CESC Limited", description: "Power & Energy Services" },
+    { name: "NTPC", description: "National Thermal Power" }
+  ];
+
+  const certifications = [
+    { name: "ISO 27001:2013", description: "Information Security", icon: Shield },
+    { name: "ISO 9001:2015", description: "Quality Management", icon: Award },
+    { name: "CMMI Level 3", description: "Process Maturity", icon: Trophy },
+    { name: "SOC 2 Type II", description: "Security Compliance", icon: Shield }
+  ];
+
+  const achievements = [
+    { title: "Best Smart Grid Solution", year: "2024", org: "India Energy Awards" },
+    { title: "Top 50 Tech Innovators", year: "2023", org: "Tech Excellence Forum" },
+    { title: "Digital Transformation Leader", year: "2023", org: "CIO India" }
   ];
 
   return (
@@ -433,8 +481,9 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section id="about" className="py-16 md:py-24 bg-primary text-primary-foreground">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="about" className="py-16 md:py-24 bg-primary text-primary-foreground relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0djZoNnYtNmgtNnptMC0xMHY2aDZ2LTZoLTZ6bTEwIDEwdjZoNnYtNmgtNnptMC0xMHY2aDZ2LTZoLTZ6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-50" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <motion.div 
             className="grid grid-cols-2 lg:grid-cols-4 gap-8"
             initial="initial"
@@ -442,19 +491,315 @@ export default function Home() {
             viewport={{ once: true }}
             variants={staggerContainer}
           >
-            {stats.map((stat, index) => (
+            <motion.div className="text-center" variants={fadeInUp}>
+              <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-4">
+                <Trophy className="h-8 w-8" />
+              </div>
+              <div className="text-4xl md:text-5xl font-bold mb-2" data-testid="text-stat-section-projects">
+                <AnimatedCounter end={500} suffix="+" />
+              </div>
+              <div className="text-primary-foreground/80">Projects Delivered</div>
+            </motion.div>
+            <motion.div className="text-center" variants={fadeInUp}>
+              <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-4">
+                <Users className="h-8 w-8" />
+              </div>
+              <div className="text-4xl md:text-5xl font-bold mb-2" data-testid="text-stat-section-engineers">
+                <AnimatedCounter end={150} suffix="+" />
+              </div>
+              <div className="text-primary-foreground/80">Expert Engineers</div>
+            </motion.div>
+            <motion.div className="text-center" variants={fadeInUp}>
+              <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-4">
+                <Clock className="h-8 w-8" />
+              </div>
+              <div className="text-4xl md:text-5xl font-bold mb-2" data-testid="text-stat-section-uptime">99.9%</div>
+              <div className="text-primary-foreground/80">Uptime Guarantee</div>
+            </motion.div>
+            <motion.div className="text-center" variants={fadeInUp}>
+              <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-4">
+                <Building2 className="h-8 w-8" />
+              </div>
+              <div className="text-4xl md:text-5xl font-bold mb-2" data-testid="text-stat-section-experience">
+                <AnimatedCounter end={10} suffix="+" />
+              </div>
+              <div className="text-primary-foreground/80">Years Experience</div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Trusted Clients Section */}
+      <section className="py-16 md:py-24 bg-muted/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div 
+            className="text-center max-w-3xl mx-auto mb-16"
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            <Badge variant="secondary" className="mb-4" data-testid="badge-clients">Trusted Partners</Badge>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6" data-testid="text-clients-title">
+              Powering Industry Leaders
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              From smart grid pioneers to enterprise utilities, we partner with organizations that are shaping the future of energy and technology.
+            </p>
+          </motion.div>
+
+          <motion.div 
+            className="grid grid-cols-2 md:grid-cols-4 gap-6"
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
+            {clients.map((client, index) => (
               <motion.div 
-                key={index} 
-                className="text-center"
+                key={index}
                 variants={fadeInUp}
+                className={`group relative ${client.featured ? 'md:col-span-2 md:row-span-2' : ''}`}
               >
-                <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-4">
-                  <stat.icon className="h-8 w-8" />
-                </div>
-                <div className="text-4xl md:text-5xl font-bold mb-2" data-testid={`text-stat-${index}`}>{stat.value}</div>
-                <div className="text-primary-foreground/80">{stat.label}</div>
+                <Card className={`p-6 h-full hover-elevate transition-all duration-300 ${client.featured ? 'border-accent bg-gradient-to-br from-accent/5 to-primary/5' : ''}`}>
+                  <div className="flex flex-col h-full justify-center items-center text-center">
+                    {client.featured && (
+                      <Badge variant="default" className="mb-4 bg-accent text-accent-foreground">
+                        <Sparkles className="h-3 w-3 mr-1" />
+                        Featured Partner
+                      </Badge>
+                    )}
+                    <div className={`w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4 ${client.featured ? 'w-20 h-20' : ''}`}>
+                      <Globe className={`text-primary ${client.featured ? 'h-10 w-10' : 'h-8 w-8'}`} />
+                    </div>
+                    <h3 className={`font-bold text-foreground mb-2 ${client.featured ? 'text-xl' : 'text-lg'}`}>{client.name}</h3>
+                    <p className="text-sm text-muted-foreground">{client.description}</p>
+                    {client.featured && (
+                      <p className="text-sm text-muted-foreground mt-4">
+                        Sister company delivering world's first 5G-enabled smart meters and AI-powered IRIS platform.
+                      </p>
+                    )}
+                  </div>
+                </Card>
               </motion.div>
             ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Certifications & Achievements */}
+      <section className="py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-16">
+            <motion.div
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+            >
+              <Badge variant="secondary" className="mb-4">Certifications</Badge>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+                Enterprise-Grade Quality Standards
+              </h2>
+              <p className="text-lg text-muted-foreground mb-8">
+                Our certifications demonstrate our commitment to quality, security, and process excellence at every level.
+              </p>
+              <div className="grid grid-cols-2 gap-4">
+                {certifications.map((cert, index) => (
+                  <Card key={index} className="p-4 hover-elevate transition-all duration-300">
+                    <div className="flex items-start gap-4">
+                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <cert.icon className="h-6 w-6 text-primary" />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-foreground">{cert.name}</h4>
+                        <p className="text-sm text-muted-foreground">{cert.description}</p>
+                      </div>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+            >
+              <Badge variant="secondary" className="mb-4">Recognition</Badge>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+                Award-Winning Excellence
+              </h2>
+              <p className="text-lg text-muted-foreground mb-8">
+                Industry recognition that reflects our dedication to innovation and client success.
+              </p>
+              <div className="space-y-4">
+                {achievements.map((achievement, index) => (
+                  <Card key={index} className="p-6 hover-elevate transition-all duration-300">
+                    <div className="flex items-center justify-between gap-4">
+                      <div className="flex items-center gap-4">
+                        <div className="w-1 h-12 bg-accent rounded-full flex-shrink-0" />
+                        <div>
+                          <h4 className="font-semibold text-foreground text-lg">{achievement.title}</h4>
+                          <p className="text-muted-foreground">{achievement.org}</p>
+                        </div>
+                      </div>
+                      <Badge variant="outline" className="flex-shrink-0">
+                        {achievement.year}
+                      </Badge>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+              <Card className="mt-6 p-6 bg-gradient-to-r from-primary/5 to-accent/5 border-accent/20">
+                <div className="flex items-center gap-4">
+                  <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
+                    <Zap className="h-8 w-8 text-accent" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-foreground text-lg">Make in India Initiative</h4>
+                    <p className="text-muted-foreground">100% Indigenous Solutions - Proudly developed in India for global markets</p>
+                  </div>
+                </div>
+              </Card>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* IoT & Smart Grid Technology Section */}
+      <section className="py-16 md:py-24 bg-gradient-to-br from-background via-muted/20 to-background relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/5 to-transparent" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <motion.div 
+            className="text-center max-w-3xl mx-auto mb-16"
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            <Badge variant="secondary" className="mb-4">
+              <Zap className="h-3 w-3 mr-1" />
+              Advanced Technology
+            </Badge>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
+              IoT & Smart Grid Solutions
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Powering the future of energy with AI-driven analytics, 5G-enabled smart metering, and comprehensive grid management platforms.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <motion.div
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+              className="lg:col-span-2"
+            >
+              <Card className="p-8 h-full bg-gradient-to-br from-primary/5 to-accent/5 border-primary/20 hover-elevate">
+                <div className="flex items-start gap-6">
+                  <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <Sparkles className="h-8 w-8 text-primary" />
+                  </div>
+                  <div>
+                    <Badge variant="outline" className="mb-3">AI-Powered</Badge>
+                    <h3 className="text-2xl font-bold text-foreground mb-3">IRIS Platform</h3>
+                    <p className="text-muted-foreground mb-4">
+                      Our Intelligent Remote Interface Server provides real-time data acquisition, advanced analytics, and seamless integration with blockchain technology for secure, transparent utility operations.
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      <Badge variant="secondary">MDAS Integration</Badge>
+                      <Badge variant="secondary">HES Compatible</Badge>
+                      <Badge variant="secondary">GET-SET Services</Badge>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            </motion.div>
+
+            <motion.div
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+            >
+              <Card className="p-6 h-full hover-elevate">
+                <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4">
+                  <Globe className="h-6 w-6 text-accent" />
+                </div>
+                <h3 className="text-xl font-bold text-foreground mb-2">5G Smart Meters</h3>
+                <p className="text-muted-foreground text-sm">
+                  World's first 5G-enabled smart metering solutions with ultra-low latency and real-time grid visibility.
+                </p>
+              </Card>
+            </motion.div>
+
+            <motion.div
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+            >
+              <Card className="p-6 h-full hover-elevate">
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                  <BarChart3 className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="text-xl font-bold text-foreground mb-2">MDMS Analytics</h3>
+                <p className="text-muted-foreground text-sm">
+                  Comprehensive meter data management with AI-powered loss detection and demand forecasting.
+                </p>
+              </Card>
+            </motion.div>
+
+            <motion.div
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+            >
+              <Card className="p-6 h-full hover-elevate">
+                <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4">
+                  <Shield className="h-6 w-6 text-accent" />
+                </div>
+                <h3 className="text-xl font-bold text-foreground mb-2">Grid Security</h3>
+                <p className="text-muted-foreground text-sm">
+                  End-to-end encryption with blockchain-backed audit trails for tamper-proof utility operations.
+                </p>
+              </Card>
+            </motion.div>
+
+            <motion.div
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+            >
+              <Card className="p-6 h-full hover-elevate">
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                  <Zap className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="text-xl font-bold text-foreground mb-2">AMI Communication</h3>
+                <p className="text-muted-foreground text-sm">
+                  Multi-protocol support: RF-Mesh, PLCC, 6LoWPAN, LoRa, NB-IoT, and cellular connectivity.
+                </p>
+              </Card>
+            </motion.div>
+          </div>
+
+          <motion.div 
+            className="mt-12 text-center"
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            <Button size="lg" className="group" data-testid="button-explore-technology">
+              Explore Our Technology
+              <ChevronRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            </Button>
           </motion.div>
         </div>
       </section>
