@@ -1,7 +1,14 @@
-# Website Crafter App - Design Guidelines
+# iOne Techlabs - Professional Website Design Guidelines
+
+## Brand Identity
+**Company**: iOne Techlabs - A cutting-edge technology company delivering innovative software solutions
+**Brand Colors**: 
+- Primary Green: #1B6B3D (deep forest green)
+- Accent Gold: #E5A623 (vibrant golden yellow)
+- Supporting: Clean whites and subtle grays for professional appearance
 
 ## Design Approach
-**Reference-Based Approach** drawing from leading web development platforms: Webflow (sophisticated layouts), Framer (modern interactions), and Linear (clean typography). This SaaS product demands visual credibility while showcasing technical capability.
+**Reference-Based Approach** drawing from leading enterprise tech companies: Salesforce (trust/enterprise), Stripe (clarity/elegance), and Linear (modern minimalism). This technology services company demands visual credibility while showcasing technical capability.
 
 ## Core Design Elements
 
@@ -22,87 +29,93 @@ Spacing primitives: **2, 4, 6, 8, 12, 16, 20, 24** (tailwind units)
 - Card padding: p-6 md:p-8
 - Max-width: max-w-7xl for containers
 
-### Page Structure (7 Sections)
+### Page Structure (8 Sections)
 
-**1. Hero Section (90vh)**
+**1. Navigation Header (Sticky)**
+- Logo (iOne Techlabs) on left
+- Horizontal menu: Services, Solutions, About, Industries, Contact
+- Right-aligned: "Get Started" CTA button
+
+**2. Hero Section (90vh)**
 - Split layout: 50/50 text-left, visual-right on desktop
-- Headline showcasing value proposition
+- Headline showcasing core value proposition for digital transformation
 - Subheadline with key differentiator
-- CTA group: Primary button + Secondary "Watch Demo" button with blurred background overlay
-- Trust indicator: "Trusted by 50,000+ creators" with logo strip
+- CTA group: Primary button "Schedule Consultation" + Secondary "View Our Work"
+- Trust indicator: Stats like "500+ Projects Delivered" and "50+ Enterprise Clients"
 
-**2. Interactive Demo Preview**
-- Full-width browser mockup showing the app interface in action
-- Tabbed interface displaying different features (drag-drop, templates, code export)
-- Screenshot carousel with smooth transitions
-
-**3. Key Features Grid (3 columns)**
-- Visual icon + Feature title + 2-line description
-- Features: Drag & Drop Builder, Template Library, Code Export, Real-time Collaboration, Responsive Preview, SEO Optimizer
+**3. Services Overview (3 columns)**
+- Visual icon + Service title + 2-line description
+- Services: Custom Software Development, Cloud Solutions, Mobile App Development, Data Analytics, DevOps & Automation, UI/UX Design
 - Each card with hover elevation effect
 
-**4. Use Case Showcase (2-column alternating)**
-- 3 use cases: Freelancers, Agencies, Startups
-- Each row: Image (screenshot/illustration) + Text content
+**4. Why Choose Us (Key Differentiators)**
+- 4-column grid with compelling stats and icons
+- Technical Expertise, Agile Methodology, 24/7 Support, Proven Track Record
+- Include metrics like "10+ Years Experience", "99.9% Uptime", "150+ Engineers"
+
+**5. Solutions Showcase (2-column alternating)**
+- 3 solution areas: Enterprise Software, Digital Transformation, Startup Acceleration
+- Each row: Image (relevant tech visual) + Text content
 - Alternate image-left/image-right pattern
-- Include specific metrics/outcomes
+- Include specific outcomes and benefits
 
-**5. Social Proof Section**
-- 3-column testimonial cards with customer photos
-- Star ratings, company logos, detailed feedback
-- "Case Studies" link to full stories
+**6. Client Testimonials**
+- 3-column testimonial cards with client photos
+- Company logos, roles, detailed feedback
+- Star ratings for credibility
 
-**6. Pricing Tiers (3 columns)**
-- Starter, Professional, Enterprise
-- Feature comparison list
-- Highlighted "Most Popular" tier
-- CTA buttons per tier
+**7. Industries We Serve**
+- Grid of industry icons with labels
+- Healthcare, Finance, E-commerce, Education, Manufacturing, Logistics
+- Brief description of expertise in each
 
-**7. Final CTA + Footer**
-- Centered CTA block with gradient background
-- Compelling headline + Primary action button
-- Comprehensive footer: Product links, Resources, Company, Social links, Newsletter signup form
+**8. CTA Section + Footer**
+- Centered CTA block with gradient background (green to gold subtle)
+- "Ready to Transform Your Business?" headline
+- Primary action button + Contact info
+- Comprehensive footer: Services, Solutions, Company, Resources, Social links, Newsletter
 
 ## Component Library
 
 ### Navigation
-- Sticky header with logo (use provided image)
-- Horizontal menu: Product, Features, Pricing, Resources, Blog
-- Right-aligned: Login (text) + "Start Free Trial" (button)
+- Sticky header with logo (provided iOne Techlabs logo)
+- Horizontal menu: Services, Solutions, About, Industries, Contact
+- Right-aligned: "Get Started" primary button
 
 ### Cards
-- Rounded-xl with subtle shadow
-- Hover: scale-105 transition with increased shadow
-- Consistent padding: p-8
+- Rounded-lg with subtle shadow
+- Hover: scale-102 transition with increased shadow
+- Consistent padding: p-6 md:p-8
 
 ### Buttons
-- Primary: Rounded-lg, px-8 py-4, font-semibold
-- Secondary: Outlined with backdrop-blur when on images
-- CTA buttons: Larger scale (px-10 py-5) with icon arrows
+- Primary: Green background, white text, rounded-lg, px-6 py-3
+- Secondary: Outlined with gold accent border
+- CTA buttons: Larger scale (px-8 py-4) with icon arrows
 
 ### Forms
+- Contact form: Name, Email, Company, Message
 - Newsletter: Single-line horizontal layout (email + button)
 - Consistent input styling: rounded-lg, px-4 py-3
 - Focus states with ring-2 treatment
 
-## Images Section
+## Images Available
 
-**Hero Image**: Professional screenshot of the website builder interface showing drag-and-drop functionality, template selection panel, and live preview - placed right side of split hero layout
-
+**Hero Image**: Team collaboration photo showing technology professionals
 **Use Case Images**:
-1. Freelancer workspace mockup showing portfolio creation
-2. Agency team collaboration view with multiple users
-3. Startup dashboard displaying analytics and site performance
+1. Software development workspace
+2. Cloud computing visualization
+3. Mobile app development
+4. Data analytics dashboard
 
-**Feature Section**: Icon illustrations for each feature (modern, geometric style)
+**Testimonial Photos**: Professional headshots (6 diverse business professionals)
 
-**Testimonial Photos**: Professional headshots of 6 diverse customers
+**Logo**: iOne Techlabs logo (attached_assets/image_1768908388633.png)
 
-**Demo Preview**: High-fidelity interface screenshots showing:
-- Template gallery view
-- Code export panel
-- Mobile responsive preview
+All images should be professionally presented with subtle shadows and rounded corners (rounded-lg) for product screenshots.
 
-**Logo Strip**: 8-10 recognizable company logos using the product
-
-All images should be high-resolution, professionally lit/designed, and maintain consistent visual style. Use subtle shadows and rounded corners (rounded-lg) for all product screenshots.
+## Color Variables (for index.css)
+Use these HSL values:
+- Primary (Green): 148 58% 26%
+- Primary Foreground: 0 0% 100%
+- Accent (Gold): 42 80% 52%
+- Accent Foreground: 42 80% 10%
