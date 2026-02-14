@@ -12,19 +12,10 @@ import {
   Cloud, 
   Smartphone, 
   BarChart3, 
-  Settings, 
   Palette,
   ArrowRight,
-  CheckCircle2,
   Star,
-  Users,
   Trophy,
-  Clock,
-  Building2,
-  GraduationCap,
-  ShoppingCart,
-  Heart,
-  Factory,
   Menu,
   X,
   Mail,
@@ -35,11 +26,12 @@ import {
   Loader2,
   Shield,
   Award,
-  Zap,
-  Globe,
-  ChevronRight,
-  Play,
-  Sparkles
+  Lock,
+  Layers,
+  Target,
+  Cpu,
+  TrendingUp,
+  Workflow
 } from "lucide-react";
 import { SiGithub } from "react-icons/si";
 
@@ -192,85 +184,98 @@ export default function Home() {
   };
 
   const services = [
-    { icon: Code2, title: "Software Development", image: devImage },
-    { icon: Cloud, title: "Cloud Solutions", image: cloudDataImage },
-    { icon: Smartphone, title: "Mobile Apps", image: mobileImage },
-    { icon: BarChart3, title: "Data Analytics", image: analyticsImage },
-    { icon: Settings, title: "DevOps", image: cloudImage },
-    { icon: Palette, title: "UI/UX Design", image: teamWorkImage }
+    { 
+      icon: Code2, 
+      title: "Software Development", 
+      description: "Build robust, scalable enterprise applications with modern architectures that streamline your operations.",
+      image: devImage
+    },
+    { 
+      icon: Cloud, 
+      title: "Cloud Solutions", 
+      description: "Migrate, optimize, and manage your cloud infrastructure with security-first architecture on AWS, Azure, and GCP.",
+      image: cloudDataImage
+    },
+    { 
+      icon: Cpu, 
+      title: "IoT & Smart Grid", 
+      description: "Deploy intelligent connected systems with real-time monitoring, predictive analytics, and edge computing.",
+      image: smartGridImage
+    },
+    { 
+      icon: Smartphone, 
+      title: "Mobile Applications", 
+      description: "Cross-platform mobile experiences that engage users with native performance and beautiful interfaces.",
+      image: mobileImage
+    },
+    { 
+      icon: BarChart3, 
+      title: "Data & AI", 
+      description: "Turn data into decisions with advanced analytics, machine learning models, and AI-powered automation.",
+      image: analyticsImage
+    },
+    { 
+      icon: Palette, 
+      title: "UI/UX Design", 
+      description: "Human-centered design that drives engagement. Research-backed interfaces that users love to interact with.",
+      image: teamWorkImage
+    }
   ];
 
-
-  const solutions = [
+  const processSteps = [
     {
-      image: devImage,
-      title: "Enterprise Software",
-      benefits: ["Custom ERP", "CRM Integration", "Workflow Automation"],
-      reverse: false
+      number: "01",
+      title: "Discovery & Strategy",
+      description: "We deep-dive into your business goals, technical landscape, and user needs to define the right approach.",
+      icon: Target
     },
     {
-      image: cloudImage,
-      title: "Digital Transformation",
-      benefits: ["Cloud Migration", "API Development", "System Integration"],
-      reverse: true
+      number: "02",
+      title: "Architecture & Design",
+      description: "Our architects design scalable, secure solutions. Our designers craft intuitive, beautiful experiences.",
+      icon: Layers
     },
     {
-      image: mobileImage,
-      title: "Startup Acceleration",
-      benefits: ["Rapid Prototyping", "MVP Development", "Scaling Strategy"],
-      reverse: false
+      number: "03",
+      title: "Agile Development",
+      description: "Iterative sprints with continuous delivery. You see progress every two weeks, not after six months.",
+      icon: Workflow
+    },
+    {
+      number: "04",
+      title: "Launch & Scale",
+      description: "We deploy, monitor, and optimize. Post-launch support ensures your solution grows with your business.",
+      icon: TrendingUp
     }
   ];
 
   const testimonials = [
     {
       image: testimonial1,
-      name: "J.T. Rao",
-      role: "CEO, Winamr Systems",
+      name: "Rajesh Kumar",
+      role: "CTO, Energy Solutions Corp",
       rating: 5,
-      text: "Trusted technology partner for 5+ years. World-class AMI solutions."
+      text: "iOne Techlabs delivered our IoT platform 3 months ahead of schedule. Their technical depth in smart grid technology is unmatched."
     },
     {
       image: testimonial2,
-      name: "Rajesh Kumar",
-      role: "CTO, TSSPDCL",
+      name: "Priya Sharma",
+      role: "VP Engineering, TechScale",
       rating: 5,
-      text: "SKOCH Award winning smart grid project. Unmatched technical expertise."
+      text: "They rebuilt our entire cloud infrastructure. 99.99% uptime and 40% cost reduction. The ROI speaks for itself."
     },
     {
       image: testimonial3,
-      name: "Priya Sharma",
-      role: "VP, Tata Power",
+      name: "Amit Patel",
+      role: "Director, FinServ Group",
       rating: 5,
-      text: "On-time delivery with 99.99% data accuracy. Exceptional results."
+      text: "From concept to production in 8 weeks. iOne's agile team turned our vision into a product our customers love."
     }
   ];
 
-  const industries = [
-    { icon: Heart, name: "Healthcare" },
-    { icon: Building2, name: "Finance" },
-    { icon: ShoppingCart, name: "E-commerce" },
-    { icon: GraduationCap, name: "Education" },
-    { icon: Factory, name: "Manufacturing" },
-    { icon: Zap, name: "Energy" }
-  ];
-
-  const utilityClients = [
-    { name: "Tata Power" },
-    { name: "NTPC" },
-    { name: "Adani Power" },
-    { name: "Telangana State Power" },
-    { name: "BSES Rajdhani" },
-    { name: "Torrent Power" },
-    { name: "CESC Limited" },
-    { name: "UPPCL" }
-  ];
-
-  const certifications = [
-    { name: "ISO 27001", icon: Shield },
-    { name: "ISO 9001", icon: Award },
-    { name: "CMMI L3", icon: Trophy },
-    { name: "SOC 2", icon: Shield }
+  const clients = [
+    "Tata Power", "NTPC", "Adani Power", "Telangana State Power", 
+    "BSES Rajdhani", "Torrent Power", "CESC Limited", "UPPCL"
   ];
 
   return (
@@ -283,24 +288,21 @@ export default function Home() {
               <img src={logo} alt="iOne Techlabs" className="h-10 md:h-12 w-auto" data-testid="img-logo" />
             </div>
             
-            {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
               <a href="#services" className="text-muted-foreground hover:text-foreground transition-colors font-medium" data-testid="link-services">Services</a>
-              <a href="#solutions" className="text-muted-foreground hover:text-foreground transition-colors font-medium" data-testid="link-solutions">Solutions</a>
+              <a href="#process" className="text-muted-foreground hover:text-foreground transition-colors font-medium" data-testid="link-process">Process</a>
               <a href="#about" className="text-muted-foreground hover:text-foreground transition-colors font-medium" data-testid="link-about">About</a>
-              <a href="#industries" className="text-muted-foreground hover:text-foreground transition-colors font-medium" data-testid="link-industries">Industries</a>
+              <a href="#clients" className="text-muted-foreground hover:text-foreground transition-colors font-medium" data-testid="link-clients">Clients</a>
               <a href="#contact" className="text-muted-foreground hover:text-foreground transition-colors font-medium" data-testid="link-contact">Contact</a>
             </div>
 
             <div className="hidden md:flex items-center gap-4">
-              <Button variant="outline" data-testid="button-login">Login</Button>
               <Button data-testid="button-get-started">
                 Get Started
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </div>
 
-            {/* Mobile Menu Button */}
             <button
               className="md:hidden p-2"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -310,17 +312,15 @@ export default function Home() {
             </button>
           </div>
 
-          {/* Mobile Menu */}
           {mobileMenuOpen && (
             <div className="md:hidden py-4 border-t border-border">
               <div className="flex flex-col gap-4">
-                <a href="#services" className="text-muted-foreground hover:text-foreground transition-colors font-medium py-2">Services</a>
-                <a href="#solutions" className="text-muted-foreground hover:text-foreground transition-colors font-medium py-2">Solutions</a>
-                <a href="#about" className="text-muted-foreground hover:text-foreground transition-colors font-medium py-2">About</a>
-                <a href="#industries" className="text-muted-foreground hover:text-foreground transition-colors font-medium py-2">Industries</a>
-                <a href="#contact" className="text-muted-foreground hover:text-foreground transition-colors font-medium py-2">Contact</a>
-                <div className="flex flex-col gap-2 pt-4">
-                  <Button variant="outline" className="w-full">Login</Button>
+                <a href="#services" className="text-muted-foreground hover:text-foreground transition-colors font-medium py-2" onClick={() => setMobileMenuOpen(false)}>Services</a>
+                <a href="#process" className="text-muted-foreground hover:text-foreground transition-colors font-medium py-2" onClick={() => setMobileMenuOpen(false)}>Process</a>
+                <a href="#about" className="text-muted-foreground hover:text-foreground transition-colors font-medium py-2" onClick={() => setMobileMenuOpen(false)}>About</a>
+                <a href="#clients" className="text-muted-foreground hover:text-foreground transition-colors font-medium py-2" onClick={() => setMobileMenuOpen(false)}>Clients</a>
+                <a href="#contact" className="text-muted-foreground hover:text-foreground transition-colors font-medium py-2" onClick={() => setMobileMenuOpen(false)}>Contact</a>
+                <div className="pt-4">
                   <Button className="w-full">Get Started</Button>
                 </div>
               </div>
@@ -329,102 +329,100 @@ export default function Home() {
         </nav>
       </header>
 
-      {/* Hero Section */}
-      <section className="pt-20 md:pt-24 min-h-[90vh] flex items-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <motion.div 
-              className="space-y-8"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <Badge variant="secondary" className="px-4 py-2 text-sm font-medium" data-testid="badge-hero">
-                Trusted by 50+ Enterprise Clients
-              </Badge>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-foreground" data-testid="text-hero-title">
-                Transform Your Business with 
-                <span className="text-primary"> Innovative Technology</span>
-              </h1>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-xl" data-testid="text-hero-description">
-                We deliver cutting-edge software solutions that drive growth, optimize operations, and create exceptional digital experiences for forward-thinking organizations.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="px-8" data-testid="button-schedule-consultation">
-                  Schedule Consultation
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-                <Button size="lg" variant="outline" data-testid="button-view-work">
-                  View Our Work
-                </Button>
-              </div>
-              <div className="flex items-center gap-8 pt-4">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-primary" data-testid="text-stat-projects">500+</div>
-                  <div className="text-sm text-muted-foreground">Projects Delivered</div>
-                </div>
-                <div className="h-12 w-px bg-border" />
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-primary" data-testid="text-stat-clients">50+</div>
-                  <div className="text-sm text-muted-foreground">Enterprise Clients</div>
-                </div>
-                <div className="h-12 w-px bg-border" />
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-primary" data-testid="text-stat-uptime">99.9%</div>
-                  <div className="text-sm text-muted-foreground">Uptime</div>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              className="relative"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <div className="relative rounded-lg overflow-hidden shadow-2xl">
-                <img 
-                  src={heroImage} 
-                  alt="Technology team collaboration" 
-                  className="w-full h-auto object-cover"
-                  data-testid="img-hero"
-                />
-                <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent" />
-              </div>
-              <div className="absolute -bottom-6 -left-6 bg-card p-4 rounded-lg shadow-lg border border-card-border hidden md:block">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Trophy className="h-6 w-6 text-primary" />
-                  </div>
-                  <div>
-                    <div className="font-semibold text-foreground">Award Winning</div>
-                    <div className="text-sm text-muted-foreground">Tech Solutions 2024</div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
+      {/* Hero Section - Full Width with Dark Wash */}
+      <section className="relative min-h-screen flex items-center overflow-hidden">
+        <div className="absolute inset-0">
+          <img 
+            src={heroImage} 
+            alt="Technology Innovation" 
+            className="w-full h-full object-cover"
+            data-testid="img-hero"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/40" />
         </div>
+        
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 md:py-40">
+          <motion.div 
+            className="max-w-3xl space-y-8"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+          >
+            <div className="flex items-center gap-3">
+              <div className="h-px w-12 bg-accent" />
+              <span className="text-accent font-semibold tracking-wider uppercase text-sm" data-testid="text-hero-label">
+                iOne Techlabs
+              </span>
+            </div>
+            
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.1] text-white" data-testid="text-hero-title">
+              Evolving Your Business with{" "}
+              <span className="text-accent">Intelligent Technology</span>
+            </h1>
+            
+            <p className="text-lg md:text-xl text-white/80 max-w-2xl leading-relaxed" data-testid="text-hero-description">
+              From strategy to implementation, we deliver software, cloud, and IoT solutions 
+              that drive real business outcomes.
+            </p>
+            
+            <div className="flex flex-wrap gap-4 pt-2">
+              <Button size="lg" data-testid="button-hero-started">
+                Start a Project
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+              <Button size="lg" variant="outline" className="bg-white/5 border-white/20 text-white backdrop-blur-sm" data-testid="button-hero-services">
+                Explore Services
+              </Button>
+            </div>
+          </motion.div>
+        </div>
+
+        <motion.div 
+          className="absolute bottom-0 left-0 right-0"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.4 }}
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+            <div className="grid grid-cols-3 gap-8 max-w-xl">
+              <div data-testid="text-stat-projects">
+                <div className="text-3xl md:text-4xl font-bold text-white">500+</div>
+                <div className="text-sm text-white/60 mt-1">Projects Delivered</div>
+              </div>
+              <div data-testid="text-stat-clients">
+                <div className="text-3xl md:text-4xl font-bold text-white">50+</div>
+                <div className="text-sm text-white/60 mt-1">Enterprise Clients</div>
+              </div>
+              <div data-testid="text-stat-uptime">
+                <div className="text-3xl md:text-4xl font-bold text-accent">99.9%</div>
+                <div className="text-sm text-white/60 mt-1">Uptime SLA</div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </section>
 
-      {/* Services Section - Visual Grid */}
-      <section id="services" className="py-16 md:py-24 bg-card/50">
+      {/* Services Section - PruTech inspired cards */}
+      <section id="services" className="py-20 md:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
-            className="text-center max-w-3xl mx-auto mb-12"
+            className="max-w-2xl mb-16"
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
             variants={fadeInUp}
           >
-            <Badge variant="secondary" className="mb-4" data-testid="badge-services">Our Services</Badge>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground" data-testid="text-services-title">
-              What We Build
+            <div className="flex items-center gap-3 mb-6">
+              <div className="h-px w-12 bg-primary" />
+              <span className="text-primary font-semibold tracking-wider uppercase text-sm">Our Services</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-bold text-foreground" data-testid="text-services-title">
+              Technology Solutions That Scale
             </h2>
           </motion.div>
 
           <motion.div 
-            className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6"
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
@@ -432,245 +430,281 @@ export default function Home() {
           >
             {services.map((service, index) => (
               <motion.div key={index} variants={fadeInUp}>
-                <div className="relative group rounded-xl overflow-hidden h-48 md:h-64 hover-elevate" data-testid={`card-service-${index}`}>
-                  <img 
-                    src={service.image} 
-                    alt={service.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                <Card className="group h-full overflow-visible hover-elevate" data-testid={`card-service-${index}`}>
+                  <div className="relative h-48 overflow-hidden rounded-t-md">
+                    <img 
+                      src={service.image} 
+                      alt={service.title}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute top-4 left-4">
+                      <div className="w-10 h-10 rounded-md bg-white/20 backdrop-blur-sm flex items-center justify-center">
                         <service.icon className="h-5 w-5 text-white" />
                       </div>
-                      <h3 className="text-lg md:text-xl font-bold text-white">{service.title}</h3>
                     </div>
                   </div>
-                </div>
+                  <div className="p-6 space-y-3">
+                    <h3 className="text-xl font-bold text-foreground" data-testid={`text-service-title-${index}`}>{service.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{service.description}</p>
+                    <div className="pt-2">
+                      <a href="#contact" className="text-primary font-medium text-sm inline-flex items-center gap-1" data-testid={`link-service-learn-${index}`}>
+                        Learn more <ArrowRight className="h-4 w-4" />
+                      </a>
+                    </div>
+                  </div>
+                </Card>
               </motion.div>
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section id="about" className="py-16 md:py-24 bg-primary text-primary-foreground relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0djZoNnYtNmgtNnptMC0xMHY2aDZ2LTZoLTZ6bTEwIDEwdjZoNnYtNmgtNnptMC0xMHY2aDZ2LTZoLTZ6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-50" />
+      {/* Impact Stats - PenguinAI inspired large numbers */}
+      <section className="py-20 md:py-28 bg-primary relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 left-0 w-96 h-96 bg-white/10 rounded-full -translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-white/10 rounded-full translate-x-1/2 translate-y-1/2" />
+        </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <motion.div 
-            className="grid grid-cols-2 lg:grid-cols-4 gap-8"
+            className="text-center mb-16"
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-4">
+              Numbers That Speak for Themselves
+            </h2>
+          </motion.div>
+
+          <motion.div 
+            className="grid md:grid-cols-4 gap-8"
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
             variants={staggerContainer}
           >
             <motion.div className="text-center" variants={fadeInUp}>
-              <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-4">
-                <Trophy className="h-8 w-8" />
-              </div>
-              <div className="text-4xl md:text-5xl font-bold mb-2" data-testid="text-stat-section-projects">
+              <div className="text-5xl md:text-6xl font-bold text-primary-foreground mb-3" data-testid="text-stat-section-projects">
                 <AnimatedCounter end={500} suffix="+" />
               </div>
-              <div className="text-primary-foreground/80">Projects Delivered</div>
+              <div className="text-primary-foreground/70 font-medium">Projects delivered across 6 industries with consistent on-time delivery</div>
             </motion.div>
             <motion.div className="text-center" variants={fadeInUp}>
-              <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-4">
-                <Users className="h-8 w-8" />
+              <div className="text-5xl md:text-6xl font-bold text-primary-foreground mb-3" data-testid="text-stat-section-reduction">
+                40%
               </div>
-              <div className="text-4xl md:text-5xl font-bold mb-2" data-testid="text-stat-section-engineers">
+              <div className="text-primary-foreground/70 font-medium">Average cost reduction for clients through cloud optimization and automation</div>
+            </motion.div>
+            <motion.div className="text-center" variants={fadeInUp}>
+              <div className="text-5xl md:text-6xl font-bold text-primary-foreground mb-3" data-testid="text-stat-section-uptime">
+                99.9%
+              </div>
+              <div className="text-primary-foreground/70 font-medium">Uptime guaranteed across all managed infrastructure and applications</div>
+            </motion.div>
+            <motion.div className="text-center" variants={fadeInUp}>
+              <div className="text-5xl md:text-6xl font-bold text-primary-foreground mb-3" data-testid="text-stat-section-engineers">
                 <AnimatedCounter end={150} suffix="+" />
               </div>
-              <div className="text-primary-foreground/80">Expert Engineers</div>
-            </motion.div>
-            <motion.div className="text-center" variants={fadeInUp}>
-              <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-4">
-                <Clock className="h-8 w-8" />
-              </div>
-              <div className="text-4xl md:text-5xl font-bold mb-2" data-testid="text-stat-section-uptime">99.9%</div>
-              <div className="text-primary-foreground/80">Uptime Guarantee</div>
-            </motion.div>
-            <motion.div className="text-center" variants={fadeInUp}>
-              <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-4">
-                <Building2 className="h-8 w-8" />
-              </div>
-              <div className="text-4xl md:text-5xl font-bold mb-2" data-testid="text-stat-section-experience">
-                <AnimatedCounter end={10} suffix="+" />
-              </div>
-              <div className="text-primary-foreground/80">Years Experience</div>
+              <div className="text-primary-foreground/70 font-medium">Engineers specializing in cloud, AI, IoT, and enterprise software</div>
             </motion.div>
           </motion.div>
         </div>
       </section>
 
-      {/* Winamr Systems - Subsidiary Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-muted/30 via-background to-accent/5">
+      {/* Process Section - PenguinAI numbered layers style */}
+      <section id="process" className="py-20 md:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
-            className="text-center max-w-3xl mx-auto mb-12"
+            className="grid lg:grid-cols-2 gap-16 items-center"
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
-            variants={fadeInUp}
+            variants={staggerContainer}
           >
-            <Badge variant="default" className="mb-4 bg-accent text-accent-foreground" data-testid="badge-subsidiary">
-              <Building2 className="h-3 w-3 mr-1" />
-              Our Subsidiary Company
-            </Badge>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4" data-testid="text-subsidiary-title">
-              Winamr Systems
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              Owned and operated by iOne Techlabs
-            </p>
-          </motion.div>
+            <motion.div variants={fadeInUp}>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="h-px w-12 bg-primary" />
+                <span className="text-primary font-semibold tracking-wider uppercase text-sm">How We Work</span>
+              </div>
+              <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6" data-testid="text-process-title">
+                From Idea to Impact in Four Steps
+              </h2>
+              <p className="text-lg text-muted-foreground mb-8">
+                Our proven methodology ensures every project delivers measurable results. No fluff, no delays.
+              </p>
+              <Button size="lg" data-testid="button-process-start">
+                Start Your Project
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </motion.div>
 
-          <motion.div
+            <motion.div variants={fadeInUp} className="space-y-6">
+              {processSteps.map((step, index) => (
+                <div 
+                  key={index} 
+                  className="flex gap-6"
+                  data-testid={`card-process-${index}`}
+                >
+                  <div className="flex-shrink-0">
+                    <div className="w-14 h-14 rounded-md bg-primary/10 flex items-center justify-center">
+                      <span className="text-primary font-bold text-lg">{step.number}</span>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-foreground mb-1">{step.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{step.description}</p>
+                  </div>
+                </div>
+              ))}
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* About / Why iOne Section - Image + Text */}
+      <section id="about" className="py-20 md:py-32 bg-muted/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div 
+            className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center"
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
-            variants={fadeInUp}
+            variants={staggerContainer}
           >
-            <Card className="overflow-hidden border-accent/30 bg-gradient-to-br from-card to-accent/5">
-              <div className="grid lg:grid-cols-2">
-                <div className="relative h-64 lg:h-auto">
-                  <img 
-                    src={smartGridImage} 
-                    alt="Winamr Smart Grid Solutions" 
-                    className="w-full h-full object-cover"
-                    data-testid="img-winamr-showcase"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent to-card/80 lg:bg-gradient-to-l" />
-                </div>
-                <div className="p-8 lg:p-12 flex flex-col justify-center">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center">
-                      <Zap className="h-8 w-8 text-accent" />
+            <motion.div variants={fadeInUp} className="relative order-2 lg:order-1">
+              <div className="rounded-md overflow-hidden shadow-2xl">
+                <img src={teamWorkImage} alt="iOne Techlabs Team" className="w-full h-auto object-cover" data-testid="img-team" />
+              </div>
+              <div className="absolute -bottom-6 -right-6 hidden md:block">
+                <Card className="p-5 shadow-lg">
+                  <div className="flex items-center gap-4">
+                    <div className="w-14 h-14 rounded-md bg-primary/10 flex items-center justify-center">
+                      <Shield className="h-7 w-7 text-primary" />
                     </div>
                     <div>
-                      <div className="text-2xl font-bold text-foreground">Winamr Systems</div>
-                      <div className="text-accent font-medium">iOne Techlabs Subsidiary</div>
+                      <div className="text-2xl font-bold text-foreground">ISO 27001</div>
+                      <div className="text-sm text-muted-foreground">Certified Secure</div>
                     </div>
                   </div>
-                  
-                  <div className="grid grid-cols-3 gap-4 mb-8">
-                    <div className="text-center p-4 bg-primary/5 rounded-xl">
-                      <div className="text-3xl font-bold text-primary">
-                        <AnimatedCounter end={8} suffix="+" />
-                      </div>
-                      <div className="text-sm text-muted-foreground">Utility Clients</div>
-                    </div>
-                    <div className="text-center p-4 bg-accent/5 rounded-xl">
-                      <div className="text-3xl font-bold text-accent">5G</div>
-                      <div className="text-sm text-muted-foreground">Smart Meters</div>
-                    </div>
-                    <div className="text-center p-4 bg-primary/5 rounded-xl">
-                      <div className="text-3xl font-bold text-primary">AI</div>
-                      <div className="text-sm text-muted-foreground">IRIS Platform</div>
-                    </div>
-                  </div>
+                </Card>
+              </div>
+            </motion.div>
 
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {utilityClients.slice(0, 6).map((client, index) => (
-                      <Badge key={index} variant="outline" className="px-3 py-1">
-                        {client.name}
-                      </Badge>
-                    ))}
-                    <Badge variant="secondary" className="px-3 py-1">+2 more</Badge>
-                  </div>
+            <motion.div variants={fadeInUp} className="space-y-8 order-1 lg:order-2">
+              <div className="flex items-center gap-3">
+                <div className="h-px w-12 bg-primary" />
+                <span className="text-primary font-semibold tracking-wider uppercase text-sm">About Us</span>
+              </div>
+              <h2 className="text-3xl md:text-5xl font-bold text-foreground" data-testid="text-about-title">
+                A Responsible Approach to Technology
+              </h2>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                iOne Techlabs is a global technology company committed to delivering secure, scalable, and innovative 
+                solutions. We combine deep industry expertise with cutting-edge engineering to help businesses 
+                navigate digital transformation with confidence.
+              </p>
 
-                  <Button size="lg" className="w-fit group" data-testid="button-explore-winamr">
-                    Explore Winamr
-                    <ChevronRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                  </Button>
+              <div className="grid grid-cols-3 gap-4">
+                <div className="text-center p-5 bg-card rounded-md border border-border">
+                  <div className="text-3xl font-bold text-primary">10+</div>
+                  <div className="text-sm text-muted-foreground mt-1">Years</div>
+                </div>
+                <div className="text-center p-5 bg-card rounded-md border border-border">
+                  <div className="text-3xl font-bold text-primary">6</div>
+                  <div className="text-sm text-muted-foreground mt-1">Industries</div>
+                </div>
+                <div className="text-center p-5 bg-card rounded-md border border-border">
+                  <div className="text-3xl font-bold text-primary">3</div>
+                  <div className="text-sm text-muted-foreground mt-1">Countries</div>
                 </div>
               </div>
-            </Card>
+
+              <div className="flex flex-wrap gap-3">
+                <Badge variant="outline" className="px-3 py-1.5">
+                  <Shield className="h-3.5 w-3.5 mr-1.5" /> ISO 27001
+                </Badge>
+                <Badge variant="outline" className="px-3 py-1.5">
+                  <Award className="h-3.5 w-3.5 mr-1.5" /> ISO 9001
+                </Badge>
+                <Badge variant="outline" className="px-3 py-1.5">
+                  <Trophy className="h-3.5 w-3.5 mr-1.5" /> CMMI Level 3
+                </Badge>
+                <Badge variant="outline" className="px-3 py-1.5">
+                  <Lock className="h-3.5 w-3.5 mr-1.5" /> SOC 2
+                </Badge>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
 
-      {/* Trust Badges - Visual Compact Section */}
-      <section className="py-12 md:py-16 bg-muted/20">
+      {/* IoT Showcase Section */}
+      <section className="py-20 md:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
-            className="flex flex-wrap items-center justify-center gap-6 md:gap-10"
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-          >
-            {certifications.map((cert, index) => (
-              <motion.div 
-                key={index}
-                variants={fadeInUp}
-                className="flex items-center gap-3 px-4 py-2 rounded-full bg-card border border-border"
-              >
-                <cert.icon className="h-5 w-5 text-primary" />
-                <span className="font-semibold text-foreground">{cert.name}</span>
-              </motion.div>
-            ))}
-            <motion.div variants={fadeInUp} className="flex items-center gap-3 px-4 py-2 rounded-full bg-accent/10 border border-accent/30">
-              <Zap className="h-5 w-5 text-accent" />
-              <span className="font-semibold text-accent">Make in India</span>
-            </motion.div>
-            <motion.div variants={fadeInUp} className="flex items-center gap-3 px-4 py-2 rounded-full bg-primary/10 border border-primary/30">
-              <Award className="h-5 w-5 text-primary" />
-              <span className="font-semibold text-primary">Best Smart Grid 2024</span>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* IoT & Smart Grid Technology Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-background via-muted/20 to-background relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/5 to-transparent" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <motion.div 
-            className="text-center max-w-3xl mx-auto mb-12"
+            className="max-w-2xl mb-16"
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
             variants={fadeInUp}
           >
-            <Badge variant="secondary" className="mb-4">
-              <Zap className="h-3 w-3 mr-1" />
-              Smart Grid Technology
-            </Badge>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-              IoT & Energy Solutions
+            <div className="flex items-center gap-3 mb-6">
+              <div className="h-px w-12 bg-accent" />
+              <span className="text-accent font-semibold tracking-wider uppercase text-sm">Featured Capability</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-bold text-foreground" data-testid="text-iot-title">
+              IoT & Smart Grid Technology
             </h2>
           </motion.div>
 
-          {/* Hero Image Grid */}
           <motion.div 
-            className="grid md:grid-cols-2 gap-6 mb-12"
+            className="grid md:grid-cols-2 gap-6"
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
             variants={staggerContainer}
           >
-            <motion.div variants={fadeInUp} className="relative rounded-2xl overflow-hidden h-64 md:h-80">
-              <img src={powerInfraImage} alt="Power Infrastructure" className="w-full h-full object-cover" data-testid="img-power-infra" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-              <div className="absolute bottom-0 left-0 p-6">
-                <Badge className="mb-2 bg-accent text-accent-foreground">AI-Powered</Badge>
-                <h3 className="text-2xl font-bold text-white">IRIS Platform</h3>
-                <p className="text-white/80 text-sm">Intelligent grid management</p>
+            <motion.div variants={fadeInUp} className="relative rounded-md overflow-hidden h-72 md:h-96">
+              <img src={powerInfraImage} alt="Smart Grid Infrastructure" className="w-full h-full object-cover" data-testid="img-power-infra" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+              <div className="absolute bottom-0 left-0 p-8">
+                <Badge className="mb-3 bg-accent text-accent-foreground">AI-Powered</Badge>
+                <h3 className="text-2xl font-bold text-white mb-2" data-testid="text-iris-title">IRIS Platform</h3>
+                <p className="text-white/70 max-w-sm">Intelligent grid management with real-time analytics and predictive maintenance.</p>
               </div>
             </motion.div>
-            <motion.div variants={fadeInUp} className="relative rounded-2xl overflow-hidden h-64 md:h-80">
-              <img src={iotDevicesImage} alt="IoT Smart Devices" className="w-full h-full object-cover" data-testid="img-iot-devices" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-              <div className="absolute bottom-0 left-0 p-6">
-                <Badge className="mb-2 bg-primary text-primary-foreground">5G Enabled</Badge>
-                <h3 className="text-2xl font-bold text-white">Smart Meters</h3>
-                <p className="text-white/80 text-sm">Real-time data visibility</p>
+            <motion.div variants={fadeInUp} className="relative rounded-md overflow-hidden h-72 md:h-96">
+              <img src={iotDevicesImage} alt="IoT Connected Devices" className="w-full h-full object-cover" data-testid="img-iot-devices" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+              <div className="absolute bottom-0 left-0 p-8">
+                <Badge className="mb-3 bg-primary text-primary-foreground">5G Enabled</Badge>
+                <h3 className="text-2xl font-bold text-white mb-2" data-testid="text-metering-title">Smart Metering</h3>
+                <p className="text-white/70 max-w-sm">Next-gen AMI solutions with multi-protocol support and real-time data visibility.</p>
               </div>
             </motion.div>
           </motion.div>
+        </div>
+      </section>
 
-          {/* Feature Icons Grid */}
+      {/* Client Logos / Trust Section */}
+      <section id="clients" className="py-16 md:py-20 bg-muted/20 border-y border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div 
+            className="text-center mb-12"
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            <p className="text-muted-foreground font-medium uppercase tracking-wider text-sm mb-2">Trusted By</p>
+            <h3 className="text-2xl md:text-3xl font-bold text-foreground" data-testid="text-clients-title">
+              Leading Enterprises Across India
+            </h3>
+          </motion.div>
+
           <motion.div 
             className="grid grid-cols-2 md:grid-cols-4 gap-4"
             initial="initial"
@@ -678,51 +712,33 @@ export default function Home() {
             viewport={{ once: true }}
             variants={staggerContainer}
           >
-            {[
-              { icon: BarChart3, label: "MDMS Analytics", color: "primary" },
-              { icon: Shield, label: "Grid Security", color: "accent" },
-              { icon: Globe, label: "Multi-Protocol", color: "primary" },
-              { icon: Sparkles, label: "AI Analytics", color: "accent" }
-            ].map((item, index) => (
+            {clients.map((client, index) => (
               <motion.div key={index} variants={fadeInUp}>
-                <Card className="p-4 text-center hover-elevate">
-                  <div className={`w-12 h-12 mx-auto rounded-xl bg-${item.color}/10 flex items-center justify-center mb-3`}>
-                    <item.icon className={`h-6 w-6 text-${item.color}`} />
-                  </div>
-                  <div className="font-semibold text-foreground">{item.label}</div>
-                </Card>
+                <div className="flex items-center justify-center p-6 bg-card rounded-md border border-border" data-testid={`card-client-${index}`}>
+                  <span className="font-semibold text-foreground">{client}</span>
+                </div>
               </motion.div>
             ))}
-          </motion.div>
-
-          <motion.div 
-            className="mt-10 text-center"
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-          >
-            <Button size="lg" className="group" data-testid="button-explore-technology">
-              Explore Technology
-              <ChevronRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
           </motion.div>
         </div>
       </section>
 
-      {/* Solutions Section - Visual Grid */}
-      <section id="solutions" className="py-16 md:py-24">
+      {/* Testimonials */}
+      <section className="py-20 md:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
-            className="text-center max-w-3xl mx-auto mb-12"
+            className="max-w-2xl mb-16"
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
             variants={fadeInUp}
           >
-            <Badge variant="secondary" className="mb-4" data-testid="badge-solutions">Solutions</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground" data-testid="text-solutions-title">
-              What We Deliver
+            <div className="flex items-center gap-3 mb-6">
+              <div className="h-px w-12 bg-primary" />
+              <span className="text-primary font-semibold tracking-wider uppercase text-sm">Testimonials</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-bold text-foreground" data-testid="text-testimonials-title">
+              What Our Clients Say
             </h2>
           </motion.div>
 
@@ -733,71 +749,16 @@ export default function Home() {
             viewport={{ once: true }}
             variants={staggerContainer}
           >
-            {solutions.map((solution, index) => (
-              <motion.div key={index} variants={fadeInUp}>
-                <Card className="overflow-hidden h-full group hover-elevate" data-testid={`card-solution-${index}`}>
-                  <div className="relative h-48 overflow-hidden">
-                    <img 
-                      src={solution.image} 
-                      alt={solution.title} 
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      data-testid={`img-solution-${index}`}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                    <div className="absolute bottom-4 left-4">
-                      <h3 className="text-xl font-bold text-white">{solution.title}</h3>
-                    </div>
-                  </div>
-                  <div className="p-5">
-                    <div className="flex flex-wrap gap-2">
-                      {solution.benefits.map((benefit, benefitIndex) => (
-                        <Badge key={benefitIndex} variant="outline" className="text-xs">
-                          <CheckCircle2 className="h-3 w-3 mr-1" />
-                          {benefit}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Testimonials Section - Compact */}
-      <section className="py-12 md:py-16 bg-card/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            className="text-center max-w-3xl mx-auto mb-10"
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-          >
-            <Badge variant="secondary" className="mb-4" data-testid="badge-testimonials">Client Reviews</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground" data-testid="text-testimonials-title">
-              Trusted by Industry Leaders
-            </h2>
-          </motion.div>
-
-          <motion.div 
-            className="grid md:grid-cols-3 gap-4 md:gap-6"
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-          >
             {testimonials.map((testimonial, index) => (
               <motion.div key={index} variants={fadeInUp}>
-                <Card className="p-5 h-full" data-testid={`card-testimonial-${index}`}>
-                  <div className="flex items-center gap-1 mb-3">
+                <Card className="p-6 h-full flex flex-col" data-testid={`card-testimonial-${index}`}>
+                  <div className="flex items-center gap-1 mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (
                       <Star key={i} className="h-4 w-4 fill-accent text-accent" />
                     ))}
                   </div>
-                  <p className="text-muted-foreground text-sm mb-4">"{testimonial.text}"</p>
-                  <div className="flex items-center gap-3">
+                  <p className="text-foreground mb-6 flex-1 leading-relaxed">"{testimonial.text}"</p>
+                  <div className="flex items-center gap-3 pt-4 border-t border-border">
                     <img 
                       src={testimonial.image} 
                       alt={testimonial.name}
@@ -815,97 +776,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About Section with Team Image */}
-      <section id="team" className="py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center"
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-          >
-            <motion.div variants={fadeInUp} className="relative">
-              <div className="rounded-2xl overflow-hidden shadow-2xl">
-                <img src={teamWorkImage} alt="Our Expert Team" className="w-full h-auto object-cover" data-testid="img-team" />
-              </div>
-              <div className="absolute -bottom-4 -right-4 bg-card p-4 rounded-xl shadow-lg border border-border hidden md:flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                  <Users className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-foreground">150+</div>
-                  <div className="text-sm text-muted-foreground">Engineers</div>
-                </div>
-              </div>
-            </motion.div>
-            <motion.div variants={fadeInUp} className="space-y-6">
-              <Badge variant="secondary">About iOne Techlabs</Badge>
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-                Building Tomorrow's Technology Today
-              </h2>
-              <div className="grid grid-cols-3 gap-4">
-                <div className="text-center p-4 bg-muted/50 rounded-xl">
-                  <div className="text-3xl font-bold text-primary">10+</div>
-                  <div className="text-sm text-muted-foreground">Years</div>
-                </div>
-                <div className="text-center p-4 bg-muted/50 rounded-xl">
-                  <div className="text-3xl font-bold text-primary">500+</div>
-                  <div className="text-sm text-muted-foreground">Projects</div>
-                </div>
-                <div className="text-center p-4 bg-muted/50 rounded-xl">
-                  <div className="text-3xl font-bold text-primary">50+</div>
-                  <div className="text-sm text-muted-foreground">Clients</div>
-                </div>
-              </div>
-              <Button size="lg" className="group" data-testid="button-about-learn-more">
-                Learn More
-                <ChevronRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Industries Section - Visual Icons */}
-      <section id="industries" className="py-12 md:py-16 bg-muted/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            className="text-center mb-10"
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-          >
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground" data-testid="text-industries-title">
-              Industries We Serve
-            </h2>
-          </motion.div>
-
-          <motion.div 
-            className="grid grid-cols-3 md:grid-cols-6 gap-4"
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-          >
-            {industries.map((industry, index) => (
-              <motion.div key={index} variants={fadeInUp}>
-                <div className="p-4 text-center hover-elevate rounded-xl group" data-testid={`card-industry-${index}`}>
-                  <div className="w-14 h-14 rounded-xl bg-card border border-border flex items-center justify-center mx-auto mb-3 group-hover:bg-primary/10 transition-colors">
-                    <industry.icon className="h-7 w-7 text-primary" />
-                  </div>
-                  <span className="font-medium text-foreground text-sm">{industry.name}</span>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
       {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-primary to-primary/80">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="py-20 md:py-28 relative overflow-hidden">
+        <div className="absolute inset-0">
+          <img src={teamImage} alt="Technology" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/80 to-black/70" />
+        </div>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
           <motion.div
             initial="initial"
             whileInView="animate"
@@ -913,19 +790,19 @@ export default function Home() {
             variants={fadeInUp}
             className="space-y-8"
           >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground" data-testid="text-cta-title">
-              Ready to Transform Your Business?
+            <h2 className="text-3xl md:text-5xl font-bold text-white" data-testid="text-cta-title">
+              Your Journey to Digital Leadership Starts Here
             </h2>
-            <p className="text-lg md:text-xl text-primary-foreground/90 max-w-2xl mx-auto" data-testid="text-cta-description">
-              Let's discuss how iOne Techlabs can help you achieve your technology goals. Schedule a free consultation with our experts today.
+            <p className="text-lg text-white/80 max-w-2xl mx-auto">
+              Let's discuss how iOne Techlabs can accelerate your business growth with the right technology strategy.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button size="lg" variant="secondary" className="px-8" data-testid="button-cta-consultation">
+              <Button size="lg" data-testid="button-cta-consultation">
                 Schedule Free Consultation
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button size="lg" variant="outline" className="bg-transparent border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10" data-testid="button-cta-contact">
-                Contact Sales
+              <Button size="lg" variant="outline" className="bg-white/5 border-white/20 text-white backdrop-blur-sm" data-testid="button-cta-contact">
+                Contact Us
               </Button>
             </div>
           </motion.div>
@@ -933,7 +810,7 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-16 md:py-24 lg:py-32">
+      <section id="contact" className="py-20 md:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
             <motion.div
@@ -944,18 +821,21 @@ export default function Home() {
               className="space-y-8"
             >
               <div>
-                <Badge variant="secondary" className="mb-4" data-testid="badge-contact">Contact Us</Badge>
-                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4" data-testid="text-contact-title">
-                  Let's Start a Conversation
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="h-px w-12 bg-primary" />
+                  <span className="text-primary font-semibold tracking-wider uppercase text-sm">Connect With Us</span>
+                </div>
+                <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4" data-testid="text-contact-title">
+                  Let's Build Together
                 </h2>
-                <p className="text-lg text-muted-foreground" data-testid="text-contact-description">
-                  Have a project in mind? We'd love to hear from you. Fill out the form and our team will get back to you within 24 hours.
+                <p className="text-lg text-muted-foreground">
+                  Have a project in mind? Our team will get back to you within 24 hours.
                 </p>
               </div>
 
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-md bg-primary/10 flex items-center justify-center">
                     <Mail className="h-6 w-6 text-primary" />
                   </div>
                   <div>
@@ -964,7 +844,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-md bg-primary/10 flex items-center justify-center">
                     <Phone className="h-6 w-6 text-primary" />
                   </div>
                   <div>
@@ -973,15 +853,29 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-md bg-primary/10 flex items-center justify-center">
                     <MapPin className="h-6 w-6 text-primary" />
                   </div>
                   <div>
                     <div className="font-semibold text-foreground">Office</div>
-                    <div className="text-muted-foreground">123 Innovation Drive, Tech City, TC 12345</div>
+                    <div className="text-muted-foreground">Hyderabad, India</div>
                   </div>
                 </div>
               </div>
+
+              <form className="flex gap-2" onSubmit={handleNewsletterSubmit} data-testid="form-newsletter">
+                <Input 
+                  type="email" 
+                  placeholder="Subscribe to updates..." 
+                  value={newsletterEmail}
+                  onChange={(e) => setNewsletterEmail(e.target.value)}
+                  disabled={newsletterMutation.isPending}
+                  data-testid="input-newsletter-email"
+                />
+                <Button type="submit" disabled={newsletterMutation.isPending} data-testid="button-subscribe">
+                  {newsletterMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : "Subscribe"}
+                </Button>
+              </form>
             </motion.div>
 
             <motion.div
@@ -991,7 +885,7 @@ export default function Home() {
               variants={fadeInUp}
             >
               <Card className="p-6 md:p-8" data-testid="card-contact-form">
-                <form className="space-y-6" onSubmit={handleContactSubmit} data-testid="form-contact">
+                <form className="space-y-5" onSubmit={handleContactSubmit} data-testid="form-contact">
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-foreground mb-2">Full Name *</label>
@@ -1059,11 +953,11 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-card border-t border-border py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 lg:gap-12">
-            <div className="col-span-2 lg:col-span-1">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
+            <div className="col-span-2 md:col-span-1">
               <img src={logo} alt="iOne Techlabs" className="h-10 w-auto mb-4" data-testid="img-footer-logo" />
               <p className="text-sm text-muted-foreground mb-4">
-                Transforming businesses through innovative technology solutions since 2014.
+                Transforming businesses through innovative technology solutions.
               </p>
               <div className="flex gap-4">
                 <a href="#" className="text-muted-foreground hover:text-foreground transition-colors" data-testid="link-linkedin">
@@ -1083,18 +977,18 @@ export default function Home() {
               <ul className="space-y-3 text-sm">
                 <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Software Development</a></li>
                 <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Cloud Solutions</a></li>
-                <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Mobile Apps</a></li>
-                <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Data Analytics</a></li>
+                <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">IoT & Smart Grid</a></li>
+                <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Data & AI</a></li>
               </ul>
             </div>
 
             <div>
               <h4 className="font-semibold text-foreground mb-4">Company</h4>
               <ul className="space-y-3 text-sm">
-                <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">About Us</a></li>
+                <li><a href="#about" className="text-muted-foreground hover:text-foreground transition-colors">About Us</a></li>
                 <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Careers</a></li>
-                <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Blog</a></li>
-                <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Press</a></li>
+                <li><a href="#clients" className="text-muted-foreground hover:text-foreground transition-colors">Clients</a></li>
+                <li><a href="#contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact</a></li>
               </ul>
             </div>
 
@@ -1102,44 +996,21 @@ export default function Home() {
               <h4 className="font-semibold text-foreground mb-4">Resources</h4>
               <ul className="space-y-3 text-sm">
                 <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Case Studies</a></li>
+                <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Blog</a></li>
                 <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Documentation</a></li>
-                <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">API Reference</a></li>
-                <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Support</a></li>
+                <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Privacy Policy</a></li>
               </ul>
-            </div>
-
-            <div className="col-span-2 md:col-span-4 lg:col-span-1">
-              <h4 className="font-semibold text-foreground mb-4">Stay Updated</h4>
-              <p className="text-sm text-muted-foreground mb-4">Subscribe to our newsletter for the latest updates.</p>
-              <form className="flex gap-2" onSubmit={handleNewsletterSubmit} data-testid="form-newsletter">
-                <Input 
-                  placeholder="Enter email" 
-                  type="email"
-                  className="flex-1" 
-                  value={newsletterEmail}
-                  onChange={(e) => setNewsletterEmail(e.target.value)}
-                  disabled={newsletterMutation.isPending}
-                  data-testid="input-newsletter" 
-                />
-                <Button type="submit" disabled={newsletterMutation.isPending} data-testid="button-subscribe">
-                  {newsletterMutation.isPending ? (
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                  ) : (
-                    "Subscribe"
-                  )}
-                </Button>
-              </form>
             </div>
           </div>
 
-          <div className="border-t border-border mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-muted-foreground">
-              2024 iOne Techlabs. All rights reserved.
+          <div className="border-t border-border mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-muted-foreground" data-testid="text-copyright">
+              &copy; {new Date().getFullYear()} iOne Techlabs. All rights reserved.
             </p>
-            <div className="flex gap-6 text-sm">
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Privacy Policy</a>
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Terms of Service</a>
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Cookies</a>
+            <div className="flex gap-6 text-sm text-muted-foreground">
+              <a href="#" className="hover:text-foreground transition-colors">Privacy</a>
+              <a href="#" className="hover:text-foreground transition-colors">Terms</a>
+              <a href="#" className="hover:text-foreground transition-colors">Security</a>
             </div>
           </div>
         </div>

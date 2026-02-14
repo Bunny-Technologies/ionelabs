@@ -1,22 +1,22 @@
 # iOne Techlabs - Professional Company Website
 
 ## Overview
-A professional technology company landing page for iOne Techlabs (parent company of Winamr Systems), showcasing their software development, cloud solutions, IoT, and smart grid services.
+A professional technology company landing page for iOne Techlabs, showcasing software development, cloud solutions, IoT, smart grid, and AI services. Designed with a modern, clean aesthetic inspired by sites like PenguinAI and PruTech.
 
 ## Recent Changes
-- **January 2026**: Major visual overhaul - less text, more visuals
-  - Winamr Systems now shown as SUBSIDIARY owned by iOne Techlabs (not partner)
-  - Replaced text-heavy services section with image-grid layout
-  - Added visual IoT section with hero images (power infrastructure, IoT devices)
-  - Added About section with team image and stats
-  - Simplified testimonials to be shorter and more compact
-  - Added trust badges bar (certifications + awards in pill format)
-  - Simplified industries section to icon-only format
-  - Reduced overall text density across all sections
-- Created comprehensive landing page with Hero, Services, Stats, Solutions, Testimonials, Industries, CTA, and Contact sections
-- Implemented contact form with backend API
-- Implemented newsletter subscription with backend API
-- Used iOne Techlabs branding with green (#1B6B3D) and gold (#E5A623) colors
+- **February 2026**: Complete redesign inspired by PenguinAI.co and PruTech.com
+  - Full-width hero with dark wash over background image, bold headline, bottom-aligned stats
+  - Service cards with images, descriptions, and "learn more" links (PruTech style)
+  - Large impact stats section (PenguinAI style) with descriptive context
+  - 4-step process section with numbered steps (PenguinAI layers style)
+  - About section with team image, certifications badges, and stats
+  - IoT & Smart Grid showcase with hero images
+  - Client trust section showing enterprise client names
+  - Testimonial cards with quotes and ratings
+  - Full-width CTA with background image and dark wash
+  - Contact form with newsletter subscription
+  - Removed ALL Winamr subsidiary references - clients only listed as clients
+  - Clean, modern navigation with minimal links
 
 ## Project Architecture
 
@@ -47,7 +47,8 @@ A professional technology company landing page for iOne Techlabs (parent company
 - **Primary Color**: Green (148 58% 26% HSL)
 - **Accent Color**: Gold (42 80% 52% HSL)
 - **Typography**: Inter font family
-- **Spacing**: Consistent 4-point grid system
+- **Design Pattern**: Line accent + uppercase label headers, left-aligned section titles, card-based layouts
+- **Hero Style**: Full-width image with dark gradient wash, light text
 
 ## Running the Project
 The project runs via `npm run dev` which starts both the Express backend and Vite frontend on port 5000.
