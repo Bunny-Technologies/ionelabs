@@ -163,7 +163,7 @@ export default function Home() {
     { name: "Dr. Anand Mehta", role: "Director of IT, Metro Health Network", quote: "The patient management system they built has fundamentally changed how our 12 hospitals operate. 40% reduction in administrative costs while improving patient care quality.", avatar: "AM" },
   ];
 
-  const clients = ["Tata Power", "NTPC", "Adani Power", "Telangana State Power", "BSES Rajdhani", "Torrent Power", "CESC Limited", "UPPCL"];
+  const clients = ["Tata Power", "HDFC Bank", "Apollo Hospitals", "Mahindra Group", "Reliance Retail", "NTPC", "Bharti Airtel", "Delhivery"];
   const navItems = ["Services", "Industries", "Process", "About", "Contact"];
 
   return (
@@ -326,7 +326,7 @@ export default function Home() {
               { num: "$1.3T", sub: "Wasted Annually", label: "spent globally on IT projects that don't deliver measurable business outcomes. Most enterprises never see ROI.", icon: TrendingUp },
               { num: "18mo", sub: "Avg Time-to-Value", label: "to see first results from traditional IT engagements. We deliver working solutions in 90 days.", icon: Clock },
             ].map((p, i) => (
-              <motion.div key={i} variants={fadeUp} className="bg-card p-8 md:p-10" data-testid={`card-challenge-${i}`}>
+              <motion.div key={i} variants={fadeUp} className="bg-card p-8 md:p-10 hover-elevate cursor-default" data-testid={`card-challenge-${i}`}>
                 <p.icon className="h-6 w-6 text-primary/30 mb-8" />
                 <div className="text-5xl md:text-6xl font-bold text-foreground tracking-tight mb-1">{p.num}</div>
                 <div className="text-[11px] text-primary uppercase tracking-[0.15em] font-semibold mb-4">{p.sub}</div>
@@ -522,7 +522,7 @@ export default function Home() {
             {layers.map((l, i) => {
               const Icon = l.icon;
               return (
-                <motion.div key={i} variants={fadeUp} className="bg-card p-6 md:p-8 group" data-testid={`card-process-${i}`}>
+                <motion.div key={i} variants={fadeUp} className="bg-card p-6 md:p-8 hover-elevate cursor-default" data-testid={`card-process-${i}`}>
                   <div className="flex items-center justify-between mb-8">
                     <span className="text-4xl font-bold text-primary/15 tracking-tight">{l.num}</span>
                     <div className="w-9 h-9 rounded-md bg-primary/[0.06] flex items-center justify-center">
@@ -550,7 +550,7 @@ export default function Home() {
 
           <motion.div className="grid md:grid-cols-3 gap-px bg-border/20 rounded-md overflow-hidden" initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger}>
             {testimonials.map((t, i) => (
-              <motion.div key={i} variants={fadeUp} className="bg-card p-6 md:p-8 flex flex-col" data-testid={`card-testimonial-${i}`}>
+              <motion.div key={i} variants={fadeUp} className="bg-card p-6 md:p-8 flex flex-col hover-elevate cursor-default" data-testid={`card-testimonial-${i}`}>
                 <Quote className="h-6 w-6 text-accent/20 mb-6" />
                 <p className="text-foreground/80 text-sm leading-relaxed flex-1 mb-8">{t.quote}</p>
                 <div className="flex items-center gap-3 border-t border-border/20 pt-5">
@@ -594,8 +594,8 @@ export default function Home() {
               </h2>
               <p className="text-muted-foreground leading-relaxed">
                 We're a technology company of 150+ engineers headquartered in Hyderabad, India — specializing
-                in enterprise software, cloud infrastructure, IoT systems, and AI solutions. Our clients include
-                some of India's largest power utilities, financial institutions, and healthcare networks.
+                in enterprise software, cloud infrastructure, IoT systems, and AI solutions. Our clients span
+                energy, finance, healthcare, manufacturing, retail, telecom, and logistics — India's most demanding sectors.
               </p>
               <div className="grid grid-cols-2 gap-4 pt-2">
                 {[
@@ -628,7 +628,7 @@ export default function Home() {
           </motion.div>
           <motion.div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-px bg-border/10 rounded-md overflow-hidden" initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger}>
             {clients.map((c, i) => (
-              <motion.div key={i} variants={fadeUp} className="bg-card flex items-center justify-center p-5 md:p-6 min-h-[70px]" data-testid={`card-client-${i}`}>
+              <motion.div key={i} variants={fadeUp} className="bg-card flex items-center justify-center p-5 md:p-6 min-h-[70px] hover-elevate cursor-default" data-testid={`card-client-${i}`}>
                 <span className="text-[13px] font-semibold text-muted-foreground/40 text-center leading-tight">{c}</span>
               </motion.div>
             ))}
