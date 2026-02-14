@@ -1,22 +1,22 @@
 # iOne Techlabs - Professional Company Website
 
 ## Overview
-A professional technology company landing page for iOne Techlabs, showcasing software development, cloud solutions, IoT, smart grid, and AI services. Designed with a modern, clean aesthetic inspired by sites like PenguinAI and PruTech.
+A professional technology company landing page for iOne Techlabs, showcasing software development, cloud solutions, IoT, smart grid, and AI services. Designed with a bold, dark-themed aesthetic inspired by PenguinAI.co and PruTech.com.
 
 ## Recent Changes
-- **February 2026**: Complete redesign inspired by PenguinAI.co and PruTech.com
-  - Full-width hero with dark wash over background image, bold headline, bottom-aligned stats
-  - Service cards with images, descriptions, and "learn more" links (PruTech style)
-  - Large impact stats section (PenguinAI style) with descriptive context
-  - 4-step process section with numbered steps (PenguinAI layers style)
-  - About section with team image, certifications badges, and stats
-  - IoT & Smart Grid showcase with hero images
-  - Client trust section showing enterprise client names
-  - Testimonial cards with quotes and ratings
-  - Full-width CTA with background image and dark wash
+- **February 2026**: Complete theme overhaul to match PenguinAI/PruTech design language
+  - **Dark theme by default** - dark navy-black background throughout (PenguinAI style)
+  - Full-screen hero with dark gradient wash, very large bold typography, gold accent
+  - Large stat numbers section (500+, 40%, 99.9%) in PenguinAI's bold style
+  - Service grid with images in PruTech's clean grid layout (gap-px border pattern)
+  - Numbered process layers (1-4) matching PenguinAI's architecture layers
+  - Case study section with stats (PruTech style)
+  - Simplified about section with team image and stats
+  - Clean client grid on dark background
+  - Bold CTA section with large typography
   - Contact form with newsletter subscription
-  - Removed ALL Winamr subsidiary references - clients only listed as clients
-  - Clean, modern navigation with minimal links
+  - Minimal dark footer
+  - No Winamr subsidiary references anywhere
 
 ## Project Architecture
 
@@ -37,18 +37,20 @@ A professional technology company landing page for iOne Techlabs, showcasing sof
 
 ### Key Files
 - `client/src/pages/home.tsx` - Main landing page component
-- `client/src/index.css` - CSS variables for theming (green/gold brand colors)
+- `client/src/index.css` - CSS variables for theming (dark theme default, green/gold accents)
 - `design_guidelines.md` - Design system documentation
 - `shared/schema.ts` - Data models and validation schemas
 - `server/routes.ts` - API endpoints
 - `server/storage.ts` - Data storage interface
 
 ## Design System
-- **Primary Color**: Green (148 58% 26% HSL)
+- **Theme**: Dark by default (dark navy-black backgrounds)
+- **Primary Color**: Green (148 55% 38% HSL)
 - **Accent Color**: Gold (42 80% 52% HSL)
-- **Typography**: Inter font family
-- **Design Pattern**: Line accent + uppercase label headers, left-aligned section titles, card-based layouts
-- **Hero Style**: Full-width image with dark gradient wash, light text
+- **Background**: Dark navy (220 15% 6% HSL)
+- **Typography**: Inter font family, very large bold headings (up to 8xl)
+- **Design Pattern**: PenguinAI-style bold numbers, uppercase labels, numbered layers, PruTech-style clean service grids
+- **Hero Style**: Full-screen image with dark gradient wash, large white text with gold accent
 
 ## Running the Project
 The project runs via `npm run dev` which starts both the Express backend and Vite frontend on port 5000.
