@@ -171,26 +171,34 @@ export default function Home() {
 
       {/* ══════════════════ NAV ══════════════════ */}
       <motion.header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "bg-background/90 backdrop-blur-xl border-b border-border/30" : "bg-transparent"}`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "bg-background/95 backdrop-blur-2xl border-b border-white/[0.06] shadow-[0_1px_30px_rgba(0,0,0,0.4)]" : "bg-transparent"}`}
         initial={{ y: -100 }} animate={{ y: 0 }} transition={{ duration: 0.6 }}
       >
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-4 h-16 md:h-20">
-            <a href="#" className="flex-shrink-0">
-              <img src={logo} alt="iOne Techlabs" className="h-9 md:h-11 w-auto" data-testid="img-logo" />
+            <a href="#" className="flex-shrink-0 group" data-testid="link-home">
+              <img src={logo} alt="iOne Techlabs" className="h-9 md:h-11 w-auto transition-all duration-300 group-hover:brightness-125 group-hover:drop-shadow-[0_0_8px_rgba(27,107,61,0.3)]" data-testid="img-logo" />
             </a>
-            <div className="hidden lg:flex items-center gap-8">
+            <div className="hidden lg:flex items-center gap-1">
               {navItems.map((item) => (
                 <a key={item} href={`#${item.toLowerCase().replace(" ", "-")}`}
-                  className="text-[13px] font-medium text-white/50 hover:text-white transition-colors duration-300 tracking-wide uppercase"
+                  className="relative text-[13px] font-medium text-white/50 hover:text-white transition-all duration-300 tracking-wide uppercase px-4 py-2 rounded-md hover:bg-white/[0.04] group"
                   data-testid={`link-${item.toLowerCase().replace(" ", "-")}`}
-                >{item}</a>
+                >
+                  {item}
+                  <span className="absolute bottom-0.5 left-4 right-4 h-px bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                </a>
               ))}
             </div>
-            <div className="hidden lg:flex items-center gap-3">
-              <a href="tel:+919959933363" className="text-[13px] text-white/40 hover:text-white transition-colors">+91 99599 33363</a>
-              <span className="text-white/10">|</span>
-              <a href="#contact"><Button size="sm" data-testid="button-get-started">Get Started <ArrowRight className="ml-1.5 h-3.5 w-3.5" /></Button></a>
+            <div className="hidden lg:flex items-center gap-4">
+              <a href="tel:+919959933363" className="group flex items-center gap-2 text-[13px] text-white/40 hover:text-white transition-all duration-300">
+                <span className="w-7 h-7 rounded-full bg-white/[0.04] group-hover:bg-primary/20 flex items-center justify-center transition-all duration-300">
+                  <Phone className="h-3 w-3 text-white/40 group-hover:text-primary transition-colors duration-300" />
+                </span>
+                <span className="hidden xl:inline">+91 99599 33363</span>
+              </a>
+              <div className="w-px h-5 bg-white/[0.06]" />
+              <a href="#contact"><Button size="sm" className="group/btn" data-testid="button-get-started">Get Started <ArrowRight className="ml-1.5 h-3.5 w-3.5 transition-transform duration-300 group-hover/btn:translate-x-0.5" /></Button></a>
             </div>
             <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} data-testid="button-mobile-menu" aria-label="Toggle menu">
               {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
