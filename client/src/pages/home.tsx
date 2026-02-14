@@ -1129,7 +1129,7 @@ export default function Home() {
                 {[
                   { icon: Mail, label: "Email", value: "hello@ionetechlabs.com" },
                   { icon: Phone, label: "Phone", value: "+91 99599 33363" },
-                  { icon: MapPin, label: "Office", value: "Flat No:210/3 Myhome Tycoon, Kundhanbagh, Begumpet, Hyderabad-500016" },
+                  { icon: MapPin, label: "Office", value: "Flat No: Myhome Tycoon, Kundhanbagh, Begumpet, Hyderabad-500016" },
                 ].map((item) => (
                   <div key={item.label} className="flex items-center gap-4 group">
                     <div className="w-12 h-12 rounded-md bg-primary/10 flex items-center justify-center transition-colors duration-300 group-hover:bg-primary/20">
