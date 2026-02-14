@@ -36,14 +36,18 @@ import {
 import { SiGithub } from "react-icons/si";
 
 import logo from "@assets/image_1768908388633.png";
-import heroImage from "@assets/stock_images/modern_technology_te_e0b8fff8.jpg";
-import devImage from "@assets/stock_images/software_development_ab7e0fa9.jpg";
-import cloudDataImage from "@assets/stock_images/cloud_computing_serv_87c9c082.jpg";
-import smartGridImage from "@assets/stock_images/modern_smart_grid_po_98ffde9c.jpg";
-import mobileImage from "@assets/stock_images/mobile_app_developme_1a27f1de.jpg";
-import analyticsImage from "@assets/stock_images/data_analytics_dashb_f154ce7f.jpg";
-import teamWorkImage from "@assets/stock_images/business_team_profes_34bf9c20.jpg";
-import iotDevicesImage from "@assets/stock_images/iot_internet_of_thin_b80df81d.jpg";
+import heroImage from "@assets/images/hero-main.png";
+import devImage from "@assets/images/service-software-dev.png";
+import cloudDataImage from "@assets/images/service-cloud.png";
+import smartGridImage from "@assets/images/service-iot-smartgrid.png";
+import mobileImage from "@assets/images/service-mobile.png";
+import analyticsImage from "@assets/images/service-ai-data.png";
+import teamWorkImage from "@assets/images/about-team.png";
+import uiuxImage from "@assets/images/service-uiux.png";
+import usecaseEnergyImage from "@assets/images/usecase-energy.png";
+import usecaseFinanceImage from "@assets/images/usecase-finance.png";
+import usecaseHealthcareImage from "@assets/images/usecase-healthcare.png";
+import iotDevicesImage from "@assets/images/hero-main.png";
 
 function AnimatedCounter({ end, suffix = "", duration = 2000 }: { end: number; suffix?: string; duration?: number }) {
   const [count, setCount] = useState(0);
@@ -252,7 +256,7 @@ export default function Home() {
     {
       title: "UI/UX Design",
       description: "Human-centered design that drives engagement. Research-backed interfaces that users love to interact with, increasing conversion and retention.",
-      image: teamWorkImage,
+      image: uiuxImage,
       icon: Palette,
       features: ["User Research", "Prototyping", "Design Systems", "Accessibility"],
     },
@@ -293,6 +297,7 @@ export default function Home() {
       description: "Modernized grid infrastructure for a major power utility with IoT sensors, real-time analytics, and predictive maintenance.",
       features: ["Real-time grid monitoring", "Predictive fault detection", "Automated load balancing"],
       icon: Zap,
+      image: usecaseEnergyImage,
     },
     {
       title: "Financial Services",
@@ -301,6 +306,7 @@ export default function Home() {
       description: "Built a cloud-native trading platform processing millions of transactions with sub-millisecond latency and 99.99% uptime.",
       features: ["High-frequency data processing", "Regulatory compliance", "Fraud detection AI"],
       icon: BarChart3,
+      image: usecaseFinanceImage,
     },
     {
       title: "Healthcare",
@@ -309,6 +315,7 @@ export default function Home() {
       description: "Developed a patient management system with AI-driven diagnostics, reducing administrative overhead and improving care quality.",
       features: ["HIPAA-compliant architecture", "AI diagnostic support", "Telemedicine platform"],
       icon: Shield,
+      image: usecaseHealthcareImage,
     },
   ];
 
@@ -828,43 +835,55 @@ export default function Home() {
               return (
                 <motion.div key={index} variants={fadeUp}>
                   <Card
-                    className="p-6 md:p-8 h-full border-border/30 group transition-all duration-500 hover:border-accent/30 overflow-visible relative"
+                    className="h-full border-border/30 group transition-all duration-500 hover:border-accent/30 overflow-hidden relative"
                     data-testid={`card-usecase-${index}`}
                   >
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="w-10 h-10 rounded-md bg-accent/10 flex items-center justify-center transition-colors duration-300 group-hover:bg-accent/20">
-                        <Icon className="h-5 w-5 text-accent" />
+                    <div className="relative h-48 overflow-hidden">
+                      <img
+                        src={uc.image}
+                        alt={uc.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-card via-card/60 to-transparent" />
+                      <div className="absolute bottom-4 left-6 right-6">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 rounded-md bg-accent/20 backdrop-blur-sm flex items-center justify-center border border-accent/20">
+                            <Icon className="h-5 w-5 text-accent" />
+                          </div>
+                          <h3 className="font-bold text-lg text-white">{uc.title}</h3>
+                        </div>
                       </div>
-                      <h3 className="font-semibold text-foreground">{uc.title}</h3>
                     </div>
 
-                    <div className="mb-6">
-                      <div className="text-5xl font-bold text-accent tracking-tight" data-testid={`text-usecase-stat-${index}`}>
-                        {uc.stat}
+                    <div className="p-6 md:p-8 pt-4 md:pt-4">
+                      <div className="mb-5">
+                        <div className="text-5xl font-bold text-accent tracking-tight" data-testid={`text-usecase-stat-${index}`}>
+                          {uc.stat}
+                        </div>
+                        <div className="text-sm text-muted-foreground mt-1">{uc.statLabel}</div>
                       </div>
-                      <div className="text-sm text-muted-foreground mt-1">{uc.statLabel}</div>
-                    </div>
 
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-                      {uc.description}
-                    </p>
+                      <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                        {uc.description}
+                      </p>
 
-                    <ul className="space-y-2">
-                      {uc.features.map((feature, fi) => (
-                        <li key={fi} className="flex items-center gap-2 text-sm text-foreground/80">
-                          <CheckCircle2 className="h-4 w-4 text-primary/60 flex-shrink-0" />
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
+                      <ul className="space-y-2">
+                        {uc.features.map((feature, fi) => (
+                          <li key={fi} className="flex items-center gap-2 text-sm text-foreground/80">
+                            <CheckCircle2 className="h-4 w-4 text-primary/60 flex-shrink-0" />
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
 
-                    <div className="mt-6 pt-4 border-t border-border/30">
-                      <a href="#contact" className="flex items-center gap-2 text-sm font-medium text-accent transition-colors duration-300 group-hover:text-accent" data-testid={`link-usecase-${index}`}>
-                        Read full case study
-                        <motion.span className="inline-block" whileHover={{ x: 4 }}>
-                          <ArrowUpRight className="h-4 w-4" />
-                        </motion.span>
-                      </a>
+                      <div className="mt-6 pt-4 border-t border-border/30">
+                        <a href="#contact" className="flex items-center gap-2 text-sm font-medium text-accent transition-colors duration-300 group-hover:text-accent" data-testid={`link-usecase-${index}`}>
+                          Read full case study
+                          <motion.span className="inline-block" whileHover={{ x: 4 }}>
+                            <ArrowUpRight className="h-4 w-4" />
+                          </motion.span>
+                        </a>
+                      </div>
                     </div>
                   </Card>
                 </motion.div>
