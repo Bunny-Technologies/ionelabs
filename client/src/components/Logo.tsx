@@ -22,27 +22,27 @@ export default function Logo({ className = "h-10" }: LogoProps) {
 
       <text
         x="0"
-        y="27"
+        y="26"
         fontFamily="Inter, system-ui, -apple-system, sans-serif"
-        fontWeight="800"
-        fontSize="28"
-        letterSpacing="-1.2"
+        fontWeight="500"
+        fontSize="24"
+        letterSpacing="-0.3"
         fill="white"
       >
-        iONE
+        iOne
       </text>
 
-      <circle cx="8.5" cy="8" r="2.5" fill="url(#lg-green)" />
+      <circle cx="5" cy="7.5" r="2" fill="url(#lg-green)" />
 
-      <line x1="62" y1="10" x2="62" y2="30" stroke="#2A2F38" strokeWidth="1" />
+      <line x1="52" y1="10" x2="52" y2="30" stroke="#2A2F38" strokeWidth="1" />
 
       <text
-        x="70"
+        x="60"
         y="22"
         fontFamily="Inter, system-ui, -apple-system, sans-serif"
         fontWeight="400"
         fontSize="11"
-        letterSpacing="5"
+        letterSpacing="4.5"
         fill="#6B7280"
       >
         TECHLABS
