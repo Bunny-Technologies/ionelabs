@@ -5,7 +5,7 @@ interface LogoProps {
 export default function Logo({ className = "h-10" }: LogoProps) {
   return (
     <svg
-      viewBox="0 0 180 40"
+      viewBox="0 0 200 40"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
@@ -14,47 +14,38 @@ export default function Logo({ className = "h-10" }: LogoProps) {
       aria-label="iOne Techlabs"
     >
       <defs>
-        <linearGradient id="lg-accent" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#2BA85A" />
+        <linearGradient id="lg-green" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#34D27B" />
           <stop offset="100%" stopColor="#1B6B3D" />
         </linearGradient>
       </defs>
 
-      <rect x="0" y="8" width="3" height="16" rx="1.5" fill="url(#lg-accent)" />
-
       <text
-        x="10"
-        y="28"
+        x="0"
+        y="27"
         fontFamily="Inter, system-ui, -apple-system, sans-serif"
-        fontWeight="600"
-        fontSize="26"
-        letterSpacing="-0.8"
+        fontWeight="800"
+        fontSize="28"
+        letterSpacing="-1.2"
         fill="white"
       >
-        i
-      </text>
-      <text
-        x="19"
-        y="28"
-        fontFamily="Inter, system-ui, -apple-system, sans-serif"
-        fontWeight="600"
-        fontSize="26"
-        letterSpacing="-0.8"
-        fill="url(#lg-accent)"
-      >
-        One
+        iONE
       </text>
 
+      <circle cx="8.5" cy="8" r="2.5" fill="url(#lg-green)" />
+
+      <line x1="62" y1="10" x2="62" y2="30" stroke="#2A2F38" strokeWidth="1" />
+
       <text
-        x="72"
-        y="28"
+        x="70"
+        y="22"
         fontFamily="Inter, system-ui, -apple-system, sans-serif"
-        fontWeight="300"
-        fontSize="26"
-        letterSpacing="-0.8"
-        fill="#5A6270"
+        fontWeight="400"
+        fontSize="11"
+        letterSpacing="5"
+        fill="#6B7280"
       >
-        Techlabs
+        TECHLABS
       </text>
     </svg>
   );
