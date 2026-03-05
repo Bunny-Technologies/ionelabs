@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import { SiGithub, SiAmazonwebservices, SiGooglecloud } from "react-icons/si";
 
-import logo from "@assets/image_1768908388633.png";
+import Logo from "@/components/Logo";
 import heroImage from "@assets/images/hero-main.png";
 import devImage from "@assets/images/service-software-dev.png";
 import cloudDataImage from "@assets/images/service-cloud.png";
@@ -177,7 +177,7 @@ export default function Home() {
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-4 h-16 md:h-20">
             <a href="#" className="flex-shrink-0 group" data-testid="link-home">
-              <img src={logo} alt="iOne Techlabs" className="h-9 md:h-11 w-auto transition-all duration-300 group-hover:brightness-125 group-hover:drop-shadow-[0_0_8px_rgba(27,107,61,0.3)]" data-testid="img-logo" />
+              <Logo className="h-9 md:h-11 w-auto transition-all duration-300 group-hover:brightness-125 group-hover:drop-shadow-[0_0_8px_rgba(27,107,61,0.3)]" />
             </a>
             <div className="hidden lg:flex items-center gap-1">
               {navItems.map((item) => (
@@ -750,7 +750,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-8 lg:gap-12">
             <div className="col-span-2 md:col-span-2">
-              <img src={logo} alt="iOne Techlabs" className="h-9 w-auto mb-4" data-testid="img-footer-logo" />
+              <Logo className="h-9 w-auto mb-4" />
               <p className="text-sm text-muted-foreground/50 mb-5 max-w-xs leading-relaxed">
                 Enterprise technology solutions for India's most ambitious companies. Software, Cloud, IoT & AI.
               </p>
