@@ -1,52 +1,17 @@
+import logoImg from "@assets/images/logo-ione.png";
+
+
 interface LogoProps {
   className?: string;
 }
 
 export default function Logo({ className = "h-10" }: LogoProps) {
   return (
-    <svg
-      viewBox="0 0 200 40"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
+    <img
+      src={logoImg}
+      alt="iOne Techlabs"
       className={className}
       data-testid="img-logo"
-      role="img"
-      aria-label="iOne Techlabs"
-    >
-      <defs>
-        <linearGradient id="lg-green" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#34D27B" />
-          <stop offset="100%" stopColor="#1B6B3D" />
-        </linearGradient>
-      </defs>
-
-      <text
-        x="0"
-        y="26"
-        fontFamily="Inter, system-ui, -apple-system, sans-serif"
-        fontWeight="500"
-        fontSize="24"
-        letterSpacing="-0.3"
-        fill="white"
-      >
-        iOne
-      </text>
-
-      <circle cx="5" cy="7.5" r="2" fill="url(#lg-green)" />
-
-      <line x1="52" y1="10" x2="52" y2="30" stroke="#2A2F38" strokeWidth="1" />
-
-      <text
-        x="60"
-        y="22"
-        fontFamily="Inter, system-ui, -apple-system, sans-serif"
-        fontWeight="400"
-        fontSize="11"
-        letterSpacing="4.5"
-        fill="#6B7280"
-      >
-        TECHLABS
-      </text>
-    </svg>
+    />
   );
 }
