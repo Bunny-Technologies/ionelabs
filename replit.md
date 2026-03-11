@@ -1,7 +1,7 @@
 # iOne Techlabs - Professional Company Website
 
 ## Overview
-A premium enterprise technology company website for iOne Techlabs, showcasing software development, cloud solutions, IoT, smart grid, and AI services across 8 industry verticals. Built with a dark-themed aesthetic inspired by PenguinAI.co and PruTech.com.
+A premium enterprise technology company website for iOne Techlabs, showcasing software development, cloud solutions, IoT, smart grid, and AI services across 8 industry verticals. Built with a clean light-themed aesthetic featuring green and gold accents.
 
 ## Recent Changes
 - **February 2026**: Major professional overhaul
@@ -26,7 +26,8 @@ A premium enterprise technology company website for iOne Techlabs, showcasing so
 - **State Management**: TanStack Query for server state
 - **Animations**: Framer Motion (parallax, stagger, fade-up, AnimatePresence)
 - **UI Components**: shadcn/ui
-- **Custom CSS**: gradient-border, glow-green/glow-gold, text-gradient-green/gold/white, animate-gradient-x/shimmer/pulse-glow/float
+- **Logo**: SVG component (`client/src/components/Logo.tsx`) — gold circle with arrow icon, green "ione" text, "TECHLABS" subtitle
+- **Custom CSS**: gradient-border, glow-green/glow-gold, text-gradient-green/gold/dark, animate-gradient-x/shimmer/pulse-glow/float
 
 ### Backend (server/)
 - **Framework**: Express.js with TypeScript
@@ -50,10 +51,12 @@ A premium enterprise technology company website for iOne Techlabs, showcasing so
 - Team: `about-team.png`
 
 ## Design System
-- **Theme**: Dark by default (dark navy-black backgrounds)
-- **Primary Color**: Green (148 55% 38% HSL)
-- **Accent Color**: Gold (42 80% 52% HSL)
-- **Background**: Dark navy (220 15% 6% HSL)
+- **Theme**: Light by default (off-white backgrounds, dark text)
+- **Primary Color**: Green (148 55% 32% HSL)
+- **Accent Color**: Gold (42 80% 48% HSL)
+- **Background**: Off-white (210 20% 98% HSL)
+- **Card**: White (0 0% 100% HSL)
+- **Elevate System**: Uses dark overlays (rgba(0,0,0,...)) for hover/active states on light backgrounds
 - **Typography**: Inter font family, clamp-based responsive sizing
 - **Design Pattern**: gap-px grid sections (PruTech), bold stats (PenguinAI), uppercase tracking-wide labels, gradient text effects
 - **Sections**: Nav > Hero > Trust Bar > Pain Points > Services > Industries (8 tabs) > Process > Testimonials > About > Clients > CTA > Contact > Footer

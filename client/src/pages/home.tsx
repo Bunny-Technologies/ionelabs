@@ -171,18 +171,18 @@ export default function Home() {
 
       {/* ══════════════════ NAV ══════════════════ */}
       <motion.header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "bg-background/95 backdrop-blur-2xl border-b border-white/[0.06] shadow-[0_1px_30px_rgba(0,0,0,0.4)]" : "bg-transparent"}`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "bg-background/95 backdrop-blur-2xl border-b border-border shadow-[0_1px_20px_rgba(0,0,0,0.06)]" : "bg-transparent"}`}
         initial={{ y: -100 }} animate={{ y: 0 }} transition={{ duration: 0.6 }}
       >
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-4 h-16 md:h-20">
             <a href="#" className="flex-shrink-0 group" data-testid="link-home">
-              <Logo className="h-12 md:h-14 w-auto transition-all duration-300 group-hover:drop-shadow-[0_0_10px_rgba(27,107,61,0.35)]" />
+              <Logo className="h-12 md:h-14 w-auto transition-all duration-300 group-hover:drop-shadow-[0_0_10px_rgba(27,107,61,0.25)]" />
             </a>
             <div className="hidden lg:flex items-center gap-1">
               {navItems.map((item) => (
                 <a key={item} href={`#${item.toLowerCase().replace(" ", "-")}`}
-                  className="relative text-[13px] font-medium text-white/50 hover:text-white transition-all duration-300 tracking-wide uppercase px-4 py-2 rounded-md hover:bg-white/[0.04] group"
+                  className="relative text-[13px] font-medium text-foreground/50 hover:text-foreground transition-all duration-300 tracking-wide uppercase px-4 py-2 rounded-md hover:bg-foreground/[0.04] group"
                   data-testid={`link-${item.toLowerCase().replace(" ", "-")}`}
                 >
                   {item}
@@ -191,13 +191,13 @@ export default function Home() {
               ))}
             </div>
             <div className="hidden lg:flex items-center gap-4">
-              <a href="tel:+919959933363" className="group flex items-center gap-2 text-[13px] text-white/40 hover:text-white transition-all duration-300">
-                <span className="w-7 h-7 rounded-full bg-white/[0.04] group-hover:bg-primary/20 flex items-center justify-center transition-all duration-300">
-                  <Phone className="h-3 w-3 text-white/40 group-hover:text-primary transition-colors duration-300" />
+              <a href="tel:+919959933363" className="group flex items-center gap-2 text-[13px] text-muted-foreground hover:text-foreground transition-all duration-300">
+                <span className="w-7 h-7 rounded-full bg-foreground/[0.04] group-hover:bg-primary/20 flex items-center justify-center transition-all duration-300">
+                  <Phone className="h-3 w-3 text-muted-foreground group-hover:text-primary transition-colors duration-300" />
                 </span>
                 <span className="hidden xl:inline">+91 99599 33363</span>
               </a>
-              <div className="w-px h-5 bg-white/[0.06]" />
+              <div className="w-px h-5 bg-border" />
               <a href="#contact"><Button size="sm" className="group/btn" data-testid="button-get-started">Get Started <ArrowRight className="ml-1.5 h-3.5 w-3.5 transition-transform duration-300 group-hover/btn:translate-x-0.5" /></Button></a>
             </div>
             <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} data-testid="button-mobile-menu" aria-label="Toggle menu">
@@ -225,32 +225,32 @@ export default function Home() {
       <section ref={heroRef} className="relative min-h-screen flex items-center">
         <motion.div className="absolute inset-0" style={{ y: heroY }}>
           <img src={heroImage} alt="" className="w-full h-[120%] object-cover" data-testid="img-hero" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/70 to-background" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/50 to-background" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white/60 via-transparent to-transparent" />
         </motion.div>
 
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/3 -left-40 w-[500px] h-[500px] rounded-full bg-primary/[0.04] blur-[120px]" />
-          <div className="absolute bottom-1/4 -right-40 w-[400px] h-[400px] rounded-full bg-accent/[0.03] blur-[100px]" />
+          <div className="absolute top-1/3 -left-40 w-[500px] h-[500px] rounded-full bg-primary/[0.06] blur-[120px]" />
+          <div className="absolute bottom-1/4 -right-40 w-[400px] h-[400px] rounded-full bg-accent/[0.05] blur-[100px]" />
         </div>
 
         <motion.div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20 md:pt-44 md:pb-32 w-full" style={{ opacity: heroOpacity }}>
           <motion.div className="max-w-4xl" initial="initial" animate="animate" variants={stagger}>
             <motion.div variants={fadeUp} className="mb-10">
-              <span className="inline-flex items-center gap-3 bg-white/[0.04] backdrop-blur-sm border border-white/[0.06] rounded-full px-5 py-2.5">
+              <span className="inline-flex items-center gap-3 bg-foreground/[0.04] backdrop-blur-sm border border-foreground/[0.08] rounded-full px-5 py-2.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-                <span className="text-[13px] text-white/60 font-medium tracking-wide">Trusted by 200+ enterprises across 8 industries</span>
+                <span className="text-[13px] text-foreground/60 font-medium tracking-wide">Trusted by 200+ enterprises across 8 industries</span>
               </span>
             </motion.div>
 
             <motion.h1 variants={fadeUp} className="text-[clamp(2.8rem,7vw,6rem)] font-bold leading-[1.05] tracking-tight mb-8" data-testid="text-hero-title">
-              <span className="text-gradient-white">Technology that</span>
+              <span className="text-gradient-dark">Technology that</span>
               <br />
-              <span className="text-gradient-white">delivers </span>
+              <span className="text-gradient-dark">delivers </span>
               <span className="text-gradient-gold">outcomes.</span>
             </motion.h1>
 
-            <motion.p variants={fadeUp} className="text-base md:text-lg text-white/40 max-w-xl leading-relaxed mb-12 font-light" data-testid="text-hero-description">
+            <motion.p variants={fadeUp} className="text-base md:text-lg text-foreground/50 max-w-xl leading-relaxed mb-12 font-light" data-testid="text-hero-description">
               iOne Techlabs engineers software, cloud, IoT, and AI solutions
               for enterprises that need results — not reports. From energy grids to
               financial platforms, we build what matters.
@@ -263,14 +263,14 @@ export default function Home() {
                 </Button>
               </a>
               <a href="#industries">
-                <Button size="lg" variant="outline" className="backdrop-blur-sm border-white/15 text-white/80" data-testid="button-hero-cases">
+                <Button size="lg" variant="outline" data-testid="button-hero-cases">
                   <Play className="mr-2 h-3.5 w-3.5" /> View Case Studies
                 </Button>
               </a>
             </motion.div>
 
             <motion.div variants={fadeUp}>
-              <div className="flex flex-wrap gap-x-12 gap-y-6 border-t border-white/[0.06] pt-8">
+              <div className="flex flex-wrap gap-x-12 gap-y-6 border-t border-foreground/[0.08] pt-8">
                 {[
                   { v: <AnimatedCounter end={500} suffix="+" />, l: "Projects Delivered" },
                   { v: <AnimatedCounter end={8} />, l: "Industry Verticals" },
@@ -278,8 +278,8 @@ export default function Home() {
                   { v: <><AnimatedCounter end={10} />{"+"}</>, l: "Years in Operation" },
                 ].map((s, i) => (
                   <div key={i}>
-                    <div className="text-2xl md:text-3xl font-bold text-white tracking-tight">{s.v}</div>
-                    <div className="text-[11px] text-white/30 mt-1.5 uppercase tracking-[0.15em] font-medium">{s.l}</div>
+                    <div className="text-2xl md:text-3xl font-bold text-foreground tracking-tight">{s.v}</div>
+                    <div className="text-[11px] text-muted-foreground mt-1.5 uppercase tracking-[0.15em] font-medium">{s.l}</div>
                   </div>
                 ))}
               </div>
@@ -294,7 +294,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="flex items-center gap-6 text-muted-foreground/30">
               <span className="text-[11px] uppercase tracking-[0.2em] font-medium text-muted-foreground/50 whitespace-nowrap">Cloud Partners</span>
-              <span className="text-white/10">|</span>
+              <span className="text-border">|</span>
               <div className="flex items-center gap-8">
                 <SiAmazonwebservices className="h-7 w-auto text-muted-foreground/30 hover:text-muted-foreground/60 transition-colors" />
                 <span className="text-sm font-semibold text-muted-foreground/30 hover:text-muted-foreground/60 transition-colors tracking-wide">Azure</span>
@@ -393,18 +393,18 @@ export default function Home() {
                 <motion.div key={activeService} initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.98 }} transition={{ duration: 0.4 }} className="sticky top-28">
                   <div className="relative rounded-md overflow-hidden" data-testid={`card-service-detail-${activeService}`}>
                     <img src={services[activeService].image} alt={services[activeService].title} className="w-full aspect-[16/10] object-cover" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/5" />
                     <div className="absolute top-5 left-5 right-5">
                       <div className="flex flex-wrap gap-2">
                         {services[activeService].features.map((f, j) => (
-                          <motion.span key={f} className="text-[11px] font-medium text-white/80 bg-white/[0.08] backdrop-blur-md px-3 py-1.5 rounded-full border border-white/[0.06]"
+                          <motion.span key={f} className="text-[11px] font-medium text-white/90 bg-black/30 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10"
                             initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: j * 0.05 + 0.1 }}>{f}</motion.span>
                         ))}
                       </div>
                     </div>
                     <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
                       <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 tracking-tight">{services[activeService].title}</h3>
-                      <p className="text-white/40 text-sm leading-relaxed max-w-lg mb-4">{services[activeService].desc}</p>
+                      <p className="text-white/50 text-sm leading-relaxed max-w-lg mb-4">{services[activeService].desc}</p>
                       <a href="#contact" className="inline-flex items-center gap-2 text-primary text-sm font-semibold" data-testid={`link-service-learn-${activeService}`}>
                         Discuss this capability <ArrowUpRight className="h-4 w-4" />
                       </a>
@@ -465,13 +465,13 @@ export default function Home() {
                     <div className={isReversed ? "lg:order-2" : ""}>
                       <div className="relative rounded-md overflow-hidden">
                         <img src={uc.image} alt={uc.title} className="w-full aspect-[16/10] object-cover" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                         <div className="absolute bottom-5 left-5 right-5">
                           <div className="flex flex-wrap gap-2">
                             {uc.metrics.map((m, mi) => (
-                              <div key={mi} className="bg-black/50 backdrop-blur-md rounded-md px-3.5 py-2.5 border border-white/[0.08]">
+                              <div key={mi} className="bg-black/40 backdrop-blur-md rounded-md px-3.5 py-2.5 border border-white/10">
                                 <div className="text-lg font-bold text-accent leading-none">{m.v}</div>
-                                <div className="text-[10px] text-white/40 uppercase tracking-wider mt-1">{m.l}</div>
+                                <div className="text-[10px] text-white/50 uppercase tracking-wider mt-1">{m.l}</div>
                               </div>
                             ))}
                           </div>
@@ -581,13 +581,13 @@ export default function Home() {
             <motion.div variants={fadeUp} className="order-2 lg:order-1">
               <div className="relative rounded-md overflow-hidden">
                 <img src={teamWorkImage} alt="iOne Techlabs Engineering Team" className="w-full aspect-[4/3] object-cover" data-testid="img-team" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-transparent" />
                 <div className="absolute bottom-5 left-5 right-5">
                   <div className="grid grid-cols-4 gap-2">
                     {[{ v: "10+", l: "Years" }, { v: "150+", l: "Engineers" }, { v: "8", l: "Verticals" }, { v: "200+", l: "Clients" }].map((s) => (
-                      <div key={s.l} className="bg-black/50 backdrop-blur-md rounded-md px-3 py-2.5 border border-white/[0.06] text-center">
+                      <div key={s.l} className="bg-black/40 backdrop-blur-md rounded-md px-3 py-2.5 border border-white/10 text-center">
                         <div className="text-lg font-bold text-white leading-none">{s.v}</div>
-                        <div className="text-[9px] text-white/40 uppercase tracking-wider mt-1">{s.l}</div>
+                        <div className="text-[9px] text-white/50 uppercase tracking-wider mt-1">{s.l}</div>
                       </div>
                     ))}
                   </div>
@@ -652,7 +652,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
           <motion.div initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger} className="space-y-8">
             <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight" data-testid="text-cta-title">
-              <span className="text-gradient-white">Ready to build</span>{" "}
+              <span className="text-foreground">Ready to build</span>{" "}
               <span className="text-gradient-green">what matters?</span>
             </motion.h2>
             <motion.p variants={fadeUp} className="text-muted-foreground max-w-xl mx-auto">
@@ -661,7 +661,7 @@ export default function Home() {
             </motion.p>
             <motion.div variants={fadeUp} className="flex flex-wrap justify-center gap-4 pt-2">
               <a href="#contact"><Button size="lg" className="glow-green" data-testid="button-cta-contact">Schedule a Call <ArrowRight className="ml-2 h-4 w-4" /></Button></a>
-              <a href="tel:+919959933363"><Button size="lg" variant="outline" className="border-white/10" data-testid="button-cta-phone"><Phone className="mr-2 h-4 w-4" />+91 99599 33363</Button></a>
+              <a href="tel:+919959933363"><Button size="lg" variant="outline" data-testid="button-cta-phone"><Phone className="mr-2 h-4 w-4" />+91 99599 33363</Button></a>
             </motion.div>
           </motion.div>
         </div>
@@ -756,7 +756,7 @@ export default function Home() {
               </p>
               <div className="flex gap-2">
                 {[{ icon: Linkedin, id: "linkedin" }, { icon: Twitter, id: "twitter" }, { icon: SiGithub, id: "github" }].map((s) => (
-                  <a key={s.id} href="#" className="w-8 h-8 rounded-md bg-white/[0.03] border border-white/[0.04] flex items-center justify-center text-muted-foreground/30 hover:text-foreground hover:border-primary/20 transition-all duration-300" data-testid={`link-${s.id}`}>
+                  <a key={s.id} href="#" className="w-8 h-8 rounded-md bg-foreground/[0.03] border border-border flex items-center justify-center text-muted-foreground/50 hover:text-foreground hover:border-primary/30 transition-all duration-300" data-testid={`link-${s.id}`}>
                     <s.icon className="h-3.5 w-3.5" />
                   </a>
                 ))}
