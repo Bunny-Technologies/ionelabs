@@ -177,7 +177,7 @@ export default function Home() {
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-4 h-20 md:h-24">
             <a href="#" className="flex-shrink-0 group" data-testid="link-home">
-              <Logo className="h-14 md:h-16 w-auto transition-all duration-300 group-hover:brightness-125 group-hover:drop-shadow-[0_0_8px_rgba(27,107,61,0.3)]" />
+              <Logo className="h-14 md:h-16 w-auto brightness-110 contrast-110 transition-all duration-300 group-hover:brightness-125 group-hover:drop-shadow-[0_0_10px_rgba(27,107,61,0.4)]" />
             </a>
             <div className="hidden lg:flex items-center gap-1">
               {navItems.map((item) => (
@@ -750,7 +750,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-8 lg:gap-12">
             <div className="col-span-2 md:col-span-2">
-              <Logo className="h-14 w-auto mb-4" />
+              <Logo className="h-14 w-auto mb-4 brightness-110 contrast-110" />
               <p className="text-sm text-muted-foreground/50 mb-5 max-w-xs leading-relaxed">
                 Enterprise technology solutions for India's most ambitious companies. Software, Cloud, IoT & AI.
               </p>
