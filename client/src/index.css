@@ -18,26 +18,26 @@
   --sidebar: 210 15% 96%;
   --sidebar-foreground: 220 20% 12%;
   --sidebar-border: 220 10% 90%;
-  --sidebar-primary: 148 55% 32%;
+  --sidebar-primary: 148 65% 30%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 42 80% 48%;
-  --sidebar-accent-foreground: 42 80% 10%;
-  --sidebar-ring: 148 55% 32%;
+  --sidebar-accent: 42 85% 50%;
+  --sidebar-accent-foreground: 42 85% 10%;
+  --sidebar-ring: 148 65% 30%;
   --popover: 0 0% 100%;
   --popover-foreground: 220 20% 12%;
   --popover-border: 220 10% 90%;
-  --primary: 148 55% 32%;
+  --primary: 148 65% 30%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 220 10% 93%;
+  --secondary: 210 15% 93%;
   --secondary-foreground: 220 20% 12%;
-  --muted: 220 8% 94%;
-  --muted-foreground: 220 5% 45%;
-  --accent: 42 80% 48%;
-  --accent-foreground: 42 80% 10%;
+  --muted: 210 12% 94%;
+  --muted-foreground: 220 8% 42%;
+  --accent: 42 85% 50%;
+  --accent-foreground: 42 85% 10%;
   --destructive: 0 84% 50%;
   --destructive-foreground: 0 0% 100%;
   --input: 220 10% 90%;
-  --ring: 148 55% 32%;
+  --ring: 148 65% 30%;
   --chart-1: 148 55% 38%;
   --chart-2: 42 80% 52%;
   --chart-3: 160 45% 42%;
@@ -222,7 +222,7 @@
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, hsl(148 55% 38% / 0.3), hsl(42 80% 52% / 0.3), hsl(148 55% 38% / 0.1));
+  background: linear-gradient(135deg, hsl(148 65% 35% / 0.4), hsl(42 85% 52% / 0.4), hsl(148 65% 35% / 0.15));
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
@@ -233,22 +233,22 @@
 }
 
 .glow-green {
-  box-shadow: 0 0 20px hsl(148 55% 32% / 0.2), 0 0 60px hsl(148 55% 32% / 0.08);
+  box-shadow: 0 0 24px hsl(148 65% 30% / 0.25), 0 0 60px hsl(148 65% 30% / 0.1);
 }
 
 .glow-gold {
-  box-shadow: 0 0 20px hsl(42 80% 48% / 0.2), 0 0 60px hsl(42 80% 48% / 0.08);
+  box-shadow: 0 0 24px hsl(42 85% 50% / 0.25), 0 0 60px hsl(42 85% 50% / 0.1);
 }
 
 .text-gradient-green {
-  background: linear-gradient(135deg, hsl(148 55% 38%), hsl(148 55% 25%));
+  background: linear-gradient(135deg, hsl(148 65% 35%), hsl(148 65% 22%));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .text-gradient-gold {
-  background: linear-gradient(135deg, hsl(42 80% 52%), hsl(42 80% 38%));
+  background: linear-gradient(135deg, hsl(42 90% 55%), hsl(42 85% 40%));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
