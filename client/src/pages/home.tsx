@@ -177,12 +177,12 @@ export default function Home() {
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-4 h-16 md:h-20">
             <a href="#" className="flex-shrink-0 group" data-testid="link-home">
-              <Logo className="h-12 md:h-14 w-auto transition-all duration-300 group-hover:drop-shadow-[0_0_10px_rgba(27,107,61,0.25)]" />
+              <Logo className="h-12 md:h-14 w-auto transition-all duration-300 group-hover:drop-shadow-[0_0_12px_rgba(26,122,61,0.5)]" />
             </a>
             <div className="hidden lg:flex items-center gap-1">
               {navItems.map((item) => (
                 <a key={item} href={`#${item.toLowerCase().replace(" ", "-")}`}
-                  className="relative text-[13px] font-medium text-foreground/50 hover:text-foreground transition-all duration-300 tracking-wide uppercase px-4 py-2 rounded-md hover:bg-foreground/[0.04] group"
+                  className={`relative text-[13px] font-medium transition-all duration-300 tracking-wide uppercase px-4 py-2 rounded-md group ${scrolled ? "text-foreground/60 hover:text-foreground hover:bg-foreground/[0.04]" : "text-white/60 hover:text-white hover:bg-white/[0.06]"}`}
                   data-testid={`link-${item.toLowerCase().replace(" ", "-")}`}
                 >
                   {item}
@@ -191,13 +191,13 @@ export default function Home() {
               ))}
             </div>
             <div className="hidden lg:flex items-center gap-4">
-              <a href="tel:+919959933363" className="group flex items-center gap-2 text-[13px] text-muted-foreground hover:text-foreground transition-all duration-300">
-                <span className="w-7 h-7 rounded-full bg-foreground/[0.04] group-hover:bg-primary/20 flex items-center justify-center transition-all duration-300">
-                  <Phone className="h-3 w-3 text-muted-foreground group-hover:text-primary transition-colors duration-300" />
+              <a href="tel:+919959933363" className={`group flex items-center gap-2 text-[13px] transition-all duration-300 ${scrolled ? "text-muted-foreground hover:text-foreground" : "text-white/60 hover:text-white"}`}>
+                <span className={`w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300 ${scrolled ? "bg-foreground/[0.04] group-hover:bg-primary/20" : "bg-white/[0.07] group-hover:bg-primary/30"}`}>
+                  <Phone className="h-3 w-3 group-hover:text-primary transition-colors duration-300" />
                 </span>
                 <span className="hidden xl:inline">+91 99599 33363</span>
               </a>
-              <div className="w-px h-5 bg-border" />
+              <div className={`w-px h-5 transition-colors ${scrolled ? "bg-border" : "bg-white/20"}`} />
               <a href="#contact"><Button size="sm" className="group/btn" data-testid="button-get-started">Get Started <ArrowRight className="ml-1.5 h-3.5 w-3.5 transition-transform duration-300 group-hover/btn:translate-x-0.5" /></Button></a>
             </div>
             <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} data-testid="button-mobile-menu" aria-label="Toggle menu">
@@ -222,70 +222,95 @@ export default function Home() {
       </motion.header>
 
       {/* ══════════════════ HERO ══════════════════ */}
-      <section ref={heroRef} className="relative min-h-screen flex items-center">
+      <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden bg-[#07170D]">
+        {/* Parallax image – darker overlay so colours pop */}
         <motion.div className="absolute inset-0" style={{ y: heroY }}>
-          <img src={heroImage} alt="" className="w-full h-[120%] object-cover" data-testid="img-hero" />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/50 to-background" />
-          <div className="absolute inset-0 bg-gradient-to-r from-white/60 via-transparent to-transparent" />
+          <img src={heroImage} alt="" className="w-full h-[120%] object-cover opacity-30" data-testid="img-hero" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#07170D]/90 via-[#0D2318]/70 to-[#07170D]/95" />
         </motion.div>
 
+        {/* Vivid ambient glows */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/3 -left-40 w-[500px] h-[500px] rounded-full bg-primary/[0.06] blur-[120px]" />
-          <div className="absolute bottom-1/4 -right-40 w-[400px] h-[400px] rounded-full bg-accent/[0.05] blur-[100px]" />
+          <div className="absolute -top-20 -left-20 w-[700px] h-[700px] rounded-full bg-primary/20 blur-[140px]" />
+          <div className="absolute top-1/2 -right-60 w-[600px] h-[600px] rounded-full bg-accent/10 blur-[130px]" />
+          <div className="absolute bottom-0 left-1/3 w-[400px] h-[300px] rounded-full bg-primary/15 blur-[100px]" />
+          {/* Decorative grid lines */}
+          <svg className="absolute inset-0 w-full h-full opacity-[0.04]" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="hero-grid" width="60" height="60" patternUnits="userSpaceOnUse">
+                <path d="M 60 0 L 0 0 0 60" fill="none" stroke="white" strokeWidth="0.8" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#hero-grid)" />
+          </svg>
+          {/* Accent diagonal stripe */}
+          <div className="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-transparent via-primary/30 to-transparent" />
         </div>
 
         <motion.div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20 md:pt-44 md:pb-32 w-full" style={{ opacity: heroOpacity }}>
           <motion.div className="max-w-4xl" initial="initial" animate="animate" variants={stagger}>
+
+            {/* Trust badge */}
             <motion.div variants={fadeUp} className="mb-10">
-              <span className="inline-flex items-center gap-3 bg-foreground/[0.04] backdrop-blur-sm border border-foreground/[0.08] rounded-full px-5 py-2.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-                <span className="text-[13px] text-foreground/60 font-medium tracking-wide">Trusted by 200+ enterprises across 8 industries</span>
+              <span className="inline-flex items-center gap-3 bg-white/[0.06] backdrop-blur-md border border-white/[0.12] rounded-full px-5 py-2.5 shadow-[0_0_30px_rgba(26,122,61,0.15)]">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
+                </span>
+                <span className="text-[13px] text-white/70 font-medium tracking-wide">Trusted by 200+ enterprises across 8 industries</span>
               </span>
             </motion.div>
 
+            {/* Headline */}
             <motion.h1 variants={fadeUp} className="text-[clamp(2.8rem,7vw,6rem)] font-bold leading-[1.05] tracking-tight mb-8" data-testid="text-hero-title">
-              <span className="text-gradient-dark">Technology that</span>
+              <span className="text-white">Technology that</span>
               <br />
-              <span className="text-gradient-dark">delivers </span>
+              <span className="text-white">delivers </span>
               <span className="text-gradient-gold">outcomes.</span>
             </motion.h1>
 
-            <motion.p variants={fadeUp} className="text-base md:text-lg text-foreground/50 max-w-xl leading-relaxed mb-12 font-light" data-testid="text-hero-description">
+            {/* Sub-heading */}
+            <motion.p variants={fadeUp} className="text-base md:text-lg text-white/60 max-w-xl leading-relaxed mb-12" data-testid="text-hero-description">
               iOne Techlabs engineers software, cloud, IoT, and AI solutions
               for enterprises that need results — not reports. From energy grids to
               financial platforms, we build what matters.
             </motion.p>
 
+            {/* CTAs */}
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4 mb-20">
               <a href="#contact">
-                <Button size="lg" className="glow-green" data-testid="button-hero-started">
+                <Button size="lg" className="bg-primary hover:bg-primary/90 text-white glow-green shadow-lg shadow-primary/30 border-0" data-testid="button-hero-started">
                   Start Your Project <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </a>
               <a href="#industries">
-                <Button size="lg" variant="outline" data-testid="button-hero-cases">
-                  <Play className="mr-2 h-3.5 w-3.5" /> View Case Studies
+                <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10 hover:border-white/30 backdrop-blur-sm" data-testid="button-hero-cases">
+                  <Play className="mr-2 h-3.5 w-3.5 fill-current" /> View Case Studies
                 </Button>
               </a>
             </motion.div>
 
+            {/* Stats */}
             <motion.div variants={fadeUp}>
-              <div className="flex flex-wrap gap-x-12 gap-y-6 border-t border-foreground/[0.08] pt-8">
+              <div className="flex flex-wrap gap-x-10 gap-y-6 border-t border-white/[0.10] pt-8">
                 {[
                   { v: <AnimatedCounter end={500} suffix="+" />, l: "Projects Delivered" },
                   { v: <AnimatedCounter end={8} />, l: "Industry Verticals" },
                   { v: "99.9%", l: "Uptime Guarantee" },
                   { v: <><AnimatedCounter end={10} />{"+"}</>, l: "Years in Operation" },
                 ].map((s, i) => (
-                  <div key={i}>
-                    <div className="text-2xl md:text-3xl font-bold text-foreground tracking-tight">{s.v}</div>
-                    <div className="text-[11px] text-muted-foreground mt-1.5 uppercase tracking-[0.15em] font-medium">{s.l}</div>
+                  <div key={i} className="min-w-[90px]">
+                    <div className="text-2xl md:text-3xl font-bold text-white tracking-tight">{s.v}</div>
+                    <div className="text-[11px] text-white/40 mt-1.5 uppercase tracking-[0.15em] font-medium">{s.l}</div>
                   </div>
                 ))}
               </div>
             </motion.div>
           </motion.div>
         </motion.div>
+
+        {/* Bottom fade into page background */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none" />
       </section>
 
       {/* ══════════════════ TRUST BAR ══════════════════ */}
