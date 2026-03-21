@@ -222,20 +222,20 @@ export default function Home() {
       </motion.header>
 
       {/* ══════════════════ HERO ══════════════════ */}
-      <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden bg-[#07170D]">
-        {/* Parallax image – darker overlay so colours pop */}
+      <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden bg-[#0E3322]">
+        {/* Parallax image – lighter overlay lets the photo breathe */}
         <motion.div className="absolute inset-0" style={{ y: heroY }}>
-          <img src={heroImage} alt="" className="w-full h-[120%] object-cover opacity-30" data-testid="img-hero" />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#07170D]/90 via-[#0D2318]/70 to-[#07170D]/95" />
+          <img src={heroImage} alt="" className="w-full h-[120%] object-cover opacity-50" data-testid="img-hero" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0E3322]/80 via-[#1A4D32]/50 to-[#0E3322]/75" />
         </motion.div>
 
-        {/* Vivid ambient glows */}
+        {/* Ambient glows */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-20 -left-20 w-[700px] h-[700px] rounded-full bg-primary/20 blur-[140px]" />
-          <div className="absolute top-1/2 -right-60 w-[600px] h-[600px] rounded-full bg-accent/10 blur-[130px]" />
-          <div className="absolute bottom-0 left-1/3 w-[400px] h-[300px] rounded-full bg-primary/15 blur-[100px]" />
+          <div className="absolute -top-20 -left-20 w-[700px] h-[700px] rounded-full bg-primary/25 blur-[140px]" />
+          <div className="absolute top-1/2 -right-60 w-[600px] h-[600px] rounded-full bg-accent/15 blur-[130px]" />
+          <div className="absolute bottom-0 left-1/3 w-[400px] h-[300px] rounded-full bg-primary/20 blur-[100px]" />
           {/* Decorative grid lines */}
-          <svg className="absolute inset-0 w-full h-full opacity-[0.04]" xmlns="http://www.w3.org/2000/svg">
+          <svg className="absolute inset-0 w-full h-full opacity-[0.06]" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <pattern id="hero-grid" width="60" height="60" patternUnits="userSpaceOnUse">
                 <path d="M 60 0 L 0 0 0 60" fill="none" stroke="white" strokeWidth="0.8" />
@@ -243,8 +243,7 @@ export default function Home() {
             </defs>
             <rect width="100%" height="100%" fill="url(#hero-grid)" />
           </svg>
-          {/* Accent diagonal stripe */}
-          <div className="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-transparent via-primary/30 to-transparent" />
+          <div className="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-transparent via-white/20 to-transparent" />
         </div>
 
         <motion.div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20 md:pt-44 md:pb-32 w-full" style={{ opacity: heroOpacity }}>
@@ -252,12 +251,12 @@ export default function Home() {
 
             {/* Trust badge */}
             <motion.div variants={fadeUp} className="mb-10">
-              <span className="inline-flex items-center gap-3 bg-white/[0.06] backdrop-blur-md border border-white/[0.12] rounded-full px-5 py-2.5 shadow-[0_0_30px_rgba(26,122,61,0.15)]">
+              <span className="inline-flex items-center gap-3 bg-white/[0.10] backdrop-blur-md border border-white/[0.18] rounded-full px-5 py-2.5 shadow-[0_0_30px_rgba(26,122,61,0.2)]">
                 <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F0B820] opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#F0B820]" />
                 </span>
-                <span className="text-[13px] text-white/70 font-medium tracking-wide">Trusted by 200+ enterprises across 8 industries</span>
+                <span className="text-[13px] text-white/80 font-medium tracking-wide">Trusted by 200+ enterprises across 8 industries</span>
               </span>
             </motion.div>
 
@@ -270,7 +269,7 @@ export default function Home() {
             </motion.h1>
 
             {/* Sub-heading */}
-            <motion.p variants={fadeUp} className="text-base md:text-lg text-white/60 max-w-xl leading-relaxed mb-12" data-testid="text-hero-description">
+            <motion.p variants={fadeUp} className="text-base md:text-lg text-white/75 max-w-xl leading-relaxed mb-12" data-testid="text-hero-description">
               iOne Techlabs engineers software, cloud, IoT, and AI solutions
               for enterprises that need results — not reports. From energy grids to
               financial platforms, we build what matters.
@@ -284,7 +283,7 @@ export default function Home() {
                 </Button>
               </a>
               <a href="#industries">
-                <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10 hover:border-white/30 backdrop-blur-sm" data-testid="button-hero-cases">
+                <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/15 hover:border-white/40 backdrop-blur-sm" data-testid="button-hero-cases">
                   <Play className="mr-2 h-3.5 w-3.5 fill-current" /> View Case Studies
                 </Button>
               </a>
@@ -292,7 +291,7 @@ export default function Home() {
 
             {/* Stats */}
             <motion.div variants={fadeUp}>
-              <div className="flex flex-wrap gap-x-10 gap-y-6 border-t border-white/[0.10] pt-8">
+              <div className="flex flex-wrap gap-x-10 gap-y-6 border-t border-white/[0.15] pt-8">
                 {[
                   { v: <AnimatedCounter end={500} suffix="+" />, l: "Projects Delivered" },
                   { v: <AnimatedCounter end={8} />, l: "Industry Verticals" },
@@ -301,7 +300,7 @@ export default function Home() {
                 ].map((s, i) => (
                   <div key={i} className="min-w-[90px]">
                     <div className="text-2xl md:text-3xl font-bold text-white tracking-tight">{s.v}</div>
-                    <div className="text-[11px] text-white/40 mt-1.5 uppercase tracking-[0.15em] font-medium">{s.l}</div>
+                    <div className="text-[11px] text-white/55 mt-1.5 uppercase tracking-[0.15em] font-medium">{s.l}</div>
                   </div>
                 ))}
               </div>
