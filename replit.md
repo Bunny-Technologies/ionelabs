@@ -26,7 +26,7 @@ A premium enterprise technology company website for iOne Techlabs, showcasing so
 - **State Management**: TanStack Query for server state
 - **Animations**: Framer Motion (parallax, stagger, fade-up, AnimatePresence)
 - **UI Components**: shadcn/ui
-- **Logo**: SVG component (`client/src/components/Logo.tsx`) — matches original brand: gold filled circle with white arrow, serif "ione" with split gold/green "o", gray "TECHLABS" subtitle. Uses `useId()` for unique SVG gradient/clip IDs
+- **Logo**: PNG image component (`client/src/components/Logo.tsx`) — uses the original brand PNG (`attached_assets/logo_transparent.png`) with background removed for transparency. DO NOT change or recreate the logo.
 - **Custom CSS**: gradient-border, glow-green/glow-gold, text-gradient-green/gold/dark, animate-gradient-x/shimmer/pulse-glow/float
 
 ### Backend (server/)
