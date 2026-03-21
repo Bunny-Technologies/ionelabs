@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { motion, useInView, AnimatePresence, useAnimation } from "framer-motion";
 import { useMutation } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
 import {
@@ -33,6 +33,9 @@ function AnimatedCounter({ end, suffix = "", duration = 2000 }: { end: number; s
   }, [isInView, end, duration]);
   return <span ref={ref}>{count}{suffix}</span>;
 }
+
+/* ── Shared utilities ───────────────────────────────────────────── */
+const slugify = (s: string) => s.toLowerCase().replace(/\s+/g, "-");
 
 /* ── Motion variants ────────────────────────────────────────────── */
 const stagger = { animate: { transition: { staggerChildren: 0.08 } } };
@@ -142,9 +145,9 @@ export default function Home() {
 
             <div className="hidden lg:flex items-center gap-1">
               {navItems.map((item) => (
-                <a key={item} href={`#${item.toLowerCase().replace(" ", "-")}`}
+                <a key={item} href={`#${slugify(item)}`}
                   className="relative text-[13px] font-medium text-white/55 hover:text-white transition-all duration-300 tracking-wide uppercase px-4 py-2 rounded-md hover:bg-white/[0.05] group"
-                  data-testid={`link-${item.toLowerCase()}`}
+                  data-testid={`link-${slugify(item)}`}
                 >
                   {item}
                   <span className="absolute bottom-1 left-4 right-4 h-px bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
@@ -177,7 +180,7 @@ export default function Home() {
               <motion.div className="lg:hidden py-4 border-t border-white/10" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }}>
                 <div className="flex flex-col gap-1">
                   {navItems.map((item) => (
-                    <a key={item} href={`#${item.toLowerCase()}`} className="text-white/60 hover:text-white text-sm font-medium py-3 px-2 transition-colors" onClick={() => setMobileMenuOpen(false)} data-testid={`link-mobile-${item.toLowerCase()}`}>{item}</a>
+                    <a key={item} href={`#${slugify(item)}`} className="text-white/60 hover:text-white text-sm font-medium py-3 px-2 transition-colors" onClick={() => setMobileMenuOpen(false)} data-testid={`link-mobile-${slugify(item)}`}>{item}</a>
                   ))}
                   <div className="pt-3 border-t border-white/10 mt-2">
                     <a href="#contact"><Button className="w-full bg-primary text-primary-foreground" data-testid="button-mobile-get-started">Get Started</Button></a>
@@ -336,11 +339,23 @@ export default function Home() {
             <motion.h2 variants={fadeUp} className="text-3xl md:text-5xl font-bold text-foreground tracking-tight" data-testid="text-industries-title">Industries We Serve</motion.h2>
           </motion.div>
 
-          <motion.div className="flex flex-wrap justify-center gap-4" initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger}>
+          {/* Mobile: horizontal scroll  |  md+: flex-wrap centered */}
+          <div className="md:hidden flex gap-3 overflow-x-auto pb-2 -mx-4 px-4 no-scrollbar">
+            {industries.map((ind, i) => (
+              <div key={i}
+                className="flex items-center gap-2.5 glass rounded-full px-5 py-2.5 shrink-0 cursor-default"
+                data-testid={`badge-industry-${i}`}
+              >
+                <ind.icon className="h-4 w-4 text-accent" />
+                <span className="text-sm font-medium text-white/80 whitespace-nowrap">{ind.label}</span>
+              </div>
+            ))}
+          </div>
+          <motion.div className="hidden md:flex flex-wrap justify-center gap-4" initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger}>
             {industries.map((ind, i) => (
               <motion.div key={i} variants={fadeUp}
                 className="flex items-center gap-3 glass rounded-full px-6 py-3 hover:border-accent/30 hover:bg-accent/[0.05] transition-all duration-300 cursor-default"
-                data-testid={`badge-industry-${i}`}
+                data-testid={`badge-industry-md-${i}`}
               >
                 <ind.icon className="h-4 w-4 text-accent" />
                 <span className="text-sm font-medium text-white/80">{ind.label}</span>
@@ -379,9 +394,17 @@ export default function Home() {
             <motion.h2 variants={fadeUp} className="text-3xl md:text-5xl font-bold text-foreground tracking-tight" data-testid="text-process-title">Our Process</motion.h2>
           </motion.div>
 
+          <div className="relative">
+            {/* Animated connecting line — reveals left-to-right on scroll */}
+            <motion.div
+              className="hidden md:block absolute top-[2.75rem] left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-primary/10 via-primary/50 to-primary/10 origin-left"
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
+            />
+
           <motion.div className="grid md:grid-cols-4 gap-8 relative" initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger}>
-            {/* Connecting line */}
-            <div className="hidden md:block absolute top-[2.75rem] left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-primary/20 via-primary/40 to-primary/20" />
 
             {steps.map((step, i) => (
               <motion.div key={i} variants={fadeUp} className="relative flex flex-col items-center text-center" data-testid={`step-${i}`}>
@@ -396,6 +419,7 @@ export default function Home() {
               </motion.div>
             ))}
           </motion.div>
+          </div>
         </div>
       </section>
 
