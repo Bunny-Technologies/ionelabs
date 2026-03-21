@@ -1,39 +1,21 @@
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { motion, useInView, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useMutation } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
 import {
-  ArrowRight, ArrowUpRight, Menu, X, Mail, Phone, MapPin,
+  ArrowRight, Menu, X, Mail, Phone, MapPin,
   Linkedin, Twitter, Loader2, Code2, Cloud, Cpu, Smartphone,
-  BrainCircuit, Palette, ChevronRight, Zap, Shield, BarChart3,
-  Globe, Server, Layers, CheckCircle2, Play, Building2, Factory,
-  ShoppingCart, Radio, Truck, Award, Users, Clock, Target,
-  TrendingUp, Lock, Headphones, Quote,
+  BrainCircuit, BarChart3, Zap, Shield, Globe, Layers, Server,
+  Play, Building2, Factory, ShoppingCart, Radio, Truck, Award,
+  Target, TrendingUp, Lock, Quote,
 } from "lucide-react";
-import { SiGithub, SiAmazonwebservices, SiGooglecloud } from "react-icons/si";
-
+import { SiAmazonwebservices, SiGooglecloud } from "react-icons/si";
 import Logo from "@/components/Logo";
-import heroImage from "@assets/images/hero-main.png";
-import devImage from "@assets/images/service-software-dev.png";
-import cloudDataImage from "@assets/images/service-cloud.png";
-import smartGridImage from "@assets/images/service-iot-smartgrid.png";
-import mobileImage from "@assets/images/service-mobile.png";
-import analyticsImage from "@assets/images/service-ai-data.png";
-import teamWorkImage from "@assets/images/about-team.png";
-import uiuxImage from "@assets/images/service-uiux.png";
-import usecaseEnergyImage from "@assets/images/usecase-energy.png";
-import usecaseFinanceImage from "@assets/images/usecase-finance.png";
-import usecaseHealthcareImage from "@assets/images/usecase-healthcare.png";
-import usecaseManufacturingImage from "@assets/images/usecase-manufacturing.png";
-import usecaseRetailImage from "@assets/images/usecase-retail.png";
-import usecaseGovernmentImage from "@assets/images/usecase-government.png";
-import usecaseTelecomImage from "@assets/images/usecase-telecom.png";
-import usecaseLogisticsImage from "@assets/images/usecase-logistics.png";
 
+/* ── Animated counter ───────────────────────────────────────────── */
 function AnimatedCounter({ end, suffix = "", duration = 2000 }: { end: number; suffix?: string; duration?: number }) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
@@ -41,11 +23,10 @@ function AnimatedCounter({ end, suffix = "", duration = 2000 }: { end: number; s
   useEffect(() => {
     if (!isInView) return;
     let startTime: number;
-    const animate = (currentTime: number) => {
-      if (!startTime) startTime = currentTime;
-      const progress = Math.min((currentTime - startTime) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.floor(eased * end));
+    const animate = (t: number) => {
+      if (!startTime) startTime = t;
+      const progress = Math.min((t - startTime) / duration, 1);
+      setCount(Math.floor((1 - Math.pow(1 - progress, 3)) * end));
       if (progress < 1) requestAnimationFrame(animate);
     };
     requestAnimationFrame(animate);
@@ -53,32 +34,29 @@ function AnimatedCounter({ end, suffix = "", duration = 2000 }: { end: number; s
   return <span ref={ref}>{count}{suffix}</span>;
 }
 
+/* ── Motion variants ────────────────────────────────────────────── */
 const stagger = { animate: { transition: { staggerChildren: 0.08 } } };
 const fadeUp = {
-  initial: { opacity: 0, y: 24 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
+  initial: { opacity: 0, y: 28 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
 };
 const fadeIn = {
   initial: { opacity: 0 },
   animate: { opacity: 1, transition: { duration: 0.5 } },
 };
 
+/* ═══════════════════════════════════════════════════════════════
+   HOME PAGE
+═══════════════════════════════════════════════════════════════ */
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeService, setActiveService] = useState(0);
-  const [activeIndustry, setActiveIndustry] = useState("all");
   const [contactForm, setContactForm] = useState({ name: "", email: "", company: "", message: "" });
   const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [scrolled, setScrolled] = useState(false);
   const { toast } = useToast();
 
-  const heroRef = useRef(null);
-  const { scrollYProgress: heroScroll } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const heroY = useTransform(heroScroll, [0, 1], [0, 150]);
-  const heroOpacity = useTransform(heroScroll, [0, 0.5], [1, 0]);
-
-  const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
-    const h = () => setScrolled(window.scrollY > 50);
+    const h = () => setScrolled(window.scrollY > 30);
     window.addEventListener("scroll", h);
     return () => window.removeEventListener("scroll", h);
   }, []);
@@ -91,7 +69,7 @@ export default function Home() {
       return result;
     },
     onSuccess: (data) => { toast({ title: "Message Sent", description: data.message || "We'll get back to you within 24 hours." }); setContactForm({ name: "", email: "", company: "", message: "" }); },
-    onError: (error: Error) => { toast({ title: "Error", description: error.message, variant: "destructive" }); },
+    onError: (e: Error) => { toast({ title: "Error", description: e.message, variant: "destructive" }); },
   });
 
   const newsletterMutation = useMutation({
@@ -102,68 +80,50 @@ export default function Home() {
       return result;
     },
     onSuccess: (data) => { toast({ title: "Subscribed", description: data.message || "You'll receive our latest updates." }); setNewsletterEmail(""); },
-    onError: (error: Error) => { toast({ title: "Error", description: error.message, variant: "destructive" }); },
+    onError: (e: Error) => { toast({ title: "Error", description: e.message, variant: "destructive" }); },
   });
 
-  const handleContactSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!contactForm.name || !contactForm.email || !contactForm.message) { toast({ title: "Required Fields", description: "Please fill in all required fields.", variant: "destructive" }); return; }
-    contactMutation.mutate(contactForm);
-  };
-
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newsletterEmail) return;
-    newsletterMutation.mutate(newsletterEmail);
-  };
-
+  /* ── Data ────────────────────────────────────────────────────── */
   const services = [
-    { title: "Custom Software Engineering", desc: "Enterprise applications built with modern architectures. Full-stack web platforms, microservices, REST & GraphQL APIs, and legacy system modernization — delivered with production-grade CI/CD pipelines.", image: devImage, icon: Code2, features: ["Enterprise Web Platforms", "Microservices & APIs", "Legacy Modernization", "DevOps & CI/CD"] },
-    { title: "Cloud & Infrastructure", desc: "Security-first cloud architecture across AWS, Azure, and GCP. We design, migrate, and manage infrastructure that scales — with cost optimization built in from day one.", image: cloudDataImage, icon: Cloud, features: ["Cloud Migration", "Infrastructure as Code", "Cost Optimization", "Multi-Cloud Strategy"] },
-    { title: "IoT & Smart Grid Solutions", desc: "End-to-end connected systems with real-time SCADA integration, edge computing, predictive analytics, and advanced metering infrastructure for energy and industrial sectors.", image: smartGridImage, icon: Cpu, features: ["SCADA Integration", "Edge Computing", "AMI Systems", "Predictive Maintenance"] },
-    { title: "Mobile Engineering", desc: "Cross-platform mobile experiences with native performance. From concept through app store launch — including ongoing analytics, A/B testing, and continuous improvement.", image: mobileImage, icon: Smartphone, features: ["iOS & Android Native", "Cross-Platform (Flutter/RN)", "Offline-First Architecture", "App Store Optimization"] },
-    { title: "AI & Data Intelligence", desc: "Production-ready machine learning pipelines, predictive models, NLP systems, and computer vision solutions. We build AI that actually ships — not just prototypes.", image: analyticsImage, icon: BrainCircuit, features: ["ML Model Development", "Predictive Analytics", "NLP & Computer Vision", "Real-Time Data Pipelines"] },
-    { title: "Product Design & UX", desc: "Research-driven design that converts. We combine user research, rapid prototyping, and design systems to create interfaces that drive measurable business outcomes.", image: uiuxImage, icon: Palette, features: ["User Research & Testing", "Rapid Prototyping", "Design Systems", "Conversion Optimization"] },
-  ];
-
-  const layers = [
-    { num: "01", title: "Discovery & Strategy", desc: "We map your business goals to technical requirements. Stakeholder interviews, technical audits, and competitive analysis — so we build the right thing, not just any thing.", icon: Target },
-    { num: "02", title: "Architecture & Design", desc: "Scalable system architecture paired with pixel-perfect UX. Every decision is documented, peer-reviewed, and stress-tested before a single line of code is written.", icon: Layers },
-    { num: "03", title: "Iterative Development", desc: "Two-week sprints with working demos. You see real progress every cycle — not a surprise reveal after six months. Full transparency through shared dashboards.", icon: Zap },
-    { num: "04", title: "Launch, Monitor & Scale", desc: "Production deployment with 24/7 monitoring, automated alerting, and dedicated support. Post-launch optimization ensures your solution grows with your business.", icon: Server },
+    { icon: Code2, title: "Custom Software Development", desc: "Enterprise-grade web platforms, microservices, REST & GraphQL APIs, and legacy modernisation — delivered with production-grade CI/CD pipelines." },
+    { icon: Cloud, title: "Cloud & DevOps", desc: "Security-first cloud architecture across AWS, Azure, and GCP. We design, migrate, and manage infrastructure that scales with cost optimisation built in." },
+    { icon: Cpu, title: "IoT & Edge Computing", desc: "End-to-end connected systems with real-time SCADA integration, edge computing, predictive analytics, and AMI for energy and industrial sectors." },
+    { icon: BrainCircuit, title: "AI & Machine Learning", desc: "Production-ready ML pipelines, predictive models, NLP systems, and computer vision solutions. AI that actually ships — not just prototypes." },
+    { icon: Smartphone, title: "Enterprise Mobility", desc: "Cross-platform mobile experiences with native performance. iOS, Android, Flutter, and React Native — from concept through app store launch." },
+    { icon: BarChart3, title: "Data Engineering & Analytics", desc: "Unified data platforms, real-time pipelines, and BI dashboards that turn raw data into boardroom-ready insights for decision makers." },
   ];
 
   const industries = [
-    { id: "energy", label: "Energy & Utilities", icon: Zap },
-    { id: "finance", label: "Financial Services", icon: BarChart3 },
-    { id: "healthcare", label: "Healthcare", icon: Shield },
-    { id: "manufacturing", label: "Manufacturing", icon: Factory },
-    { id: "retail", label: "Retail & E-Commerce", icon: ShoppingCart },
-    { id: "government", label: "Government & Smart Cities", icon: Building2 },
-    { id: "telecom", label: "Telecommunications", icon: Radio },
-    { id: "logistics", label: "Logistics & Supply Chain", icon: Truck },
+    { icon: Zap, label: "Energy & Utilities" },
+    { icon: TrendingUp, label: "Financial Services" },
+    { icon: Shield, label: "Healthcare" },
+    { icon: Factory, label: "Manufacturing" },
+    { icon: Truck, label: "Logistics & Supply Chain" },
+    { icon: ShoppingCart, label: "Retail & E-Commerce" },
+    { icon: Building2, label: "Government & Smart Cities" },
+    { icon: Radio, label: "Telecommunications" },
   ];
 
-  const useCases = [
-    { id: "energy", title: "Energy & Utilities", headline: "Smart Grid Modernization", stat: "60%", statLabel: "Outage Reduction", desc: "Modernized grid infrastructure for a major Indian power distribution company. Deployed 10,000+ IoT sensors with real-time SCADA integration, AI-powered fault prediction, and automated demand response — cutting outages by 60% and operational costs by 35%.", features: ["Real-time grid monitoring across 10,000+ sensor nodes", "AI-powered predictive fault detection (95% accuracy)", "Automated load balancing & demand response system", "SCADA system integration with legacy infrastructure"], image: usecaseEnergyImage, metrics: [{ v: "60%", l: "Fewer Outages" }, { v: "35%", l: "Cost Reduction" }, { v: "99.9%", l: "Grid Uptime" }] },
-    { id: "finance", title: "Financial Services", headline: "Cloud-Native Trading Platform", stat: "3x", statLabel: "Processing Speed", desc: "Architected a cloud-native trading platform handling millions of daily transactions with sub-millisecond latency. Built real-time compliance engine, AI-powered fraud detection, and automated reporting for regulatory requirements.", features: ["High-frequency data processing with <1ms latency", "Real-time regulatory compliance automation", "AI-powered fraud detection (prevented $2M+ in fraud)", "Automated MIS and regulatory reporting"], image: usecaseFinanceImage, metrics: [{ v: "3x", l: "Faster Processing" }, { v: "99.99%", l: "Uptime SLA" }, { v: "$2M+", l: "Fraud Prevented" }] },
-    { id: "healthcare", title: "Healthcare", headline: "Patient Management & AI Diagnostics", stat: "40%", statLabel: "Administrative Savings", desc: "Built an end-to-end patient management system with AI-driven diagnostic support, integrated telemedicine, and automated billing — reducing administrative overhead by 40% while improving diagnostic accuracy for a hospital network.", features: ["HIPAA-compliant cloud infrastructure on AWS", "AI diagnostic imaging support (radiology & pathology)", "Integrated telemedicine with real-time vitals", "Automated insurance verification & billing"], image: usecaseHealthcareImage, metrics: [{ v: "40%", l: "Cost Savings" }, { v: "3x", l: "Faster Diagnostics" }, { v: "50K+", l: "Patients Served" }] },
-    { id: "manufacturing", title: "Manufacturing", headline: "Digital Twin & Predictive Maintenance", stat: "45%", statLabel: "Downtime Reduction", desc: "Implemented digital twin technology and IoT-based predictive maintenance for a large-scale manufacturing facility. Real-time equipment monitoring, automated quality control, and production optimization reduced unplanned downtime by 45%.", features: ["Digital twin simulation for production optimization", "IoT-based real-time equipment health monitoring", "Automated quality control with computer vision", "Predictive maintenance scheduling with ML models"], image: usecaseManufacturingImage, metrics: [{ v: "45%", l: "Less Downtime" }, { v: "28%", l: "Yield Increase" }, { v: "3x", l: "ROI in Year 1" }] },
-    { id: "retail", title: "Retail & E-Commerce", headline: "AI-Powered Retail Analytics Platform", stat: "32%", statLabel: "Revenue Uplift", desc: "Developed a unified retail analytics platform with AI-driven demand forecasting, dynamic pricing, and personalized customer experiences — driving a 32% revenue uplift and 50% reduction in inventory waste for a multi-store retail chain.", features: ["AI demand forecasting with 94% accuracy", "Dynamic pricing engine with competitive intelligence", "Customer behavior analytics & personalization", "Real-time inventory optimization across 200+ stores"], image: usecaseRetailImage, metrics: [{ v: "32%", l: "Revenue Growth" }, { v: "50%", l: "Less Waste" }, { v: "94%", l: "Forecast Accuracy" }] },
-    { id: "government", title: "Government & Smart Cities", headline: "Urban IoT Command Center", stat: "55%", statLabel: "Faster Response", desc: "Designed and deployed a smart city command center integrating traffic management, environmental monitoring, public safety, and utility management systems — improving emergency response times by 55% across the metropolitan area.", features: ["Unified IoT platform for city-wide sensor network", "Real-time traffic optimization & signal control", "Environmental monitoring (air quality, noise, water)", "Citizen engagement portal with real-time dashboards"], image: usecaseGovernmentImage, metrics: [{ v: "55%", l: "Faster Response" }, { v: "40%", l: "Energy Savings" }, { v: "2M+", l: "Citizens Served" }] },
-    { id: "telecom", title: "Telecommunications", headline: "Network Intelligence Platform", stat: "70%", statLabel: "Faster Provisioning", desc: "Built an AI-powered network intelligence platform for a major telecom provider. Automated network provisioning, predictive capacity planning, and real-time anomaly detection reduced provisioning time by 70% and network incidents by 40%.", features: ["AI-driven network capacity planning & optimization", "Automated provisioning with zero-touch deployment", "Real-time network anomaly detection & self-healing", "Customer experience scoring with churn prediction"], image: usecaseTelecomImage, metrics: [{ v: "70%", l: "Faster Provisioning" }, { v: "40%", l: "Fewer Incidents" }, { v: "25%", l: "Churn Reduction" }] },
-    { id: "logistics", title: "Logistics & Supply Chain", headline: "End-to-End Supply Chain Visibility", stat: "38%", statLabel: "Cost Optimization", desc: "Created an intelligent supply chain platform with real-time tracking, AI-powered route optimization, warehouse automation integration, and predictive demand planning — reducing logistics costs by 38% for a national distribution network.", features: ["Real-time shipment tracking with GPS & IoT sensors", "AI route optimization reducing fuel costs by 22%", "Warehouse automation integration (pick, pack, ship)", "Predictive demand planning with supplier management"], image: usecaseLogisticsImage, metrics: [{ v: "38%", l: "Cost Reduction" }, { v: "22%", l: "Fuel Savings" }, { v: "99.2%", l: "On-Time Delivery" }] },
+  const steps = [
+    { num: "01", icon: Target, title: "Discovery & Strategy", desc: "We map your business goals to technical requirements through stakeholder interviews, audits, and competitive analysis." },
+    { num: "02", icon: Layers, title: "Design & Architecture", desc: "Scalable system architecture paired with pixel-perfect UX. Every decision is peer-reviewed before code is written." },
+    { num: "03", icon: Code2, title: "Agile Development", desc: "Two-week sprints with working demos. Real progress every cycle — full transparency through shared dashboards." },
+    { num: "04", icon: Globe, title: "Deploy & Scale", desc: "Production deployment with 24/7 monitoring, automated alerting, and dedicated support that grows with your business." },
   ];
 
-  const filteredUseCases = activeIndustry === "all" ? useCases : useCases.filter(uc => uc.id === activeIndustry);
+  const stats = [
+    { v: <AnimatedCounter end={200} suffix="+" />, label: "Enterprises Served" },
+    { v: <AnimatedCounter end={8} />, label: "Industries" },
+    { v: <AnimatedCounter end={50} suffix="+" />, label: "Engineers" },
+    { v: <><AnimatedCounter end={10} />+</>, label: "Years Experience" },
+  ];
 
   const testimonials = [
-    { name: "Rajesh Kumar", role: "CTO, National Power Grid Corp", quote: "iOne Techlabs transformed our grid operations. Their IoT solution reduced our outage response time from hours to minutes. The team's deep domain expertise in energy made all the difference.", avatar: "RK" },
-    { name: "Priya Sharma", role: "VP Engineering, FinServ Holdings", quote: "We evaluated five vendors. iOne was the only one that understood both the technical complexity and regulatory requirements of our trading platform. Delivered on time, under budget.", avatar: "PS" },
-    { name: "Dr. Anand Mehta", role: "Director of IT, Metro Health Network", quote: "The patient management system they built has fundamentally changed how our 12 hospitals operate. 40% reduction in administrative costs while improving patient care quality.", avatar: "AM" },
+    { name: "Rajesh Kumar", role: "CTO", company: "National Power Grid Corp", quote: "iOne Techlabs transformed our grid operations. Their IoT solution reduced our outage response time from hours to minutes. Deep domain expertise made all the difference.", avatar: "RK" },
+    { name: "Priya Sharma", role: "VP Engineering", company: "FinServ Holdings", quote: "We evaluated five vendors. iOne was the only one that understood both the technical complexity and regulatory requirements. Delivered on time, under budget.", avatar: "PS" },
+    { name: "Dr. Anand Mehta", role: "Director of IT", company: "Metro Health Network", quote: "The patient management system fundamentally changed how our 12 hospitals operate — 40% cost reduction while improving care quality.", avatar: "AM" },
   ];
 
-  const clients = ["Tata Power", "HDFC Bank", "Apollo Hospitals", "Mahindra Group", "Reliance Retail", "NTPC", "Bharti Airtel", "Delhivery"];
   const navItems = ["Services", "Industries", "Process", "About", "Contact"];
 
   return (
@@ -171,48 +131,56 @@ export default function Home() {
 
       {/* ══════════════════ NAV ══════════════════ */}
       <motion.header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "bg-background/95 backdrop-blur-2xl border-b border-border shadow-[0_1px_20px_rgba(0,0,0,0.06)]" : "bg-transparent"}`}
-        initial={{ y: -100 }} animate={{ y: 0 }} transition={{ duration: 0.6 }}
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${scrolled ? "bg-background/90 backdrop-blur-2xl border-b border-border/60 shadow-[0_1px_30px_rgba(0,0,0,0.4)]" : "bg-transparent"}`}
+        initial={{ y: -80 }} animate={{ y: 0 }} transition={{ duration: 0.6 }}
       >
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between gap-4 h-16 md:h-20">
+          <div className="flex items-center justify-between h-16 md:h-20">
             <a href="#" className="flex-shrink-0 group" data-testid="link-home">
-              <Logo className="h-12 md:h-14 w-auto transition-all duration-300 drop-shadow-[0_1px_3px_rgba(0,0,0,0.35)] group-hover:drop-shadow-[0_0_14px_rgba(240,184,32,0.45)]" />
+              <Logo className="h-10 md:h-12 w-auto transition-all duration-300 drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)] group-hover:drop-shadow-[0_0_14px_rgba(245,166,35,0.5)]" />
             </a>
+
             <div className="hidden lg:flex items-center gap-1">
               {navItems.map((item) => (
                 <a key={item} href={`#${item.toLowerCase().replace(" ", "-")}`}
-                  className={`relative text-[13px] font-medium transition-all duration-300 tracking-wide uppercase px-4 py-2 rounded-md group ${scrolled ? "text-foreground/60 hover:text-foreground hover:bg-foreground/[0.04]" : "text-white/60 hover:text-white hover:bg-white/[0.06]"}`}
-                  data-testid={`link-${item.toLowerCase().replace(" ", "-")}`}
+                  className="relative text-[13px] font-medium text-white/55 hover:text-white transition-all duration-300 tracking-wide uppercase px-4 py-2 rounded-md hover:bg-white/[0.05] group"
+                  data-testid={`link-${item.toLowerCase()}`}
                 >
                   {item}
-                  <span className="absolute bottom-0.5 left-4 right-4 h-px bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                  <span className="absolute bottom-1 left-4 right-4 h-px bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
                 </a>
               ))}
             </div>
+
             <div className="hidden lg:flex items-center gap-4">
-              <a href="tel:+919959933363" className={`group flex items-center gap-2 text-[13px] transition-all duration-300 ${scrolled ? "text-muted-foreground hover:text-foreground" : "text-white/60 hover:text-white"}`}>
-                <span className={`w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300 ${scrolled ? "bg-foreground/[0.04] group-hover:bg-primary/20" : "bg-white/[0.07] group-hover:bg-primary/30"}`}>
-                  <Phone className="h-3 w-3 group-hover:text-primary transition-colors duration-300" />
+              <a href="tel:+919959933363" className="flex items-center gap-2 text-[13px] text-white/50 hover:text-white/80 transition-colors duration-300 group">
+                <span className="w-7 h-7 rounded-full bg-white/[0.06] group-hover:bg-primary/20 flex items-center justify-center transition-all">
+                  <Phone className="h-3 w-3 group-hover:text-primary transition-colors" />
                 </span>
                 <span className="hidden xl:inline">+91 99599 33363</span>
               </a>
-              <div className={`w-px h-5 transition-colors ${scrolled ? "bg-border" : "bg-white/20"}`} />
-              <a href="#contact"><Button size="sm" className="group/btn" data-testid="button-get-started">Get Started <ArrowRight className="ml-1.5 h-3.5 w-3.5 transition-transform duration-300 group-hover/btn:translate-x-0.5" /></Button></a>
+              <div className="w-px h-5 bg-white/10" />
+              <a href="#contact">
+                <Button size="sm" className="glow-amber bg-primary text-primary-foreground hover:bg-primary/90 font-semibold" data-testid="button-get-started">
+                  Get Started <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+                </Button>
+              </a>
             </div>
-            <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} data-testid="button-mobile-menu" aria-label="Toggle menu">
+
+            <Button variant="ghost" size="icon" className="lg:hidden text-white/70 hover:text-white hover:bg-white/[0.06]" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} data-testid="button-mobile-menu" aria-label="Toggle menu">
               {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
           </div>
+
           <AnimatePresence>
             {mobileMenuOpen && (
-              <motion.div className="lg:hidden py-4 border-t border-border/20" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }}>
+              <motion.div className="lg:hidden py-4 border-t border-white/10" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }}>
                 <div className="flex flex-col gap-1">
                   {navItems.map((item) => (
-                    <a key={item} href={`#${item.toLowerCase().replace(" ", "-")}`} className="text-muted-foreground hover:text-foreground text-sm font-medium py-3 px-2" onClick={() => setMobileMenuOpen(false)} data-testid={`link-mobile-${item.toLowerCase()}`}>{item}</a>
+                    <a key={item} href={`#${item.toLowerCase()}`} className="text-white/60 hover:text-white text-sm font-medium py-3 px-2 transition-colors" onClick={() => setMobileMenuOpen(false)} data-testid={`link-mobile-${item.toLowerCase()}`}>{item}</a>
                   ))}
-                  <div className="pt-3 border-t border-border/20 mt-2">
-                    <a href="#contact"><Button className="w-full" data-testid="button-mobile-get-started">Get Started</Button></a>
+                  <div className="pt-3 border-t border-white/10 mt-2">
+                    <a href="#contact"><Button className="w-full bg-primary text-primary-foreground" data-testid="button-mobile-get-started">Get Started</Button></a>
                   </div>
                 </div>
               </motion.div>
@@ -222,118 +190,104 @@ export default function Home() {
       </motion.header>
 
       {/* ══════════════════ HERO ══════════════════ */}
-      <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden bg-[#0E3322]">
-        {/* Parallax image – lighter overlay lets the photo breathe */}
-        <motion.div className="absolute inset-0" style={{ y: heroY }}>
-          <img src={heroImage} alt="" className="w-full h-[120%] object-cover opacity-50" data-testid="img-hero" />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0E3322]/80 via-[#1A4D32]/50 to-[#0E3322]/75" />
-        </motion.div>
+      <section className="relative min-h-screen flex items-center overflow-hidden bg-[#060d18]">
 
-        {/* Ambient glows */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-20 -left-20 w-[700px] h-[700px] rounded-full bg-primary/25 blur-[140px]" />
-          <div className="absolute top-1/2 -right-60 w-[600px] h-[600px] rounded-full bg-accent/15 blur-[130px]" />
-          <div className="absolute bottom-0 left-1/3 w-[400px] h-[300px] rounded-full bg-primary/20 blur-[100px]" />
-          {/* Decorative grid lines */}
-          <svg className="absolute inset-0 w-full h-full opacity-[0.06]" xmlns="http://www.w3.org/2000/svg">
+        {/* Animated ambient orbs */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute -top-32 -left-32 w-[700px] h-[700px] rounded-full bg-[#F5A623]/[0.10] blur-[130px] animate-orb-1" />
+          <div className="absolute -bottom-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#22C55E]/[0.08] blur-[110px] animate-orb-2" />
+          <div className="absolute top-1/3 right-1/4 w-[350px] h-[350px] rounded-full bg-[#F5A623]/[0.06] blur-[100px] animate-orb-3" />
+
+          {/* Subtle grid mesh */}
+          <svg className="absolute inset-0 w-full h-full opacity-[0.045]" xmlns="http://www.w3.org/2000/svg">
             <defs>
-              <pattern id="hero-grid" width="60" height="60" patternUnits="userSpaceOnUse">
-                <path d="M 60 0 L 0 0 0 60" fill="none" stroke="white" strokeWidth="0.8" />
+              <pattern id="hero-grid" width="56" height="56" patternUnits="userSpaceOnUse">
+                <path d="M 56 0 L 0 0 0 56" fill="none" stroke="white" strokeWidth="0.7" />
               </pattern>
             </defs>
             <rect width="100%" height="100%" fill="url(#hero-grid)" />
           </svg>
-          <div className="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-transparent via-white/20 to-transparent" />
+
+          {/* Accent vertical line */}
+          <div className="absolute top-0 right-[15%] w-px h-full bg-gradient-to-b from-transparent via-primary/20 to-transparent" />
         </div>
 
-        <motion.div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20 md:pt-44 md:pb-32 w-full" style={{ opacity: heroOpacity }}>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 pb-24 md:pt-48 md:pb-36 w-full">
           <motion.div className="max-w-4xl" initial="initial" animate="animate" variants={stagger}>
 
             {/* Trust badge */}
             <motion.div variants={fadeUp} className="mb-10">
-              <span className="inline-flex items-center gap-3 bg-white/[0.10] backdrop-blur-md border border-white/[0.18] rounded-full px-5 py-2.5 shadow-[0_0_30px_rgba(26,122,61,0.2)]">
+              <span className="inline-flex items-center gap-3 bg-white/[0.06] backdrop-blur-md border border-white/[0.12] rounded-full px-5 py-2.5" data-testid="badge-trust">
                 <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F0B820] opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#F0B820]" />
+                  <span className="animate-ping-amber absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
                 </span>
-                <span className="text-[13px] text-white/80 font-medium tracking-wide">Trusted by 200+ enterprises across 8 industries</span>
+                <span className="text-[13px] text-white/75 font-medium tracking-wide">Trusted by 200+ enterprises across 8 industries</span>
               </span>
             </motion.div>
 
             {/* Headline */}
-            <motion.h1 variants={fadeUp} className="text-[clamp(2.8rem,7vw,6rem)] font-bold leading-[1.05] tracking-tight mb-8" data-testid="text-hero-title">
+            <motion.h1 variants={fadeUp} className="text-[clamp(3rem,7.5vw,6.5rem)] font-bold leading-[1.04] tracking-tight mb-8" data-testid="text-hero-title">
               <span className="text-white">Technology that</span>
               <br />
               <span className="text-white">delivers </span>
-              <span className="text-gradient-gold">outcomes.</span>
+              <span className="text-gradient-hero">outcomes.</span>
             </motion.h1>
 
-            {/* Sub-heading */}
-            <motion.p variants={fadeUp} className="text-base md:text-lg text-white/75 max-w-xl leading-relaxed mb-12" data-testid="text-hero-description">
-              iOne Techlabs engineers software, cloud, IoT, and AI solutions
-              for enterprises that need results — not reports. From energy grids to
-              financial platforms, we build what matters.
+            {/* Subtitle */}
+            <motion.p variants={fadeUp} className="text-base md:text-lg text-white/60 max-w-2xl leading-relaxed mb-12" data-testid="text-hero-description">
+              iOne Techlabs engineers software, cloud, IoT, and AI solutions for enterprises
+              that need results — not reports. From energy grids to financial platforms,
+              we build what matters.
             </motion.p>
 
             {/* CTAs */}
-            <motion.div variants={fadeUp} className="flex flex-wrap gap-4 mb-20">
+            <motion.div variants={fadeUp} className="flex flex-wrap gap-4 mb-24">
               <a href="#contact">
-                <Button size="lg" className="bg-primary hover:bg-primary/90 text-white glow-green shadow-lg shadow-primary/30 border-0" data-testid="button-hero-started">
+                <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 glow-amber shadow-2xl font-semibold" data-testid="button-hero-started">
                   Start Your Project <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </a>
               <a href="#industries">
-                <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/15 hover:border-white/40 backdrop-blur-sm" data-testid="button-hero-cases">
+                <Button size="lg" variant="outline" className="border-white/20 text-white bg-transparent hover:bg-white/[0.07] hover:border-white/30 backdrop-blur-sm" data-testid="button-hero-cases">
                   <Play className="mr-2 h-3.5 w-3.5 fill-current" /> View Case Studies
                 </Button>
               </a>
             </motion.div>
 
-            {/* Stats */}
-            <motion.div variants={fadeUp}>
-              <div className="flex flex-wrap gap-x-10 gap-y-6 border-t border-white/[0.15] pt-8">
-                {[
-                  { v: <AnimatedCounter end={500} suffix="+" />, l: "Projects Delivered" },
-                  { v: <AnimatedCounter end={8} />, l: "Industry Verticals" },
-                  { v: "99.9%", l: "Uptime Guarantee" },
-                  { v: <><AnimatedCounter end={10} />{"+"}</>, l: "Years in Operation" },
-                ].map((s, i) => (
-                  <div key={i} className="min-w-[90px]">
-                    <div className="text-2xl md:text-3xl font-bold text-white tracking-tight">{s.v}</div>
-                    <div className="text-[11px] text-white/55 mt-1.5 uppercase tracking-[0.15em] font-medium">{s.l}</div>
-                  </div>
-                ))}
-              </div>
+            {/* Stats row */}
+            <motion.div variants={fadeUp} className="flex flex-wrap gap-x-12 gap-y-6 border-t border-white/[0.10] pt-8">
+              {stats.map((s, i) => (
+                <div key={i}>
+                  <div className="text-2xl md:text-3xl font-bold text-white tracking-tight">{s.v}</div>
+                  <div className="text-[11px] text-white/40 mt-1 uppercase tracking-[0.14em] font-medium">{s.label}</div>
+                </div>
+              ))}
             </motion.div>
           </motion.div>
-        </motion.div>
+        </div>
 
-        {/* Bottom fade into page background */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none" />
+        {/* Bottom blend into next section */}
+        <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-background to-transparent pointer-events-none" />
       </section>
 
       {/* ══════════════════ TRUST BAR ══════════════════ */}
-      <section className="py-12 md:py-16 border-y border-border/10">
+      <section className="py-10 md:py-14 border-y border-border/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="flex items-center gap-6 text-muted-foreground/30">
-              <span className="text-[11px] uppercase tracking-[0.2em] font-medium text-muted-foreground/50 whitespace-nowrap">Cloud Partners</span>
+            <div className="flex items-center gap-5">
+              <span className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground/50 font-medium whitespace-nowrap">Cloud Partners</span>
               <span className="text-border">|</span>
-              <div className="flex items-center gap-8">
-                <SiAmazonwebservices className="h-7 w-auto text-muted-foreground/30 hover:text-muted-foreground/60 transition-colors" />
-                <span className="text-sm font-semibold text-muted-foreground/30 hover:text-muted-foreground/60 transition-colors tracking-wide">Azure</span>
-                <SiGooglecloud className="h-5 w-auto text-muted-foreground/30 hover:text-muted-foreground/60 transition-colors" />
+              <div className="flex items-center gap-7">
+                <SiAmazonwebservices className="h-7 w-auto text-muted-foreground/35 hover:text-muted-foreground/70 transition-colors" />
+                <span className="text-sm font-semibold text-muted-foreground/35 hover:text-muted-foreground/70 transition-colors tracking-wider">AZURE</span>
+                <SiGooglecloud className="h-5 w-auto text-muted-foreground/35 hover:text-muted-foreground/70 transition-colors" />
               </div>
             </div>
-            <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8">
-              {[
-                { icon: Award, text: "ISO 27001 Certified" },
-                { icon: Shield, text: "SOC 2 Compliant" },
-                { icon: Lock, text: "HIPAA Ready" },
-              ].map((b, i) => (
-                <div key={i} className="flex items-center gap-2 text-[11px] text-muted-foreground/40 uppercase tracking-[0.15em] font-medium">
-                  <b.icon className="h-3.5 w-3.5" />
-                  {b.text}
+            <div className="flex flex-wrap items-center justify-center gap-6">
+              {[{ icon: Award, text: "ISO 27001 Certified" }, { icon: Shield, text: "SOC 2 Compliant" }, { icon: Lock, text: "HIPAA Ready" }].map((b, i) => (
+                <div key={i} className="flex items-center gap-2 text-[11px] text-muted-foreground/40 uppercase tracking-[0.14em] font-medium">
+                  <b.icon className="h-3.5 w-3.5" /> {b.text}
                 </div>
               ))}
             </div>
@@ -341,255 +295,136 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══════════════════ PAIN POINTS ══════════════════ */}
-      <section className="py-24 md:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div className="text-center mb-16 max-w-3xl mx-auto" initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger}>
-            <motion.p variants={fadeUp} className="text-primary text-[11px] font-semibold tracking-[0.2em] uppercase mb-5">The Problem</motion.p>
-            <motion.h2 variants={fadeUp} className="text-3xl md:text-5xl font-bold text-foreground tracking-tight leading-tight" data-testid="text-challenges-title">
-              Most digital transformations fail.
-              <span className="text-muted-foreground"> We exist to change that.</span>
-            </motion.h2>
+      {/* ══════════════════ SERVICES ══════════════════ */}
+      <section id="services" className="py-24 md:py-36 relative">
+        {/* Background accent */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-1/2 -left-60 w-[500px] h-[500px] rounded-full bg-primary/[0.05] blur-[120px]" />
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div className="text-center mb-16 max-w-2xl mx-auto" initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger}>
+            <motion.p variants={fadeUp} className="text-primary text-[11px] font-semibold tracking-[0.22em] uppercase mb-5">Capabilities</motion.p>
+            <motion.h2 variants={fadeUp} className="text-3xl md:text-5xl font-bold text-foreground tracking-tight mb-5" data-testid="text-services-title">What We Build</motion.h2>
+            <motion.p variants={fadeUp} className="text-muted-foreground leading-relaxed">
+              Full-spectrum technology services — from architecture through deployment, backed by senior engineers with deep domain expertise.
+            </motion.p>
           </motion.div>
 
-          <motion.div className="grid md:grid-cols-3 gap-px bg-border/20 rounded-md overflow-hidden" initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger}>
-            {[
-              { num: "70%", sub: "Failure Rate", label: "of enterprise digital transformations fail due to poor vendor selection, scope creep, and misaligned incentives.", icon: Target },
-              { num: "$1.3T", sub: "Wasted Annually", label: "spent globally on IT projects that don't deliver measurable business outcomes. Most enterprises never see ROI.", icon: TrendingUp },
-              { num: "18mo", sub: "Avg Time-to-Value", label: "to see first results from traditional IT engagements. We deliver working solutions in 90 days.", icon: Clock },
-            ].map((p, i) => (
-              <motion.div key={i} variants={fadeUp} className="bg-card p-8 md:p-10 hover-elevate cursor-default" data-testid={`card-challenge-${i}`}>
-                <p.icon className="h-6 w-6 text-primary/30 mb-8" />
-                <div className="text-5xl md:text-6xl font-bold text-foreground tracking-tight mb-1">{p.num}</div>
-                <div className="text-[11px] text-primary uppercase tracking-[0.15em] font-semibold mb-4">{p.sub}</div>
-                <p className="text-muted-foreground text-sm leading-relaxed">{p.label}</p>
+          <motion.div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5" initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger}>
+            {services.map((s, i) => (
+              <motion.div key={i} variants={fadeUp}
+                className="glass-card rounded-2xl p-8 cursor-default"
+                data-testid={`card-service-${i}`}
+              >
+                <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-all duration-300">
+                  <s.icon className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="text-base font-semibold text-foreground mb-3">{s.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{s.desc}</p>
               </motion.div>
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* ══════════════════ SERVICES ══════════════════ */}
-      <section id="services" className="py-24 md:py-32 relative">
+      {/* ══════════════════ INDUSTRIES ══════════════════ */}
+      <section id="industries" className="py-24 md:py-32 border-t border-border/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div className="mb-16" initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger}>
-            <motion.p variants={fadeUp} className="text-primary text-[11px] font-semibold tracking-[0.2em] uppercase mb-5">Capabilities</motion.p>
-            <motion.div variants={fadeUp} className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
-              <h2 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight max-w-2xl" data-testid="text-services-title">
-                Full-spectrum technology services
-              </h2>
-              <p className="text-muted-foreground max-w-md text-sm leading-relaxed lg:text-right">
-                From architecture through deployment. Every engagement is backed by senior engineers with domain expertise in your industry.
-              </p>
-            </motion.div>
+          <motion.div className="text-center mb-14 max-w-2xl mx-auto" initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger}>
+            <motion.p variants={fadeUp} className="text-accent text-[11px] font-semibold tracking-[0.22em] uppercase mb-5">Verticals</motion.p>
+            <motion.h2 variants={fadeUp} className="text-3xl md:text-5xl font-bold text-foreground tracking-tight" data-testid="text-industries-title">Industries We Serve</motion.h2>
           </motion.div>
 
-          <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
-            <div className="lg:col-span-5 space-y-1">
-              {services.map((s, i) => {
-                const Icon = s.icon;
-                const active = activeService === i;
-                return (
-                  <motion.div key={i} initial="initial" whileInView="animate" viewport={{ once: true }} variants={fadeUp}
-                    onClick={() => setActiveService(i)} role="button" tabIndex={0}
-                    className={`w-full text-left rounded-md transition-all cursor-pointer flex items-center gap-4 group relative p-4 ${active ? "bg-primary/[0.07] border border-primary/15" : "border border-transparent hover-elevate"}`}
-                    data-testid={`button-service-${i}`}
-                  >
-                    <div className={`flex-shrink-0 w-10 h-10 rounded-md flex items-center justify-center transition-all duration-300 ${active ? "bg-primary text-primary-foreground" : "bg-muted/40 text-muted-foreground"}`}>
-                      <Icon className="h-5 w-5" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className={`font-semibold text-sm transition-colors duration-300 truncate ${active ? "text-foreground" : "text-muted-foreground"}`} data-testid={`text-service-title-${i}`}>{s.title}</h3>
-                      <AnimatePresence>
-                        {active && (
-                          <motion.p className="text-xs text-muted-foreground mt-1.5 leading-relaxed" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }}>{s.desc}</motion.p>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                    <ChevronRight className={`h-4 w-4 flex-shrink-0 transition-all duration-300 ${active ? "text-primary rotate-90" : "text-muted-foreground/20"}`} />
-                  </motion.div>
-                );
-              })}
-            </div>
+          <motion.div className="flex flex-wrap justify-center gap-4" initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger}>
+            {industries.map((ind, i) => (
+              <motion.div key={i} variants={fadeUp}
+                className="flex items-center gap-3 glass rounded-full px-6 py-3 hover:border-accent/30 hover:bg-accent/[0.05] transition-all duration-300 cursor-default"
+                data-testid={`badge-industry-${i}`}
+              >
+                <ind.icon className="h-4 w-4 text-accent" />
+                <span className="text-sm font-medium text-white/80">{ind.label}</span>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
 
-            <div className="lg:col-span-7">
-              <AnimatePresence mode="wait">
-                <motion.div key={activeService} initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.98 }} transition={{ duration: 0.4 }} className="sticky top-28">
-                  <div className="relative rounded-md overflow-hidden" data-testid={`card-service-detail-${activeService}`}>
-                    <img src={services[activeService].image} alt={services[activeService].title} className="w-full aspect-[16/10] object-cover" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/5" />
-                    <div className="absolute top-5 left-5 right-5">
-                      <div className="flex flex-wrap gap-2">
-                        {services[activeService].features.map((f, j) => (
-                          <motion.span key={f} className="text-[11px] font-medium text-white/90 bg-black/30 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10"
-                            initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: j * 0.05 + 0.1 }}>{f}</motion.span>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-                      <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 tracking-tight">{services[activeService].title}</h3>
-                      <p className="text-white/50 text-sm leading-relaxed max-w-lg mb-4">{services[activeService].desc}</p>
-                      <a href="#contact" className="inline-flex items-center gap-2 text-primary text-sm font-semibold" data-testid={`link-service-learn-${activeService}`}>
-                        Discuss this capability <ArrowUpRight className="h-4 w-4" />
-                      </a>
-                    </div>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
+      {/* ══════════════════ STATS ══════════════════ */}
+      <section className="py-20 md:py-28 relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/[0.06] via-transparent to-accent/[0.04]" />
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border/30 rounded-2xl overflow-hidden">
+            {stats.map((s, i) => (
+              <motion.div key={i}
+                className="bg-card/60 backdrop-blur-sm p-10 md:p-12 flex flex-col items-center text-center"
+                initial="initial" whileInView="animate" viewport={{ once: true }} variants={fadeUp}
+                data-testid={`stat-${i}`}
+              >
+                <div className="text-4xl md:text-5xl font-bold text-foreground tracking-tight mb-2">{s.v}</div>
+                <div className="text-[11px] text-muted-foreground uppercase tracking-[0.16em] font-medium">{s.label}</div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ══════════════════ INDUSTRIES / USE CASES ══════════════════ */}
-      <section id="industries" className="py-24 md:py-32 relative">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-0 w-[600px] h-[600px] rounded-full bg-accent/[0.02] blur-[150px]" />
-        </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <motion.div className="mb-12" initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger}>
-            <motion.p variants={fadeUp} className="text-accent text-[11px] font-semibold tracking-[0.2em] uppercase mb-5">Industry Expertise</motion.p>
-            <motion.div variants={fadeUp} className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
-              <h2 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight max-w-3xl" data-testid="text-use-cases-title">
-                Proven results across <span className="text-gradient-gold">8 industries</span>
-              </h2>
-              <p className="text-muted-foreground max-w-md text-sm leading-relaxed lg:text-right">
-                Deep domain expertise means we understand your industry's unique challenges, compliance requirements, and opportunities.
-              </p>
-            </motion.div>
-          </motion.div>
-
-          <motion.div className="mb-12 flex flex-wrap gap-2" initial="initial" whileInView="animate" viewport={{ once: true }} variants={fadeUp}>
-            <Button
-              variant={activeIndustry === "all" ? "default" : "outline"}
-              size="sm"
-              onClick={() => setActiveIndustry("all")}
-              data-testid="button-industry-all"
-            >All Industries</Button>
-            {industries.map((ind) => {
-              const Icon = ind.icon;
-              return (
-                <Button
-                  key={ind.id}
-                  variant={activeIndustry === ind.id ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setActiveIndustry(ind.id)}
-                  data-testid={`button-industry-${ind.id}`}
-                ><Icon className="mr-1.5 h-3.5 w-3.5" />{ind.label}</Button>
-              );
-            })}
-          </motion.div>
-
-          <AnimatePresence mode="wait">
-            <motion.div key={activeIndustry} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.3 }} className="space-y-16">
-              {filteredUseCases.map((uc, i) => {
-                const isReversed = i % 2 !== 0;
-                return (
-                  <div key={uc.id} className={`grid lg:grid-cols-2 gap-8 lg:gap-12 items-center`} data-testid={`card-usecase-${uc.id}`}>
-                    <div className={isReversed ? "lg:order-2" : ""}>
-                      <div className="relative rounded-md overflow-hidden">
-                        <img src={uc.image} alt={uc.title} className="w-full aspect-[16/10] object-cover" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                        <div className="absolute bottom-5 left-5 right-5">
-                          <div className="flex flex-wrap gap-2">
-                            {uc.metrics.map((m, mi) => (
-                              <div key={mi} className="bg-black/40 backdrop-blur-md rounded-md px-3.5 py-2.5 border border-white/10">
-                                <div className="text-lg font-bold text-accent leading-none">{m.v}</div>
-                                <div className="text-[10px] text-white/50 uppercase tracking-wider mt-1">{m.l}</div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className={`space-y-5 ${isReversed ? "lg:order-1" : ""}`}>
-                      <div>
-                        <span className="text-[11px] text-accent uppercase tracking-[0.2em] font-semibold">{uc.title}</span>
-                        <h3 className="text-2xl md:text-3xl font-bold text-foreground tracking-tight mt-2">{uc.headline}</h3>
-                      </div>
-
-                      <div className="flex items-baseline gap-2">
-                        <span className="text-4xl font-bold text-gradient-gold">{uc.stat}</span>
-                        <span className="text-muted-foreground text-sm">{uc.statLabel}</span>
-                      </div>
-
-                      <p className="text-muted-foreground text-sm leading-relaxed">{uc.desc}</p>
-
-                      <ul className="space-y-2.5">
-                        {uc.features.map((f, fi) => (
-                          <li key={fi} className="flex items-start gap-2.5 text-sm text-foreground/70">
-                            <CheckCircle2 className="h-4 w-4 text-primary/50 flex-shrink-0 mt-0.5" />
-                            {f}
-                          </li>
-                        ))}
-                      </ul>
-
-                      <a href="#contact" className="inline-flex items-center gap-1.5 text-accent text-sm font-semibold pt-1" data-testid={`link-usecase-${uc.id}`}>
-                        Read full case study <ArrowUpRight className="h-3.5 w-3.5" />
-                      </a>
-                    </div>
-                  </div>
-                );
-              })}
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </section>
-
       {/* ══════════════════ PROCESS ══════════════════ */}
-      <section id="process" className="py-24 md:py-32 relative">
+      <section id="process" className="py-24 md:py-36 border-t border-border/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div className="text-center mb-16 max-w-3xl mx-auto" initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger}>
-            <motion.p variants={fadeUp} className="text-primary text-[11px] font-semibold tracking-[0.2em] uppercase mb-5">Methodology</motion.p>
-            <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-bold text-foreground tracking-tight" data-testid="text-process-title">
-              From discovery to <span className="text-gradient-green">production</span>
-            </motion.h2>
-            <motion.p variants={fadeUp} className="text-muted-foreground mt-5 text-sm leading-relaxed max-w-2xl mx-auto">
-              A battle-tested methodology that de-risks adoption and ensures every project delivers measurable results. Low barriers to entry — and exit.
-            </motion.p>
+          <motion.div className="text-center mb-16 max-w-2xl mx-auto" initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger}>
+            <motion.p variants={fadeUp} className="text-primary text-[11px] font-semibold tracking-[0.22em] uppercase mb-5">Methodology</motion.p>
+            <motion.h2 variants={fadeUp} className="text-3xl md:text-5xl font-bold text-foreground tracking-tight" data-testid="text-process-title">Our Process</motion.h2>
           </motion.div>
 
-          <motion.div className="grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-border/20 rounded-md overflow-hidden" initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger}>
-            {layers.map((l, i) => {
-              const Icon = l.icon;
-              return (
-                <motion.div key={i} variants={fadeUp} className="bg-card p-6 md:p-8 hover-elevate cursor-default" data-testid={`card-process-${i}`}>
-                  <div className="flex items-center justify-between mb-8">
-                    <span className="text-4xl font-bold text-primary/15 tracking-tight">{l.num}</span>
-                    <div className="w-9 h-9 rounded-md bg-primary/[0.06] flex items-center justify-center">
-                      <Icon className="h-4 w-4 text-primary/60" />
-                    </div>
-                  </div>
-                  <h3 className="text-base font-bold text-foreground mb-3">{l.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{l.desc}</p>
-                </motion.div>
-              );
-            })}
+          <motion.div className="grid md:grid-cols-4 gap-8 relative" initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger}>
+            {/* Connecting line */}
+            <div className="hidden md:block absolute top-[2.75rem] left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-primary/20 via-primary/40 to-primary/20" />
+
+            {steps.map((step, i) => (
+              <motion.div key={i} variants={fadeUp} className="relative flex flex-col items-center text-center" data-testid={`step-${i}`}>
+                <div className="relative z-10 w-11 h-11 rounded-full bg-background border-2 border-primary/40 flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(245,166,35,0.15)]">
+                  <span className="text-primary font-bold text-xs">{step.num}</span>
+                </div>
+                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                  <step.icon className="h-5 w-5 text-primary" />
+                </div>
+                <h3 className="text-sm font-semibold text-foreground mb-3">{step.title}</h3>
+                <p className="text-muted-foreground text-xs leading-relaxed">{step.desc}</p>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </section>
 
       {/* ══════════════════ TESTIMONIALS ══════════════════ */}
-      <section className="py-24 md:py-32 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div className="mb-16" initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger}>
-            <motion.p variants={fadeUp} className="text-primary text-[11px] font-semibold tracking-[0.2em] uppercase mb-5">Client Voices</motion.p>
-            <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-bold text-foreground tracking-tight">
-              What our clients say
-            </motion.h2>
+      <section className="py-24 md:py-32 border-t border-border/30 relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full bg-primary/[0.05] blur-[120px]" />
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div className="text-center mb-16 max-w-2xl mx-auto" initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger}>
+            <motion.p variants={fadeUp} className="text-primary text-[11px] font-semibold tracking-[0.22em] uppercase mb-5">Client Voices</motion.p>
+            <motion.h2 variants={fadeUp} className="text-3xl md:text-5xl font-bold text-foreground tracking-tight" data-testid="text-testimonials-title">What Our Clients Say</motion.h2>
           </motion.div>
 
-          <motion.div className="grid md:grid-cols-3 gap-px bg-border/20 rounded-md overflow-hidden" initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger}>
+          <motion.div className="grid md:grid-cols-3 gap-6" initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger}>
             {testimonials.map((t, i) => (
-              <motion.div key={i} variants={fadeUp} className="bg-card p-6 md:p-8 flex flex-col hover-elevate cursor-default" data-testid={`card-testimonial-${i}`}>
-                <Quote className="h-6 w-6 text-accent/20 mb-6" />
-                <p className="text-foreground/80 text-sm leading-relaxed flex-1 mb-8">{t.quote}</p>
-                <div className="flex items-center gap-3 border-t border-border/20 pt-5">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-sm font-bold text-primary">{t.avatar}</div>
+              <motion.div key={i} variants={fadeUp}
+                className="glass-card rounded-2xl p-8 flex flex-col"
+                data-testid={`card-testimonial-${i}`}
+              >
+                <Quote className="h-8 w-8 text-primary/40 mb-6 flex-shrink-0" />
+                <p className="text-foreground/80 text-sm leading-relaxed flex-1 mb-8 italic">"{t.quote}"</p>
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-full bg-primary/15 border border-primary/25 flex items-center justify-center flex-shrink-0">
+                    <span className="text-primary text-xs font-bold">{t.avatar}</span>
+                  </div>
                   <div>
                     <div className="text-sm font-semibold text-foreground">{t.name}</div>
-                    <div className="text-[11px] text-muted-foreground">{t.role}</div>
+                    <div className="text-xs text-muted-foreground">{t.role}, {t.company}</div>
                   </div>
                 </div>
               </motion.div>
@@ -599,213 +434,192 @@ export default function Home() {
       </section>
 
       {/* ══════════════════ ABOUT ══════════════════ */}
-      <section id="about" className="py-24 md:py-32 relative">
+      <section id="about" className="py-24 md:py-32 border-t border-border/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center" initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger}>
-            <motion.div variants={fadeUp} className="order-2 lg:order-1">
-              <div className="relative rounded-md overflow-hidden">
-                <img src={teamWorkImage} alt="iOne Techlabs Engineering Team" className="w-full aspect-[4/3] object-cover" data-testid="img-team" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-transparent" />
-                <div className="absolute bottom-5 left-5 right-5">
-                  <div className="grid grid-cols-4 gap-2">
-                    {[{ v: "10+", l: "Years" }, { v: "150+", l: "Engineers" }, { v: "8", l: "Verticals" }, { v: "200+", l: "Clients" }].map((s) => (
-                      <div key={s.l} className="bg-black/40 backdrop-blur-md rounded-md px-3 py-2.5 border border-white/10 text-center">
-                        <div className="text-lg font-bold text-white leading-none">{s.v}</div>
-                        <div className="text-[9px] text-white/50 uppercase tracking-wider mt-1">{s.l}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div variants={fadeUp} className="space-y-6 order-1 lg:order-2">
-              <p className="text-primary text-[11px] font-semibold tracking-[0.2em] uppercase">About iOne Techlabs</p>
-              <h2 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight" data-testid="text-about-title">
-                Engineering excellence, <span className="text-gradient-green">delivered.</span>
-              </h2>
-              <p className="text-muted-foreground leading-relaxed">
-                We're a technology company of 150+ engineers headquartered in Hyderabad, India — specializing
-                in enterprise software, cloud infrastructure, IoT systems, and AI solutions. Our clients span
-                energy, finance, healthcare, manufacturing, retail, telecom, and logistics — India's most demanding sectors.
-              </p>
-              <div className="grid grid-cols-2 gap-4 pt-2">
-                {[
-                  { icon: Award, text: "ISO 27001 certified security" },
-                  { icon: Clock, text: "2-week agile sprint cycles" },
-                  { icon: Headphones, text: "24/7 monitoring & support" },
-                  { icon: Globe, text: "Multi-cloud (AWS, Azure, GCP)" },
-                  { icon: Users, text: "Dedicated project managers" },
-                  { icon: Shield, text: "SOC 2 & HIPAA compliant" },
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-2.5">
-                    <item.icon className="h-4 w-4 text-primary/50 flex-shrink-0" />
-                    <span className="text-foreground/70 text-sm">{item.text}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="pt-4">
-                <a href="#contact"><Button variant="outline" data-testid="button-about-contact">Talk to Our Team <ArrowRight className="ml-2 h-4 w-4" /></Button></a>
-              </div>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ══════════════════ CLIENTS ══════════════════ */}
-      <section className="py-16 md:py-20 border-y border-border/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div className="text-center mb-10" initial="initial" whileInView="animate" viewport={{ once: true }} variants={fadeUp}>
-            <span className="text-[11px] text-muted-foreground/40 font-medium uppercase tracking-[0.2em]">Trusted by India's leading enterprises</span>
-          </motion.div>
-          <motion.div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-px bg-border/10 rounded-md overflow-hidden" initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger}>
-            {clients.map((c, i) => (
-              <motion.div key={i} variants={fadeUp} className="bg-card flex items-center justify-center p-5 md:p-6 min-h-[70px] hover-elevate cursor-default" data-testid={`card-client-${i}`}>
-                <span className="text-[13px] font-semibold text-muted-foreground/40 text-center leading-tight">{c}</span>
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <motion.div initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger}>
+              <motion.p variants={fadeUp} className="text-accent text-[11px] font-semibold tracking-[0.22em] uppercase mb-5">About Us</motion.p>
+              <motion.h2 variants={fadeUp} className="text-3xl md:text-5xl font-bold text-foreground tracking-tight mb-6" data-testid="text-about-title">
+                Built by engineers, for enterprises.
+              </motion.h2>
+              <motion.p variants={fadeUp} className="text-muted-foreground leading-relaxed mb-6">
+                Founded over a decade ago in Hyderabad, iOne Techlabs has grown from a boutique software studio into a full-spectrum enterprise technology partner. We've shipped 500+ solutions across 8 verticals for clients ranging from national power utilities to fast-scaling fintech platforms.
+              </motion.p>
+              <motion.p variants={fadeUp} className="text-muted-foreground leading-relaxed mb-8">
+                What sets us apart is our relentless focus on outcomes — not effort. Every engagement is measured against business KPIs, not just delivery milestones.
+              </motion.p>
+              <motion.div variants={fadeUp}>
+                <a href="#contact">
+                  <Button className="bg-primary text-primary-foreground hover:bg-primary/90 glow-amber" data-testid="button-about-contact">
+                    Work With Us <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </a>
               </motion.div>
-            ))}
-          </motion.div>
+            </motion.div>
+
+            <motion.div className="grid grid-cols-2 gap-4" initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger}>
+              {[
+                { num: "500+", label: "Projects Delivered", color: "text-primary" },
+                { num: "99.9%", label: "Uptime Guarantee", color: "text-accent" },
+                { num: "10+", label: "Years in Operation", color: "text-primary" },
+                { num: "8", label: "Industry Verticals", color: "text-accent" },
+              ].map((item, i) => (
+                <motion.div key={i} variants={fadeUp} className="glass-card rounded-2xl p-6 text-center" data-testid={`card-about-${i}`}>
+                  <div className={`text-3xl font-bold ${item.color} mb-2`}>{item.num}</div>
+                  <div className="text-xs text-muted-foreground font-medium">{item.label}</div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* ══════════════════ CTA ══════════════════ */}
+      {/* ══════════════════ CTA BANNER ══════════════════ */}
       <section className="py-24 md:py-32 relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-primary/[0.02] blur-[150px]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0a1628] via-[#0d1f2d] to-[#060d18]" />
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-0 left-1/4 w-[600px] h-[400px] rounded-full bg-primary/[0.10] blur-[120px]" />
+          <div className="absolute bottom-0 right-1/4 w-[400px] h-[300px] rounded-full bg-accent/[0.08] blur-[100px]" />
+          <svg className="absolute inset-0 w-full h-full opacity-[0.04]" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="cta-grid" width="48" height="48" patternUnits="userSpaceOnUse">
+                <path d="M 48 0 L 0 0 0 48" fill="none" stroke="white" strokeWidth="0.7" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#cta-grid)" />
+          </svg>
         </div>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
-          <motion.div initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger} className="space-y-8">
-            <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight" data-testid="text-cta-title">
-              <span className="text-foreground">Ready to build</span>{" "}
-              <span className="text-gradient-green">what matters?</span>
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger}>
+            <motion.p variants={fadeUp} className="text-primary text-[11px] font-semibold tracking-[0.22em] uppercase mb-6">Let's Build</motion.p>
+            <motion.h2 variants={fadeUp} className="text-4xl md:text-6xl font-bold text-white leading-tight tracking-tight mb-6" data-testid="text-cta-title">
+              Ready to build<br />what matters?
             </motion.h2>
-            <motion.p variants={fadeUp} className="text-muted-foreground max-w-xl mx-auto">
-              No sales pitch. No slide decks. Just a 30-minute conversation with a
-              senior engineer who understands your industry.
+            <motion.p variants={fadeUp} className="text-white/60 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
+              Join 200+ enterprises that chose iOne Techlabs to engineer their most critical systems.
             </motion.p>
-            <motion.div variants={fadeUp} className="flex flex-wrap justify-center gap-4 pt-2">
-              <a href="#contact"><Button size="lg" className="glow-green" data-testid="button-cta-contact">Schedule a Call <ArrowRight className="ml-2 h-4 w-4" /></Button></a>
-              <a href="tel:+919959933363"><Button size="lg" variant="outline" data-testid="button-cta-phone"><Phone className="mr-2 h-4 w-4" />+91 99599 33363</Button></a>
+            <motion.div variants={fadeUp}>
+              <a href="#contact">
+                <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 glow-amber text-base font-semibold px-10" data-testid="button-cta">
+                  Start Your Project <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </a>
             </motion.div>
           </motion.div>
         </div>
       </section>
 
       {/* ══════════════════ CONTACT ══════════════════ */}
-      <section id="contact" className="py-24 md:py-32">
+      <section id="contact" className="py-24 md:py-32 border-t border-border/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-5 gap-12 lg:gap-16">
-            <motion.div className="lg:col-span-2" initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger}>
-              <motion.div variants={fadeUp}>
-                <p className="text-primary text-[11px] font-semibold tracking-[0.2em] uppercase mb-5">Contact</p>
-                <h2 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight mb-4" data-testid="text-contact-title">
-                  Let's talk.
-                </h2>
-                <p className="text-muted-foreground mb-10">
-                  We respond within 24 hours. Tell us about your project and we'll
-                  match you with the right engineering team.
-                </p>
-              </motion.div>
-
-              <motion.div variants={fadeUp} className="space-y-5 mb-10">
+          <div className="grid lg:grid-cols-2 gap-16">
+            <motion.div initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger}>
+              <motion.p variants={fadeUp} className="text-primary text-[11px] font-semibold tracking-[0.22em] uppercase mb-5">Contact</motion.p>
+              <motion.h2 variants={fadeUp} className="text-3xl md:text-5xl font-bold text-foreground tracking-tight mb-6" data-testid="text-contact-title">
+                Let's start a conversation.
+              </motion.h2>
+              <motion.p variants={fadeUp} className="text-muted-foreground leading-relaxed mb-10">
+                Tell us about your challenge. We'll get back to you within 24 hours with a clear assessment and a plan of action.
+              </motion.p>
+              <motion.div variants={fadeUp} className="space-y-5">
                 {[
-                  { icon: Mail, label: "hello@ionetechlabs.com", href: "mailto:hello@ionetechlabs.com" },
                   { icon: Phone, label: "+91 99599 33363", href: "tel:+919959933363" },
-                  { icon: MapPin, label: "2nd Floor, Myhome Tycoon, Kundhanbagh, Begumpet, Hyderabad-500016" },
-                ].map((item) => (
-                  <div key={item.label} className="flex items-start gap-3">
-                    <div className="w-9 h-9 rounded-md bg-primary/[0.06] flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <item.icon className="h-4 w-4 text-primary/60" />
-                    </div>
-                    {item.href ? (
-                      <a href={item.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors mt-2">{item.label}</a>
-                    ) : (
-                      <span className="text-sm text-muted-foreground mt-2 leading-relaxed">{item.label}</span>
-                    )}
-                  </div>
+                  { icon: Mail, label: "hello@ionetechlabs.com", href: "mailto:hello@ionetechlabs.com" },
+                  { icon: MapPin, label: "2nd Floor, Myhome Tycoon, Kundhanbagh, Begumpet, Hyderabad-500016", href: "#" },
+                ].map((c, i) => (
+                  <a key={i} href={c.href} className="flex items-start gap-4 group">
+                    <span className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-all">
+                      <c.icon className="h-4 w-4 text-primary" />
+                    </span>
+                    <span className="text-muted-foreground text-sm leading-relaxed group-hover:text-foreground transition-colors pt-2.5">{c.label}</span>
+                  </a>
                 ))}
-              </motion.div>
-
-              <motion.div variants={fadeUp}>
-                <p className="text-[11px] text-muted-foreground/40 uppercase tracking-[0.15em] font-medium mb-3">Stay updated</p>
-                <form className="flex gap-2" onSubmit={handleNewsletterSubmit} data-testid="form-newsletter">
-                  <Input type="email" placeholder="Your email" value={newsletterEmail} onChange={(e) => setNewsletterEmail(e.target.value)} disabled={newsletterMutation.isPending} className="flex-1" data-testid="input-newsletter-email" />
-                  <Button type="submit" size="sm" disabled={newsletterMutation.isPending} data-testid="button-subscribe">
-                    {newsletterMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : "Subscribe"}
-                  </Button>
-                </form>
               </motion.div>
             </motion.div>
 
-            <motion.div className="lg:col-span-3" initial="initial" whileInView="animate" viewport={{ once: true }} variants={fadeUp}>
-              <Card className="p-6 md:p-8 border-border/20" data-testid="card-contact-form">
-                <form className="space-y-5" onSubmit={handleContactSubmit} data-testid="form-contact">
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-foreground mb-2">Full Name *</label>
-                      <Input placeholder="John Doe" value={contactForm.name} onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })} disabled={contactMutation.isPending} data-testid="input-name" />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-foreground mb-2">Work Email *</label>
-                      <Input type="email" placeholder="john@company.com" value={contactForm.email} onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })} disabled={contactMutation.isPending} data-testid="input-email" />
-                    </div>
+            <motion.div initial="initial" whileInView="animate" viewport={{ once: true }} variants={fadeIn}>
+              <form onSubmit={(e) => { e.preventDefault(); if (!contactForm.name || !contactForm.email || !contactForm.message) { toast({ title: "Required Fields", description: "Please fill all required fields.", variant: "destructive" }); return; } contactMutation.mutate(contactForm); }} className="glass-card rounded-2xl p-8 space-y-5">
+                <div className="grid sm:grid-cols-2 gap-5">
+                  <div>
+                    <label className="text-xs text-muted-foreground uppercase tracking-wide font-medium mb-2 block">Name *</label>
+                    <Input value={contactForm.name} onChange={(e) => setContactForm(f => ({ ...f, name: e.target.value }))} placeholder="Your name" className="bg-white/[0.04] border-white/10 text-foreground placeholder:text-muted-foreground/50 focus:border-primary/50" data-testid="input-name" />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">Company</label>
-                    <Input placeholder="Your Company" value={contactForm.company} onChange={(e) => setContactForm({ ...contactForm, company: e.target.value })} disabled={contactMutation.isPending} data-testid="input-company" />
+                    <label className="text-xs text-muted-foreground uppercase tracking-wide font-medium mb-2 block">Email *</label>
+                    <Input type="email" value={contactForm.email} onChange={(e) => setContactForm(f => ({ ...f, email: e.target.value }))} placeholder="your@email.com" className="bg-white/[0.04] border-white/10 text-foreground placeholder:text-muted-foreground/50 focus:border-primary/50" data-testid="input-email" />
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">Tell us about your project *</label>
-                    <Textarea placeholder="What are you looking to build? What's the timeline? Any specific technology requirements?" rows={5} value={contactForm.message} onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })} disabled={contactMutation.isPending} data-testid="input-message" />
-                  </div>
-                  <Button type="submit" className="w-full" size="lg" disabled={contactMutation.isPending} data-testid="button-submit-contact">
-                    {contactMutation.isPending ? (<><Loader2 className="mr-2 h-5 w-5 animate-spin" />Sending...</>) : (<>Send Message <ArrowRight className="ml-2 h-5 w-5" /></>)}
-                  </Button>
-                  <p className="text-[11px] text-muted-foreground/40 text-center">We'll respond within 24 hours. No spam, ever.</p>
-                </form>
-              </Card>
+                </div>
+                <div>
+                  <label className="text-xs text-muted-foreground uppercase tracking-wide font-medium mb-2 block">Company</label>
+                  <Input value={contactForm.company} onChange={(e) => setContactForm(f => ({ ...f, company: e.target.value }))} placeholder="Your company" className="bg-white/[0.04] border-white/10 text-foreground placeholder:text-muted-foreground/50 focus:border-primary/50" data-testid="input-company" />
+                </div>
+                <div>
+                  <label className="text-xs text-muted-foreground uppercase tracking-wide font-medium mb-2 block">Message *</label>
+                  <Textarea value={contactForm.message} onChange={(e) => setContactForm(f => ({ ...f, message: e.target.value }))} placeholder="Tell us about your project..." rows={5} className="bg-white/[0.04] border-white/10 text-foreground placeholder:text-muted-foreground/50 focus:border-primary/50 resize-none" data-testid="input-message" />
+                </div>
+                <Button type="submit" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-semibold" disabled={contactMutation.isPending} data-testid="button-contact-submit">
+                  {contactMutation.isPending ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Sending...</> : <>Send Message <ArrowRight className="ml-2 h-4 w-4" /></>}
+                </Button>
+              </form>
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* ══════════════════ FOOTER ══════════════════ */}
-      <footer className="border-t border-border/10 py-12 md:py-16">
+      <footer className="border-t border-border/30 py-14 md:py-18">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 lg:gap-12">
-            <div className="col-span-2 md:col-span-2">
-              <Logo className="h-12 w-auto mb-4 drop-shadow-[0_1px_3px_rgba(0,0,0,0.4)]" />
-              <p className="text-sm text-muted-foreground/50 mb-5 max-w-xs leading-relaxed">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-10 mb-14">
+            <div className="col-span-2">
+              <Logo className="h-10 w-auto mb-5 drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)]" />
+              <p className="text-sm text-muted-foreground/60 mb-6 max-w-xs leading-relaxed">
                 Enterprise technology solutions for India's most ambitious companies. Software, Cloud, IoT & AI.
               </p>
-              <div className="flex gap-2">
-                {[{ icon: Linkedin, id: "linkedin" }, { icon: Twitter, id: "twitter" }, { icon: SiGithub, id: "github" }].map((s) => (
-                  <a key={s.id} href="#" className="w-8 h-8 rounded-md bg-foreground/[0.03] border border-border flex items-center justify-center text-muted-foreground/50 hover:text-foreground hover:border-primary/30 transition-all duration-300" data-testid={`link-${s.id}`}>
-                    <s.icon className="h-3.5 w-3.5" />
+              <div className="flex gap-3">
+                {[Linkedin, Twitter].map((Icon, i) => (
+                  <a key={i} href="#" className="w-8 h-8 rounded-lg bg-white/[0.05] border border-white/[0.08] flex items-center justify-center text-muted-foreground/50 hover:text-primary hover:border-primary/30 transition-all duration-300" data-testid={`link-social-${i}`}>
+                    <Icon className="h-3.5 w-3.5" />
                   </a>
                 ))}
               </div>
             </div>
+
             {[
-              { title: "Services", links: [{ name: "Custom Software", href: "#services" }, { name: "Cloud & Infrastructure", href: "#services" }, { name: "IoT & Smart Grid", href: "#services" }, { name: "AI & Data Intelligence", href: "#services" }, { name: "Mobile Engineering", href: "#services" }] },
-              { title: "Industries", links: [{ name: "Energy & Utilities", href: "#industries" }, { name: "Financial Services", href: "#industries" }, { name: "Healthcare", href: "#industries" }, { name: "Manufacturing", href: "#industries" }, { name: "View All (8)", href: "#industries" }] },
-              { title: "Company", links: [{ name: "About Us", href: "#about" }, { name: "Case Studies", href: "#industries" }, { name: "Contact", href: "#contact" }, { name: "Privacy Policy", href: "#" }, { name: "Terms of Service", href: "#" }] },
-            ].map((sec) => (
-              <div key={sec.title}>
-                <h4 className="font-semibold text-foreground/60 mb-4 text-[11px] uppercase tracking-[0.15em]">{sec.title}</h4>
-                <ul className="space-y-2.5">
-                  {sec.links.map((link) => (
-                    <li key={link.name}>
-                      <a href={link.href} className="text-muted-foreground/40 hover:text-foreground transition-colors duration-300 text-sm">{link.name}</a>
-                    </li>
+              { title: "Services", links: ["Custom Software", "Cloud & DevOps", "IoT & Edge", "AI & ML", "Enterprise Mobility", "Data Engineering"] },
+              { title: "Company", links: ["About Us", "Our Process", "Case Studies", "Careers", "Blog"] },
+              { title: "Contact", links: ["+91 99599 33363", "hello@ionetechlabs.com", "Begumpet, Hyderabad", "Get in Touch"] },
+            ].map((col, i) => (
+              <div key={i}>
+                <h4 className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground/60 mb-4">{col.title}</h4>
+                <ul className="space-y-3">
+                  {col.links.map((link, j) => (
+                    <li key={j}><a href="#" className="text-sm text-muted-foreground/50 hover:text-foreground/80 transition-colors duration-200">{link}</a></li>
                   ))}
                 </ul>
               </div>
             ))}
           </div>
-          <div className="border-t border-border/10 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-[11px] text-muted-foreground/30" data-testid="text-copyright">&copy; {new Date().getFullYear()} iOne Techlabs Pvt. Ltd. All rights reserved.</p>
-            <p className="text-[11px] text-muted-foreground/20">Hyderabad, India</p>
+
+          {/* Newsletter */}
+          <div className="border-t border-border/30 pt-8 mb-8">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+              <p className="text-sm text-muted-foreground/50">Stay ahead with enterprise tech insights.</p>
+              <form onSubmit={(e) => { e.preventDefault(); if (newsletterEmail) newsletterMutation.mutate(newsletterEmail); }} className="flex gap-2 w-full sm:w-auto">
+                <Input type="email" placeholder="your@email.com" value={newsletterEmail} onChange={(e) => setNewsletterEmail(e.target.value)} className="bg-white/[0.04] border-white/10 text-foreground placeholder:text-muted-foreground/40 w-56" data-testid="input-newsletter" />
+                <Button type="submit" size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 flex-shrink-0" disabled={newsletterMutation.isPending} data-testid="button-newsletter">
+                  {newsletterMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : "Subscribe"}
+                </Button>
+              </form>
+            </div>
+          </div>
+
+          <div className="border-t border-border/30 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-xs text-muted-foreground/35">© 2026 iOne Techlabs. All rights reserved.</p>
+            <div className="flex gap-6">
+              {["Privacy Policy", "Terms of Service", "Cookie Policy"].map((link, i) => (
+                <a key={i} href="#" className="text-xs text-muted-foreground/35 hover:text-muted-foreground/60 transition-colors">{link}</a>
+              ))}
+            </div>
           </div>
         </div>
       </footer>
