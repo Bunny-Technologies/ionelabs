@@ -1,0 +1,77 @@
+Build a stunning, modern single-page marketing website for "iOne Techlabs" — a technology company that engineers software, cloud, IoT, and AI solutions for enterprises.
+IMPORTANT: Retain the original iOne Techlabs logo exactly as-is (green "iOne" wordmark with "TECHLABS" underneath in small caps). Do not redesign or replace the logo.
+## Design Direction
+- Modern, premium SaaS/enterprise aesthetic inspired by sites like Linear, Vercel, and Stripe
+- Dark theme with a rich gradient background (deep navy #0a0f1e transitioning to dark emerald #0b1a2b)
+- Accent color: vibrant golden-amber (#F5A623) for highlights, CTAs, and emphasis words
+- Secondary accent: emerald green (#22C55E) for subtle glows and hover states
+- Clean sans-serif typography (Inter or similar) with strong hierarchy
+- Smooth scroll animations using Framer Motion or AOS (fade-up, scale-in effects)
+- Glassmorphism cards with subtle backdrop-blur and border glow effects
+- Subtle animated grid/mesh gradient background in the hero (not a static city image)
+## Navigation Bar
+- Sticky/fixed top nav with blur backdrop
+- Logo on the left
+- Links: Services, Industries, Process, About, Contact
+- Phone: +91 99599 33363 with a phone icon
+- "Get Started →" CTA button with golden-amber fill and hover glow
+## Hero Section
+- Large bold headline: "Technology that delivers" with "outcomes." on the next line in golden-amber color
+- Animated gradient text effect on "outcomes"
+- Trust badge above headline: "Trusted by 200+ enterprises across 8 industries" — pill-shaped with a subtle pulsing dot indicator
+- Subtitle: "iOne Techlabs engineers software, cloud, IoT, and AI solutions for enterprises that need results — not reports. From energy grids to financial platforms, we build what matters."
+- Two CTAs: "Start Your Project →" (solid amber button) and "View Case Studies" (ghost/outline button with play icon)
+- Abstract tech-themed background element — animated particles, subtle grid lines, or a soft glowing orb — NOT a stock city photo
+## Services Section
+- Section title: "What We Build"
+- 6 glassmorphism cards in a responsive grid (3×2 on desktop, stacked on mobile)
+- Each card has an icon, title, and short description:
+  1. Custom Software Development
+  2. Cloud & DevOps
+  3. IoT & Edge Computing
+  4. AI & Machine Learning
+  5. Enterprise Mobility
+  6. Data Engineering & Analytics
+- Cards should have a subtle border glow on hover and slight lift animation
+## Industries Section
+- Section title: "Industries We Serve"
+- Horizontal scrolling row or responsive grid of industry tags/badges:
+  Energy, Finance, Healthcare, Manufacturing, Logistics, Retail, Government, Telecom
+- Each with a relevant icon and subtle background
+## Stats/Social Proof Section
+- Animated count-up numbers:
+  - "200+" Enterprises Served
+  - "8" Industries
+  - "50+" Engineers
+  - "10+" Years Experience
+- Clean layout with a subtle divider line between stats
+## Process Section
+- Section title: "Our Process"
+- Vertical timeline or horizontal stepper with 4 steps:
+  1. Discovery & Strategy
+  2. Design & Architecture  
+  3. Agile Development
+  4. Deploy & Scale
+- Each step with an icon and 1-2 line description
+- Connecting line/dots with animation on scroll
+## Testimonials Section
+- 2-3 client testimonial cards with quote, name, role, company
+- Carousel or grid layout with glassmorphism cards
+## CTA Banner Section
+- Full-width section with gradient background
+- "Ready to build what matters?" headline
+- "Start Your Project →" button
+- Subtle animated background pattern
+## Footer
+- Logo, company description
+- Quick links columns: Services, Company, Resources
+- Contact info: phone, email, address
+- Social media icons
+- "© 2026 iOne Techlabs. All rights reserved."
+## Technical Requirements
+- React with Tailwind CSS
+- Fully responsive (mobile-first)
+- Smooth scroll behavior
+- Intersection Observer for scroll-triggered animations
+- Accessible (proper ARIA labels, contrast ratios)
+- Fast loading — no heavy images, use CSS gradients and SVG icons
