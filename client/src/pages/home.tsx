@@ -442,88 +442,203 @@ export default function Home() {
       </motion.header>
 
       {/* ══════════════════ HERO ══════════════════ */}
-      <section className="relative min-h-screen flex items-center overflow-hidden bg-white">
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <svg className="absolute inset-0 w-full h-full opacity-[0.035]" xmlns="http://www.w3.org/2000/svg">
+      <section className="relative min-h-screen flex items-center overflow-hidden" style={{ background: "linear-gradient(135deg, #fff 0%, #fffbf0 50%, #f0fdf4 100%)" }}>
+
+        {/* ── Background pattern ── */}
+        <div className="absolute inset-0 pointer-events-none">
+          <svg className="absolute inset-0 w-full h-full opacity-[0.06]" xmlns="http://www.w3.org/2000/svg">
             <defs>
-              <pattern id="hero-dots" width="32" height="32" patternUnits="userSpaceOnUse">
-                <circle cx="2" cy="2" r="1.5" fill="#94a3b8" />
+              <pattern id="hero-grid" width="48" height="48" patternUnits="userSpaceOnUse">
+                <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#64748b" strokeWidth="0.6"/>
               </pattern>
             </defs>
-            <rect width="100%" height="100%" fill="url(#hero-dots)" />
+            <rect width="100%" height="100%" fill="url(#hero-grid)" />
           </svg>
-          <div className="absolute -top-32 -right-32 w-[700px] h-[700px] rounded-full bg-amber-400/8 blur-[100px]" />
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-green-700/5 blur-[80px]" />
-          <div className="absolute top-1/3 right-[15%] w-3 h-3 rounded-full bg-amber-400 animate-float opacity-50" />
-          <div className="absolute top-2/3 right-1/3 w-2 h-2 rounded-full bg-green-600 animate-float opacity-40" style={{ animationDelay: "2s" }} />
+          {/* Large ambient glows */}
+          <div className="absolute -top-20 right-0 w-[600px] h-[600px] rounded-full bg-amber-300/20 blur-[120px]" />
+          <div className="absolute bottom-0 left-1/4 w-[500px] h-[400px] rounded-full bg-green-600/10 blur-[100px]" />
+          <div className="absolute top-1/2 right-1/4 w-[300px] h-[300px] rounded-full bg-amber-200/15 blur-[80px]" />
         </div>
-        <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-amber-500 via-amber-400/50 to-transparent" />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 pb-20 md:pt-44 md:pb-28 w-full">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+        {/* ── Left amber accent bar ── */}
+        <div className="absolute left-0 top-0 bottom-0 w-2 bg-gradient-to-b from-amber-500 via-amber-400 to-green-600 opacity-80" />
+
+        {/* ── Top amber ribbon ── */}
+        <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-amber-500 via-amber-400/50 to-transparent" />
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 md:pt-36 md:pb-24 w-full">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+
+            {/* ── LEFT: Copy ── */}
             <motion.div initial="initial" animate="animate" variants={stagger}>
-              <motion.div variants={fadeUp} className="mb-8">
-                <span className="inline-flex items-center gap-3 bg-amber-50 border border-amber-200 rounded-full px-5 py-2" data-testid="badge-trust">
-                  <span className="relative flex h-2 w-2">
+              <motion.div variants={fadeUp} className="mb-7">
+                <span className="inline-flex items-center gap-3 bg-amber-50 border border-amber-300 rounded-full px-5 py-2 shadow-sm" data-testid="badge-trust">
+                  <span className="relative flex h-2.5 w-2.5">
                     <span className="animate-ping-amber absolute inline-flex h-full w-full rounded-full bg-amber-500 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500" />
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500" />
                   </span>
-                  <span className="text-[13px] text-amber-800 font-semibold">Trusted by 200+ enterprises across India</span>
+                  <span className="text-[13px] text-amber-800 font-semibold tracking-wide">Trusted by 200+ enterprises across India</span>
                 </span>
               </motion.div>
 
-              <motion.h1 variants={fadeUp} className="text-[clamp(2.5rem,5.5vw,4.5rem)] font-bold leading-[1.08] tracking-tight text-gray-900 mb-6" data-testid="text-hero-title">
-                Technology that<br />delivers{" "}
+              <motion.h1 variants={fadeUp} className="text-[clamp(2.6rem,5.5vw,4.5rem)] font-bold leading-[1.06] tracking-tight text-gray-900 mb-6" data-testid="text-hero-title">
+                Technology that<br />
+                delivers{" "}
                 <span className="text-gradient-hero">outcomes.</span>
               </motion.h1>
 
-              <motion.p variants={fadeUp} className="text-base md:text-lg text-gray-500 leading-relaxed mb-10 max-w-xl" data-testid="text-hero-description">
+              <motion.p variants={fadeUp} className="text-base md:text-lg text-gray-500 leading-relaxed mb-10 max-w-lg" data-testid="text-hero-description">
                 iOne Techlabs engineers software, cloud, IoT, and AI solutions for enterprises that need results — not reports. From energy grids to financial platforms, we build what matters.
               </motion.p>
 
               <motion.div variants={fadeUp} className="flex flex-wrap gap-4 mb-12">
                 <a href="#contact">
-                  <Button size="lg" className="bg-amber-500 hover:bg-amber-600 text-white font-semibold shadow-md btn-shimmer" data-testid="button-hero-started">
+                  <Button size="lg" className="bg-amber-500 hover:bg-amber-600 text-white font-bold shadow-lg btn-shimmer text-base px-7" data-testid="button-hero-started">
                     Start Your Project <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </a>
                 <a href="#case-studies">
-                  <Button size="lg" variant="outline" className="border-gray-300 text-gray-700 bg-white hover:bg-gray-50 hover:border-gray-400" data-testid="button-hero-cases">
+                  <Button size="lg" variant="outline" className="border-gray-300 text-gray-700 bg-white/80 hover:bg-white hover:border-amber-400 text-base px-6" data-testid="button-hero-cases">
                     <Play className="mr-2 h-3.5 w-3.5 fill-current text-amber-500" /> View Case Studies
                   </Button>
                 </a>
               </motion.div>
 
-              <motion.div variants={fadeUp} className="flex flex-wrap gap-x-10 gap-y-5 pt-8 border-t border-gray-100">
+              {/* Stats row */}
+              <motion.div variants={fadeUp} className="flex flex-wrap gap-x-8 gap-y-5 pt-8 border-t border-gray-200/80">
                 {[
                   { v: <AnimatedCounter end={200} suffix="+" />, label: "Enterprises Served" },
-                  { v: <AnimatedCounter end={8} />, label: "Industries" },
+                  { v: <AnimatedCounter end={500} suffix="+" />, label: "Projects Delivered" },
                   { v: <AnimatedCounter end={50} suffix="+" />, label: "Senior Engineers" },
                   { v: <AnimatedCounter end={10} suffix="+" />, label: "Years of Delivery" },
                 ].map((s, i) => (
                   <div key={i}>
-                    <div className="text-2xl md:text-3xl font-bold text-gray-900">{s.v}</div>
-                    <div className="text-[11px] text-gray-400 mt-0.5 uppercase tracking-[0.14em] font-medium">{s.label}</div>
+                    <div className="text-2xl md:text-3xl font-extrabold text-gray-900">{s.v}</div>
+                    <div className="text-[11px] text-gray-400 mt-0.5 uppercase tracking-[0.14em] font-semibold">{s.label}</div>
                   </div>
                 ))}
               </motion.div>
             </motion.div>
 
-            <motion.div className="hidden lg:grid grid-cols-2 gap-4" initial="initial" animate="animate" variants={stagger}>
-              {[
-                { icon: Code2, title: "Custom Software", sub: "500+ applications delivered", color: "bg-amber-50 border-amber-100" },
-                { icon: Cloud, title: "Cloud & DevOps", sub: "AWS · Azure · GCP certified", color: "bg-green-50 border-green-100" },
-                { icon: BrainCircuit, title: "AI & Machine Learning", sub: "Production AI in 8 verticals", color: "bg-green-50 border-green-100" },
-                { icon: Cpu, title: "IoT & Edge Computing", sub: "10,000+ connected devices", color: "bg-amber-50 border-amber-100" },
-              ].map((f, i) => (
-                <motion.div key={i} variants={fadeUp} className={`${f.color} border rounded-2xl p-6 flex flex-col gap-3 card-hover`} data-testid={`card-hero-${i}`}>
-                  <f.icon className="h-6 w-6 text-gray-700" />
-                  <div>
-                    <div className="font-semibold text-gray-900 text-sm">{f.title}</div>
-                    <div className="text-xs text-gray-500 mt-0.5">{f.sub}</div>
-                  </div>
+            {/* ── RIGHT: Tech Visualization ── */}
+            <motion.div
+              className="relative flex items-center justify-center"
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+            >
+              {/* Main SVG illustration */}
+              <div className="relative w-full max-w-[520px] mx-auto">
+                <svg viewBox="0 0 520 480" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto drop-shadow-xl">
+                  {/* Background card */}
+                  <rect x="20" y="20" width="480" height="440" rx="24" fill="white" stroke="#e5e7eb" strokeWidth="1.5"/>
+
+                  {/* Header band */}
+                  <rect x="20" y="20" width="480" height="52" rx="24" fill="#1d6f42"/>
+                  <rect x="20" y="52" width="480" height="20" fill="#1d6f42"/>
+                  <circle cx="52" cy="46" r="8" fill="#F5A623" opacity="0.9"/>
+                  <circle cx="76" cy="46" r="8" fill="white" opacity="0.3"/>
+                  <circle cx="100" cy="46" r="8" fill="white" opacity="0.2"/>
+                  <text x="140" y="51" fontSize="13" fontWeight="600" fill="white" opacity="0.9">iOne Enterprise Dashboard</text>
+
+                  {/* Grid lines inside card */}
+                  <line x1="40" y1="100" x2="480" y2="100" stroke="#f3f4f6" strokeWidth="1"/>
+                  <line x1="40" y1="140" x2="480" y2="140" stroke="#f3f4f6" strokeWidth="1"/>
+                  <line x1="40" y1="180" x2="480" y2="180" stroke="#f3f4f6" strokeWidth="1"/>
+                  <line x1="40" y1="220" x2="480" y2="220" stroke="#f3f4f6" strokeWidth="1"/>
+
+                  {/* Metric cards row */}
+                  <rect x="36" y="88" width="100" height="68" rx="10" fill="#fffbf0" stroke="#fde68a" strokeWidth="1.2"/>
+                  <text x="86" y="114" fontSize="22" fontWeight="800" fill="#F5A623" textAnchor="middle">200+</text>
+                  <text x="86" y="132" fontSize="9" fill="#92400e" textAnchor="middle" fontWeight="600">ENTERPRISES</text>
+                  <text x="86" y="146" fontSize="8" fill="#a16207" textAnchor="middle">Across India</text>
+
+                  <rect x="148" y="88" width="100" height="68" rx="10" fill="#f0fdf4" stroke="#bbf7d0" strokeWidth="1.2"/>
+                  <text x="198" y="114" fontSize="22" fontWeight="800" fill="#1d6f42" textAnchor="middle">99.9%</text>
+                  <text x="198" y="132" fontSize="9" fill="#166534" textAnchor="middle" fontWeight="600">UPTIME SLA</text>
+                  <text x="198" y="146" fontSize="8" fill="#15803d" textAnchor="middle">Guaranteed</text>
+
+                  <rect x="260" y="88" width="100" height="68" rx="10" fill="#fffbf0" stroke="#fde68a" strokeWidth="1.2"/>
+                  <text x="310" y="114" fontSize="22" fontWeight="800" fill="#F5A623" textAnchor="middle">500+</text>
+                  <text x="310" y="132" fontSize="9" fill="#92400e" textAnchor="middle" fontWeight="600">PROJECTS</text>
+                  <text x="310" y="146" fontSize="8" fill="#a16207" textAnchor="middle">Delivered</text>
+
+                  <rect x="372" y="88" width="100" height="68" rx="10" fill="#f0fdf4" stroke="#bbf7d0" strokeWidth="1.2"/>
+                  <text x="422" y="114" fontSize="22" fontWeight="800" fill="#1d6f42" textAnchor="middle">50+</text>
+                  <text x="422" y="132" fontSize="9" fill="#166534" textAnchor="middle" fontWeight="600">ENGINEERS</text>
+                  <text x="422" y="146" fontSize="8" fill="#15803d" textAnchor="middle">Senior-level</text>
+
+                  {/* Bar chart section */}
+                  <text x="40" y="182" fontSize="9" fill="#9ca3af" fontWeight="600">DELIVERY PERFORMANCE BY VERTICAL</text>
+
+                  {/* Bars */}
+                  {[
+                    { x: 50,  h: 90, label: "Energy", color: "#F5A623" },
+                    { x: 110, h: 75, label: "FinTech", color: "#1d6f42" },
+                    { x: 170, h: 100, label: "Health", color: "#F5A623" },
+                    { x: 230, h: 60, label: "Mfg", color: "#1d6f42" },
+                    { x: 290, h: 85, label: "Logist", color: "#F5A623" },
+                    { x: 350, h: 70, label: "Retail", color: "#1d6f42" },
+                    { x: 410, h: 95, label: "Govt", color: "#F5A623" },
+                    { x: 455, h: 55, label: "Telco", color: "#1d6f42" },
+                  ].map((bar, i) => (
+                    <g key={i}>
+                      <rect x={bar.x} y={310 - bar.h} width="36" height={bar.h} rx="5" fill={bar.color} opacity="0.85"/>
+                      <text x={bar.x + 18} y="325" fontSize="7.5" fill="#9ca3af" textAnchor="middle" fontWeight="500">{bar.label}</text>
+                    </g>
+                  ))}
+
+                  {/* Divider */}
+                  <line x1="40" y1="335" x2="480" y2="335" stroke="#f3f4f6" strokeWidth="1.5"/>
+
+                  {/* Bottom status row */}
+                  <rect x="36" y="348" width="140" height="38" rx="8" fill="#f0fdf4" stroke="#d1fae5" strokeWidth="1"/>
+                  <circle cx="56" cy="367" r="5" fill="#22c55e"/>
+                  <text x="66" y="364" fontSize="9" fill="#166534" fontWeight="700">All Systems Operational</text>
+                  <text x="66" y="377" fontSize="8" fill="#4ade80">99.97% uptime — last 90 days</text>
+
+                  <rect x="188" y="348" width="140" height="38" rx="8" fill="#fffbf0" stroke="#fef3c7" strokeWidth="1"/>
+                  <circle cx="208" cy="367" r="5" fill="#F5A623"/>
+                  <text x="218" y="364" fontSize="9" fill="#92400e" fontWeight="700">Active Projects</text>
+                  <text x="218" y="377" fontSize="8" fill="#d97706">12 in delivery · 3 in review</text>
+
+                  <rect x="340" y="348" width="132" height="38" rx="8" fill="#f0fdf4" stroke="#d1fae5" strokeWidth="1"/>
+                  <circle cx="358" cy="367" r="5" fill="#1d6f42"/>
+                  <text x="368" y="364" fontSize="9" fill="#166534" fontWeight="700">Client Satisfaction</text>
+                  <text x="368" y="377" fontSize="8" fill="#15803d">4.9 / 5.0 average rating</text>
+
+                  {/* Corner decoration dots */}
+                  <circle cx="456" cy="75" r="4" fill="#F5A623" opacity="0.6"/>
+                  <circle cx="472" cy="75" r="4" fill="white" opacity="0.4"/>
+                </svg>
+
+                {/* Floating tag: ISO */}
+                <motion.div
+                  className="absolute -top-4 -right-4 bg-white border border-amber-200 rounded-xl shadow-lg px-3 py-2 flex items-center gap-2"
+                  animate={{ y: [0, -6, 0] }} transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut" }}
+                >
+                  <Award className="h-4 w-4 text-amber-500" />
+                  <span className="text-xs font-bold text-gray-800">ISO 27001 Certified</span>
                 </motion.div>
-              ))}
+
+                {/* Floating tag: Cloud */}
+                <motion.div
+                  className="absolute -bottom-4 -left-4 bg-white border border-green-200 rounded-xl shadow-lg px-3 py-2 flex items-center gap-2"
+                  animate={{ y: [0, 6, 0] }} transition={{ repeat: Infinity, duration: 4, ease: "easeInOut", delay: 1 }}
+                >
+                  <Cloud className="h-4 w-4 text-green-700" />
+                  <span className="text-xs font-bold text-gray-800">AWS · Azure · GCP</span>
+                </motion.div>
+
+                {/* Floating tag: AI */}
+                <motion.div
+                  className="absolute top-1/2 -right-6 bg-amber-500 rounded-xl shadow-lg px-3 py-2 flex items-center gap-2"
+                  animate={{ y: [0, -8, 0] }} transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 0.5 }}
+                >
+                  <BrainCircuit className="h-4 w-4 text-white" />
+                  <span className="text-xs font-bold text-white">AI / ML</span>
+                </motion.div>
+              </div>
             </motion.div>
           </div>
         </div>
