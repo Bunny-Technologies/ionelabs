@@ -426,13 +426,78 @@ export default function Home() {
 
           <AnimatePresence>
             {mobileMenuOpen && (
-              <motion.div className="lg:hidden py-4 border-t border-gray-100" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }}>
-                <div className="flex flex-col gap-1">
-                  {navItems.map((item) => (
-                    <a key={item} href={`#${slugify(item)}`} className="text-gray-600 hover:text-gray-900 text-sm font-medium py-3 px-2 transition-colors border-b border-gray-50" onClick={() => setMobileMenuOpen(false)} data-testid={`link-mobile-${slugify(item)}`}>{item}</a>
-                  ))}
-                  <div className="pt-3 mt-1">
-                    <a href="#contact"><Button className="w-full bg-amber-500 hover:bg-amber-600 text-white" data-testid="button-mobile-get-started">Get Started</Button></a>
+              <motion.div
+                className="lg:hidden fixed inset-0 top-[64px] z-40 bg-white overflow-y-auto"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.25 }}
+              >
+                <div className="relative" style={{ background: "linear-gradient(135deg, #1d6f42 0%, #145530 60%, #0f3d22 100%)" }}>
+                  <div className="absolute inset-0 opacity-10">
+                    <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <pattern id="mobile-dots" width="20" height="20" patternUnits="userSpaceOnUse">
+                          <circle cx="2" cy="2" r="1" fill="white"/>
+                        </pattern>
+                      </defs>
+                      <rect width="100%" height="100%" fill="url(#mobile-dots)" />
+                    </svg>
+                  </div>
+                  <div className="relative px-6 py-8">
+                    <p className="text-amber-400 text-[11px] font-bold uppercase tracking-[0.2em] mb-2">What We Do</p>
+                    <h2 className="text-white text-2xl font-bold leading-tight">Software, Cloud, AI<br/>& IoT Solutions</h2>
+                    <p className="text-white/60 text-sm mt-3 leading-relaxed">Engineering outcomes for 200+ enterprises across India.</p>
+                    <div className="flex gap-3 mt-5">
+                      {[
+                        { icon: Code2, label: "Software" },
+                        { icon: Cloud, label: "Cloud" },
+                        { icon: BrainCircuit, label: "AI / ML" },
+                        { icon: Cpu, label: "IoT" },
+                      ].map((t, i) => (
+                        <div key={i} className="flex items-center gap-1.5 bg-white/10 rounded-full px-3 py-1.5">
+                          <t.icon className="h-3 w-3 text-amber-400" />
+                          <span className="text-white text-[10px] font-semibold">{t.label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="px-4 py-4">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 px-2 mb-3">Navigate</p>
+                  <div className="flex flex-col">
+                    {navItems.map((item, i) => {
+                      const icons: Record<string, typeof Code2> = { Services: Layers, Industries: Building2, Process: Target, About: Users, Contact: Mail };
+                      const ItemIcon = icons[item] || ChevronRight;
+                      return (
+                        <a
+                          key={item}
+                          href={`#${slugify(item)}`}
+                          className="flex items-center gap-4 py-4 px-3 rounded-xl text-gray-700 hover:bg-amber-50 hover:text-gray-900 transition-all group border-b border-gray-100 last:border-b-0"
+                          onClick={() => setMobileMenuOpen(false)}
+                          data-testid={`link-mobile-${slugify(item)}`}
+                        >
+                          <span className="w-10 h-10 rounded-xl bg-gray-100 group-hover:bg-amber-100 flex items-center justify-center transition-colors">
+                            <ItemIcon className="h-4.5 w-4.5 text-gray-500 group-hover:text-amber-600 transition-colors" />
+                          </span>
+                          <span className="font-semibold text-[15px]">{item}</span>
+                          <ChevronRight className="h-4 w-4 text-gray-300 group-hover:text-amber-500 ml-auto transition-colors" />
+                        </a>
+                      );
+                    })}
+                  </div>
+
+                  <div className="mt-6 px-2 space-y-3">
+                    <a href="#contact" onClick={() => setMobileMenuOpen(false)}>
+                      <Button className="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold shadow-md btn-shimmer h-12 text-base" data-testid="button-mobile-get-started">
+                        Start Your Project <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </a>
+                    <a href="tel:+919959933363" className="flex items-center justify-center gap-2 text-sm text-gray-500 hover:text-gray-800 py-2" data-testid="link-mobile-phone">
+                      <Phone className="h-4 w-4 text-amber-500" />
+                      <span>+91 99599 33363</span>
+                    </a>
                   </div>
                 </div>
               </motion.div>
